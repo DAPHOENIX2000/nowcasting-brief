@@ -6,71 +6,101 @@
 <title>Nowcasting PEFT Brief</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Outfit:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..800&family=Nunito+Sans:wght@300;400;600;700;900&family=IBM+Plex+Mono:wght@400;500;600&family=Tajawal:wght@400;500;700;800&display=swap">
 <style>
 /* ════════════════════════════════════════════════════════════════
-   TOKENS
-   Ground: warm cream paper. The data accents are the NEXRAD
-   reflectivity ramp — the colours a meteorologist already reads as
-   12 / 18 / 24 / 32 dBZ, which are the exact thresholds this brief
-   reports. Coral is the annotation pen and never encodes data.
-   Every token is declared here in bare :root, so the un-stamped
-   (system-theme) document always resolves.
+   TOKENS — one sky, two times of day.
+
+   Ground and accent are sampled from weatherkids.org (#305061 / #FEE17B).
+   The reflectivity ramp is kept for DATA only: those five colours are what
+   a meteorologist reads as 12/18/24/32 dBZ, the exact thresholds this brief
+   reports, so they carry meaning the sky palette cannot.
+
+   Yellow is unreadable on white, so --mark is the darkened form used for
+   annotation on the white sheets, and --sun is used only over the sky.
+   Every token is declared in bare :root so the system-theme document
+   resolves correctly.
    ════════════════════════════════════════════════════════════════ */
 :root{
-  --paper:#FDF6EE; --paper2:#F6ECE0; --card:#FFFCF8;
-  --ink:#1B1714; --body:#57504A; --muted:#8C8279; --faint:#B6ABA0;
-  --rule:#E4D7C8; --rule2:#D3C2AF;
-  --sky1:#9CC7EA; --sky2:#C9E1F4; --sky3:#EAF3FA;
-  --dbz12:#3F8FBE; --dbz18:#2F8552; --dbz24:#C9971D; --dbz32:#C75B25; --dbzhi:#A32F22;
-  --coral:#D9482C; --coral-s:#FBE7DF;
-  --onsky:#14324A;
-  --shadow:0 1px 2px rgba(60,40,20,.05), 0 8px 26px -12px rgba(60,40,20,.16);
-  --shadow-l:0 2px 4px rgba(60,40,20,.06), 0 18px 44px -18px rgba(60,40,20,.22);
+  --sky0:#2A4557; --sky1:#305061; --sky2:#41708A; --sky3:#77A9C4;
+  --cloud:#FFFFFF; --cloud-op:.34;
+
+  --card:#FFFFFF; --card2:#F1F7FA;
+  --ink:#22303B; --body:#4C5C68; --muted:#7C8B97; --faint:#A9B7C1;
+  --rule:#DEE8EE; --rule2:#C2D2DC;
+
+  --onsky:#FFFFFF; --onsky-dim:#CBDDE8;
+  --sun:#FEE17B; --sun-deep:#E8B93C; --sun-soft:#FFF6DA;
+  --mark:#C2510C;
+
+  --dbz12:#2E86B8; --dbz18:#2C8A52; --dbz24:#C08E14; --dbz32:#C4581F; --dbzhi:#A32C1E;
+
+  --shadow:0 1px 2px rgba(12,32,44,.06), 0 10px 30px -14px rgba(12,32,44,.28);
+  --shadow-l:0 2px 6px rgba(12,32,44,.10), 0 26px 60px -22px rgba(12,32,44,.42);
 }
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
-    --paper:#14181D; --paper2:#1A2028; --card:#1B222A;
-    --ink:#F2ECE4; --body:#C2B9AF; --muted:#8F8479; --faint:#6A625A;
-    --rule:#2D353F; --rule2:#3E4954;
-    --sky1:#2E4E6C; --sky2:#20374C; --sky3:#182835;
-    --dbz12:#63B7E2; --dbz18:#52B276; --dbz24:#EFC44E; --dbz32:#EC8047; --dbzhi:#DE5C48;
-    --coral:#F5795C; --coral-s:#37201A;
-    --onsky:#EAF3FA;
-    --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 26px -12px rgba(0,0,0,.5);
-    --shadow-l:0 2px 4px rgba(0,0,0,.35), 0 18px 44px -18px rgba(0,0,0,.6);
+    --sky0:#0C1820; --sky1:#13232D; --sky2:#1D3B4B; --sky3:#2E5B72;
+    --cloud:#8FB6CB; --cloud-op:.13;
+    --card:#182631; --card2:#1F2F3B;
+    --ink:#EAF2F7; --body:#B6C6D0; --muted:#8296A3; --faint:#5F7280;
+    --rule:#2B3D49; --rule2:#3C5261;
+    --onsky:#EAF2F7; --onsky-dim:#93AAB8;
+    --sun:#FCD968; --sun-deep:#E0B740; --sun-soft:#33301E;
+    --mark:#F08A4B;
+    --dbz12:#5FB4E2; --dbz18:#52B276; --dbz24:#EFC44E; --dbz32:#EC8047; --dbzhi:#DE5C48;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 30px -14px rgba(0,0,0,.6);
+    --shadow-l:0 2px 6px rgba(0,0,0,.45), 0 26px 60px -22px rgba(0,0,0,.7);
   }
 }
 :root[data-theme="dark"]{
-  --paper:#14181D; --paper2:#1A2028; --card:#1B222A;
-  --ink:#F2ECE4; --body:#C2B9AF; --muted:#8F8479; --faint:#6A625A;
-  --rule:#2D353F; --rule2:#3E4954;
-  --sky1:#2E4E6C; --sky2:#20374C; --sky3:#182835;
-  --dbz12:#63B7E2; --dbz18:#52B276; --dbz24:#EFC44E; --dbz32:#EC8047; --dbzhi:#DE5C48;
-  --coral:#F5795C; --coral-s:#37201A;
-  --onsky:#EAF3FA;
-  --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 26px -12px rgba(0,0,0,.5);
-  --shadow-l:0 2px 4px rgba(0,0,0,.35), 0 18px 44px -18px rgba(0,0,0,.6);
+  --sky0:#0C1820; --sky1:#13232D; --sky2:#1D3B4B; --sky3:#2E5B72;
+  --cloud:#8FB6CB; --cloud-op:.13;
+  --card:#182631; --card2:#1F2F3B;
+  --ink:#EAF2F7; --body:#B6C6D0; --muted:#8296A3; --faint:#5F7280;
+  --rule:#2B3D49; --rule2:#3C5261;
+  --onsky:#EAF2F7; --onsky-dim:#93AAB8;
+  --sun:#FCD968; --sun-deep:#E0B740; --sun-soft:#33301E;
+  --mark:#F08A4B;
+  --dbz12:#5FB4E2; --dbz18:#52B276; --dbz24:#EFC44E; --dbz32:#EC8047; --dbzhi:#DE5C48;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 30px -14px rgba(0,0,0,.6);
+  --shadow-l:0 2px 6px rgba(0,0,0,.45), 0 26px 60px -22px rgba(0,0,0,.7);
 }
 
 *{box-sizing:border-box}
 html{scroll-behavior:smooth; scroll-padding-top:96px}
 body{
-  margin:0; background:var(--paper); color:var(--body);
-  font:400 16.5px/1.72 "Outfit","Segoe UI",system-ui,sans-serif;
+  margin:0; color:var(--onsky-dim);
+  font:400 16.5px/1.72 "Nunito Sans","Segoe UI",system-ui,sans-serif;
   -webkit-font-smoothing:antialiased;
+  background:var(--sky1);
+  background-image:linear-gradient(180deg,var(--sky0) 0%,var(--sky1) 30%,var(--sky2) 68%,var(--sky3) 100%);
+  background-attachment:fixed;
 }
-html[dir=rtl] body{font-family:"IBM Plex Sans Arabic","Segoe UI",Tahoma,sans-serif; line-height:1.95}
+html[dir=rtl] body{font-family:"Tajawal","IBM Plex Sans Arabic",Tahoma,sans-serif; line-height:1.95}
 @media (prefers-reduced-motion:reduce){*{animation:none!important; transition:none!important}}
 
-/* ── Language. Hide the inactive one only; never force a display value on the
-   active one, or a specific rule like `.say .who{display:block}` outweighs it
-   and leaks the hidden language through. ── */
 body.lang-en .ar{display:none!important}
 body.lang-ar .en{display:none!important}
 
+/* ════════════════════ drifting cloud field ════════════════════
+   Drawn here as blurred ellipse clusters — the reference's clouds are
+   photographic and are not reused. They sit behind the white sheets, so
+   they read in the gaps without ever competing with running text. */
+.sky{position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden}
+.sky svg{position:absolute; fill:var(--cloud); opacity:var(--cloud-op); filter:blur(7px)}
+.cl1{width:min(760px,88vw); top:5%;  left:-10%}
+.cl2{width:min(620px,74vw); top:34%; right:-14%}
+.cl3{width:min(880px,96vw); bottom:-6%; left:-6%; opacity:calc(var(--cloud-op) * 1.5)}
+.cl4{width:min(520px,64vw); top:64%; left:4%}
+@keyframes drift{from{transform:translateX(0)} to{transform:translateX(46px)}}
+.cl1{animation:drift 34s ease-in-out infinite alternate}
+.cl2{animation:drift 46s ease-in-out infinite alternate-reverse}
+.cl3{animation:drift 62s ease-in-out infinite alternate}
+.cl4{animation:drift 40s ease-in-out infinite alternate-reverse}
+
 /* ════════════════════ top bar ════════════════════ */
-#prog{position:fixed; inset-inline-start:0; top:0; height:2px; width:0; background:var(--coral); z-index:70}
+#prog{position:fixed; inset-inline-start:0; top:0; height:3px; width:0; background:var(--sun); z-index:70}
 #bar{position:sticky; top:0; z-index:60; padding:12px 18px 0}
 #barin{
   max-width:1120px; margin:0 auto; display:flex; align-items:center; gap:12px;
@@ -82,182 +112,184 @@ html[dir=rtl] #barin{padding:7px 20px 7px 8px}
   font-family:"IBM Plex Mono",monospace; font-size:11px; font-weight:600;
   letter-spacing:1.6px; text-transform:uppercase; color:var(--ink); white-space:nowrap;
 }
-#brand i{color:var(--coral); font-style:normal}
+#brand i{color:var(--sun-deep); font-style:normal}
 #jump{flex:1; min-width:0}
 #sel{
   width:100%; max-width:330px; background:transparent; color:var(--body);
   border:0; border-inline-start:1px solid var(--rule);
   padding:4px 12px; font-family:inherit; font-size:13.5px; cursor:pointer;
 }
-#sel:focus-visible{outline:2px solid var(--coral); outline-offset:3px; border-radius:6px}
-.langbtns{display:flex; gap:3px; background:var(--paper2); border-radius:999px; padding:3px}
+#sel:focus-visible{outline:2px solid var(--mark); outline-offset:3px; border-radius:6px}
+.langbtns{display:flex; gap:3px; background:var(--card2); border-radius:999px; padding:3px}
 .langbtns button{
   background:transparent; color:var(--muted); border:0; padding:6px 15px; border-radius:999px;
   font-family:"IBM Plex Mono",monospace; font-size:11.5px; font-weight:600; cursor:pointer;
   letter-spacing:.8px; transition:background .18s,color .18s;
 }
-.langbtns button.on{background:var(--ink); color:var(--paper)}
-.langbtns button:focus-visible{outline:2px solid var(--coral); outline-offset:2px}
+.langbtns button.on{background:var(--ink); color:var(--card)}
+.langbtns button:focus-visible{outline:2px solid var(--mark); outline-offset:2px}
 
-/* ════════════════════ layout ════════════════════ */
-main{max-width:1120px; margin:0 auto; padding:0 22px 90px}
-section{padding:60px 0 10px}
+/* ════════════════════ layout — white sheets on the sky ════════════════════ */
+main{max-width:1120px; margin:0 auto; padding:0 22px 90px; position:relative; z-index:1}
+section{
+  background:var(--card); border-radius:30px; padding:48px 44px 40px;
+  margin:0 0 30px; box-shadow:var(--shadow-l); position:relative;
+}
+#hero{background:none; box-shadow:none; padding:22px 0 8px}
+@media (max-width:600px){section{padding:34px 24px 30px; border-radius:24px}}
+
 h1,h2{color:var(--ink); text-wrap:balance; margin:0}
+h1,h2,h3,.k3d-bar .lbl,.stats .n{font-variation-settings:"wdth" 116}
 h1{
-  font-family:"Fraunces",Georgia,serif; font-optical-sizing:auto;
-  font-size:clamp(34px,5.9vw,62px); line-height:1.05; font-weight:600;
-  letter-spacing:-1.3px; margin-bottom:18px;
+  font-family:"Archivo","Segoe UI",sans-serif; font-weight:700;
+  font-size:clamp(33px,5.6vw,58px); line-height:1.06; letter-spacing:-1.4px; margin-bottom:18px;
 }
 h2{
-  font-family:"Fraunces",Georgia,serif; font-size:clamp(25px,3.7vw,37px);
-  line-height:1.15; font-weight:600; letter-spacing:-.7px; margin-bottom:10px;
+  font-family:"Archivo","Segoe UI",sans-serif; font-weight:700;
+  font-size:clamp(24px,3.6vw,36px); line-height:1.16; letter-spacing:-.8px; margin-bottom:10px;
 }
 h3{
-  font-family:"Fraunces",Georgia,serif; font-size:21px; font-weight:600;
-  color:var(--ink); margin:38px 0 10px; letter-spacing:-.3px;
+  font-family:"Archivo","Segoe UI",sans-serif; font-size:20px; font-weight:700;
+  color:var(--ink); margin:38px 0 10px; letter-spacing:-.4px;
 }
 html[dir=rtl] h1,html[dir=rtl] h2,html[dir=rtl] h3{
-  font-family:"IBM Plex Sans Arabic",sans-serif; font-weight:700; letter-spacing:0;
+  font-family:"Tajawal","IBM Plex Sans Arabic",sans-serif; font-weight:800;
+  letter-spacing:0; font-variation-settings:normal;
 }
 html[dir=rtl] h1{line-height:1.4} html[dir=rtl] h2{line-height:1.5} html[dir=rtl] h3{line-height:1.6}
-p{margin:0 0 15px; max-width:68ch}
-.lead{font-size:19px; line-height:1.62; color:var(--body); max-width:58ch}
-a{color:var(--coral)}
+p{margin:0 0 15px; max-width:68ch; color:var(--body)}
+.lead{font-size:19px; line-height:1.62; max-width:58ch}
+a{color:var(--mark)}
 
-/* Numbered eyebrow. The numbers carry information — the body text
-   cross-references sections by number. */
 .eyebrow{
   font-family:"IBM Plex Mono",monospace; font-size:11px; font-weight:500;
   letter-spacing:2.6px; text-transform:uppercase; color:var(--muted);
   margin-bottom:14px; display:flex; align-items:center; gap:11px;
 }
 .eyebrow::before{content:""; width:26px; height:1px; background:var(--rule2); flex:none}
-.eyebrow b{color:var(--coral); font-weight:600}
+.eyebrow b{color:var(--mark); font-weight:600}
 
 /* ════════════════════ hero ════════════════════ */
-#hero{padding:24px 0 12px}
 .scope{
-  position:relative; border-radius:26px; overflow:hidden;
-  background:linear-gradient(168deg,var(--sky3),var(--sky2) 55%,var(--sky1));
-  border:1px solid var(--rule); box-shadow:var(--shadow-l);
-  padding:32px 32px 28px; margin-bottom:16px;
+  position:relative; border-radius:30px; overflow:hidden;
+  background:linear-gradient(170deg,#5E93B4,#3C6885 52%,#2C4A5C);
+  box-shadow:var(--shadow-l); padding:38px 38px 96px; margin-bottom:18px;
 }
-.scope h1,.scope .lead{color:var(--onsky)}
-.scope .lead{opacity:.86}
-.radar{position:absolute; inset-inline-end:-34px; top:-30px; width:320px; height:320px; opacity:.42}
+.scope h1{color:#FFFFFF}
+.scope .lead{color:#D8E9F3}
+.scope .lead b,.scope h1 i{color:var(--sun); font-style:normal}
+.radar{position:absolute; inset-inline-end:-38px; top:-34px; width:330px; height:330px; opacity:.34}
 html[dir=rtl] .radar{transform:scaleX(-1)}
+.herocloud{position:absolute; left:-4%; right:-4%; bottom:-14px; width:108%; fill:#FFFFFF; opacity:.9}
 .scope-in{position:relative; z-index:2}
 .tag{
   display:inline-flex; align-items:center; gap:8px; font-family:"IBM Plex Mono",monospace;
-  font-size:10.5px; font-weight:500; letter-spacing:2px; text-transform:uppercase;
-  color:var(--ink); background:var(--card); border:1px solid var(--rule);
-  padding:6px 14px; border-radius:999px; margin-bottom:20px; box-shadow:var(--shadow);
+  font-size:10.5px; font-weight:600; letter-spacing:2px; text-transform:uppercase;
+  color:#2B333F; background:var(--sun); padding:7px 16px; border-radius:999px; margin-bottom:20px;
 }
-.tag i{width:6px; height:6px; border-radius:50%; background:var(--coral); font-style:normal}
+.tag i{width:6px; height:6px; border-radius:50%; background:#2B333F; font-style:normal}
+html[dir=rtl] .tag{font-family:"Tajawal",sans-serif; letter-spacing:0; font-size:12px}
 
 /* ════════════════════ stat strip ════════════════════ */
 .stats{
   display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
-  border:1px solid var(--rule); border-radius:18px; overflow:hidden;
+  border:1px solid var(--rule); border-radius:20px; overflow:hidden;
   background:var(--card); box-shadow:var(--shadow); margin:22px 0;
 }
-.stats>div{padding:19px 20px; border-inline-start:1px solid var(--rule)}
+#hero .stats{box-shadow:var(--shadow-l); border:0}
+.stats>div{padding:20px; border-inline-start:1px solid var(--rule)}
 .stats>div:first-child{border-inline-start:0}
 .stats .n{
-  font-family:"IBM Plex Mono",monospace; font-size:25px; font-weight:600;
-  letter-spacing:-1px; line-height:1.15; direction:ltr; font-variant-numeric:tabular-nums;
+  font-family:"Archivo",sans-serif; font-size:27px; font-weight:800;
+  letter-spacing:-1.2px; line-height:1.15; direction:ltr; font-variant-numeric:tabular-nums;
 }
 .stats .l{font-size:13px; line-height:1.5; color:var(--muted); margin-top:6px}
 .c12{color:var(--dbz12)} .c18{color:var(--dbz18)} .c24{color:var(--dbz24)}
 .c32{color:var(--dbz32)} .chi{color:var(--dbzhi)}
 
-/* ════════════════════ the annotation pen ════════════════════
-   Organising idea: this is a printed brief someone marked up while
-   studying it. Coral is the pen; it appears nowhere else. */
+/* ════════════════════ the annotation pen ════════════════════ */
 .pen{
   display:inline-flex; align-items:center; gap:6px; font-family:"IBM Plex Mono",monospace;
   font-size:10.5px; font-weight:600; letter-spacing:1.7px; text-transform:uppercase;
-  color:var(--coral); margin-inline-start:12px; vertical-align:middle; white-space:nowrap;
+  color:var(--mark); margin-inline-start:12px; vertical-align:middle; white-space:nowrap;
 }
 .pen svg{width:15px; height:15px; flex:none; fill:none; stroke:currentColor;
   stroke-width:2.4; stroke-linecap:round; stroke-linejoin:round}
 html[dir=rtl] .pen svg{transform:scaleX(-1)}
+html[dir=rtl] .pen{font-family:"Tajawal",sans-serif; letter-spacing:0; font-size:12px}
 .pen.grey{color:var(--muted)}
 
-/* dashed pencil path threading between sections */
-.thread{display:block; width:100%; height:54px; overflow:visible; margin:4px 0 -8px}
-.thread path{fill:none; stroke:var(--rule2); stroke-width:1.6; stroke-dasharray:5 8; stroke-linecap:round}
-html[dir=rtl] .thread{transform:scaleX(-1)}
+.thread{display:none}
 
 /* ════════════════════ blocks ════════════════════ */
 .note{
-  background:var(--card); border:1px solid var(--rule); border-radius:18px;
-  padding:24px 26px; margin:20px 0; box-shadow:var(--shadow);
+  background:var(--card2); border:1px solid var(--rule); border-radius:20px;
+  padding:24px 26px; margin:20px 0;
 }
 .note h4{
-  font-family:"Fraunces",Georgia,serif; font-size:18px; font-weight:600; color:var(--ink);
-  margin:0 0 10px; letter-spacing:-.2px;
+  font-family:"Archivo",sans-serif; font-size:18px; font-weight:700; color:var(--ink);
+  margin:0 0 10px; letter-spacing:-.3px; font-variation-settings:"wdth" 112;
 }
-html[dir=rtl] .note h4{font-family:"IBM Plex Sans Arabic",sans-serif; font-weight:700; letter-spacing:0}
+html[dir=rtl] .note h4{font-family:"Tajawal",sans-serif; font-weight:800; letter-spacing:0; font-variation-settings:normal}
 .note p:last-child,.note ul:last-child,.note ol:last-child{margin-bottom:0}
-.note.key{background:var(--coral-s); border-color:var(--coral)}
-.note.key h4{color:var(--coral)}
-.note.flat{background:transparent; box-shadow:none; border-style:dashed}
-.note.warn{border-color:var(--coral)}
+.note.key{background:var(--sun-soft); border-color:var(--sun-deep)}
+.note.key h4{color:var(--mark)}
+.note.flat{background:transparent; border-style:dashed}
+.note.warn{border-color:var(--mark); background:var(--card)}
 
 .grid{display:grid; gap:18px; margin:22px 0}
 .g2{grid-template-columns:repeat(auto-fit,minmax(272px,1fr))}
 .g3{grid-template-columns:repeat(auto-fit,minmax(212px,1fr))}
 .g4{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
 
-/* Steps are a rule-and-numeral, not another card — so the cards above
-   keep their meaning as "separate object". */
-.step{border-top:2px solid var(--ink); padding-top:14px}
-.step.hot{border-top-color:var(--coral)}
+.step{border-top:3px solid var(--ink); padding-top:14px}
+.step.hot{border-top-color:var(--mark)}
 .step .no{
   font-family:"IBM Plex Mono",monospace; font-size:10.5px; font-weight:600;
-  letter-spacing:2px; color:var(--coral); text-transform:uppercase; margin-bottom:7px;
+  letter-spacing:2px; color:var(--mark); text-transform:uppercase; margin-bottom:7px;
 }
-.step h4{font-family:"Fraunces",Georgia,serif; font-size:17px; color:var(--ink); margin:0 0 7px; font-weight:600}
-html[dir=rtl] .step h4{font-family:"IBM Plex Sans Arabic",sans-serif; font-weight:700}
+.step h4{font-family:"Archivo",sans-serif; font-size:17px; color:var(--ink); margin:0 0 7px;
+  font-weight:700; letter-spacing:-.2px}
+html[dir=rtl] .step h4{font-family:"Tajawal",sans-serif; font-weight:800; letter-spacing:0}
 .step p{font-size:15px; margin:0; color:var(--body); max-width:none}
 
-/* the thing to say out loud */
 .say{
-  border:1px solid var(--rule); border-inline-start:3px solid var(--coral);
-  background:var(--card); border-radius:0 18px 18px 0; padding:22px 26px; margin:22px 0;
-  box-shadow:var(--shadow);
+  border:1px solid var(--sun-deep); border-inline-start:5px solid var(--sun-deep);
+  background:var(--sun-soft); border-radius:0 20px 20px 0; padding:24px 28px; margin:22px 0;
 }
-html[dir=rtl] .say{border-radius:18px 0 0 18px}
+html[dir=rtl] .say{border-radius:20px 0 0 20px}
 .say .who{
   display:block; font-family:"IBM Plex Mono",monospace; font-size:10.5px; font-weight:600;
-  letter-spacing:2px; text-transform:uppercase; color:var(--coral); margin-bottom:11px;
+  letter-spacing:2px; text-transform:uppercase; color:var(--mark); margin-bottom:11px;
 }
+html[dir=rtl] .say .who{font-family:"Tajawal",sans-serif; letter-spacing:0; font-size:12.5px}
 .say .q{
-  display:block; font-family:"Fraunces",Georgia,serif; font-size:20px; line-height:1.56;
-  color:var(--ink); font-weight:400; max-width:62ch;
+  display:block; font-family:"Archivo",sans-serif; font-size:19.5px; line-height:1.52;
+  color:var(--ink); font-weight:500; max-width:62ch; font-variation-settings:"wdth" 106;
 }
-html[dir=rtl] .say .q{font-family:"IBM Plex Sans Arabic",sans-serif; font-size:17.5px; line-height:1.9}
+html[dir=rtl] .say .q{font-family:"Tajawal",sans-serif; font-size:18px; line-height:1.9;
+  font-weight:500; font-variation-settings:normal}
 
 /* ════════════════════ tables ════════════════════ */
-.tw{overflow-x:auto; margin:20px 0; border:1px solid var(--rule); border-radius:16px; background:var(--card)}
+.tw{overflow-x:auto; margin:20px 0; border:1px solid var(--rule); border-radius:18px; background:var(--card)}
 table{border-collapse:collapse; width:100%; font-size:14.5px; min-width:460px}
-th,td{padding:12px 16px; text-align:start; border-bottom:1px solid var(--rule)}
+th,td{padding:13px 16px; text-align:start; border-bottom:1px solid var(--rule); color:var(--body)}
 th{
   font-family:"IBM Plex Mono",monospace; font-size:10.5px; letter-spacing:1.4px;
-  text-transform:uppercase; color:var(--muted); font-weight:500; background:var(--paper2);
+  text-transform:uppercase; color:var(--muted); font-weight:500; background:var(--card2);
 }
+html[dir=rtl] th{font-family:"Tajawal",sans-serif; letter-spacing:0; font-size:12.5px}
 tr:last-child td{border-bottom:0}
 td b{color:var(--ink)}
-tr.hi td{background:var(--coral-s)}
-tr.hi td b{color:var(--coral)}
+tr.hi td{background:var(--sun-soft)}
+tr.hi td b{color:var(--mark)}
 .mono{font-family:"IBM Plex Mono",monospace; font-variant-numeric:tabular-nums; direction:ltr; display:inline-block}
 .ok{color:var(--dbz18)} .todo{color:var(--muted)}
 
 /* ════════════════════ figures ════════════════════ */
 figure{
-  margin:26px 0; background:var(--card); border:1px solid var(--rule); border-radius:20px;
-  padding:22px 20px 16px; direction:ltr; box-shadow:var(--shadow); overflow-x:auto;
+  margin:26px 0; background:var(--card); border:1px solid var(--rule); border-radius:22px;
+  padding:24px 20px 16px; direction:ltr; overflow-x:auto;
 }
 figure svg.plot{display:block; width:100%; min-width:440px; height:auto}
 figcaption{
@@ -267,99 +299,93 @@ figcaption{
 html[dir=rtl] figcaption{direction:rtl; font-size:14.5px}
 
 /* ════════════════════ misc ════════════════════ */
-ul,ol{margin:0 0 15px; padding-inline-start:22px; max-width:68ch}
+ul,ol{margin:0 0 15px; padding-inline-start:22px; max-width:68ch; color:var(--body)}
 li{margin-bottom:9px}
-li::marker{color:var(--coral)}
+li::marker{color:var(--mark)}
 code{
-  font-family:"IBM Plex Mono",monospace; background:var(--paper2); padding:2px 7px;
+  font-family:"IBM Plex Mono",monospace; background:var(--card2); padding:2px 7px;
   border-radius:5px; font-size:13px; color:var(--ink); direction:ltr;
 }
 .gloss{display:grid; grid-template-columns:minmax(116px,180px) 1fr; margin:18px 0; font-size:15px}
 .gloss dt{
   font-family:"IBM Plex Mono",monospace; font-size:13px; font-weight:500; color:var(--ink);
-  padding:9px 0; border-top:1px solid var(--rule);
+  padding:10px 0; border-top:1px solid var(--rule);
 }
-html[dir=rtl] .gloss dt{font-family:"IBM Plex Sans Arabic",sans-serif; font-size:14px; font-weight:600}
-.gloss dd{margin:0; padding:9px 0 9px 18px; border-top:1px solid var(--rule); color:var(--body)}
-html[dir=rtl] .gloss dd{padding:9px 18px 9px 0}
+html[dir=rtl] .gloss dt{font-family:"Tajawal",sans-serif; font-size:14.5px; font-weight:700}
+.gloss dd{margin:0; padding:10px 0 10px 18px; border-top:1px solid var(--rule); color:var(--body)}
+html[dir=rtl] .gloss dd{padding:10px 18px 10px 0}
 .src{font-family:"IBM Plex Mono",monospace; font-size:10.5px; letter-spacing:1px; color:var(--muted); margin:0 0 10px}
 footer{
-  max-width:1120px; margin:0 auto; padding:34px 22px 70px; border-top:1px solid var(--rule);
-  font-family:"IBM Plex Mono",monospace; font-size:11px; line-height:1.9; color:var(--muted);
+  max-width:1120px; margin:0 auto; padding:14px 22px 70px; position:relative; z-index:1;
+  font-family:"IBM Plex Mono",monospace; font-size:11px; line-height:1.9; color:var(--onsky-dim);
 }
-html[dir=rtl] footer{font-family:"IBM Plex Sans Arabic",sans-serif; font-size:12.5px}
+html[dir=rtl] footer{font-family:"Tajawal",sans-serif; font-size:12.5px}
+footer code{background:rgba(255,255,255,.14); color:var(--onsky)}
 
 /* ════════════════════════════════════════════════════════════════
-   MOTION
-   One ambient loop (the radar sweep), one arrival per section, and
-   hover feedback. Everything is gated behind .js — with scripting off
-   the page renders complete and still. The hero and section 01 carry
-   no reveal, so the first frame is always fully readable.
+   MOTION — one ambient loop, one arrival per section, hover feedback.
+   Gated behind .js, so with scripting off the page renders complete and
+   still. The hero and section 01 never reveal, so the first frame is
+   always fully readable.
    ════════════════════════════════════════════════════════════════ */
 @keyframes sweep{to{transform:rotate(360deg)}}
 @keyframes rise{from{opacity:0; transform:translateY(18px)} to{opacity:1; transform:none}}
 @keyframes drawpen{from{stroke-dashoffset:46} to{stroke-dashoffset:0}}
 @keyframes growY{from{transform:scaleY(0)} to{transform:scaleY(1)}}
 @keyframes growX{from{transform:scaleX(0)} to{transform:scaleX(1)}}
-@keyframes fadein{from{opacity:0} to{opacity:1}}
 
 .sweepg{transform-origin:100px 100px; animation:sweep 11s linear infinite}
 
 .js .rv{opacity:0}
 .js .rv.in{animation:rise .6s cubic-bezier(.22,.75,.3,1) both}
 
-/* bars climb out of their own axis */
 .js .rv .gb{transform-box:fill-box; transform-origin:bottom; transform:scaleY(0)}
 .js .rv.in .gb{animation:growY .72s cubic-bezier(.2,.85,.3,1) both}
 .js .rv.in .gb:nth-of-type(2){animation-delay:.06s}
 .js .rv.in .gb:nth-of-type(3){animation-delay:.12s}
 .js .rv.in .gb:nth-of-type(4){animation-delay:.18s}
 
-/* the two scale bars in section 05 run horizontally instead */
 .js .rv .gx{transform-box:fill-box; transform-origin:left; transform:scaleX(0)}
 .js .rv.in .gx{animation:growX .8s cubic-bezier(.2,.85,.3,1) both}
 .js .rv.in .gx.late{animation-delay:.22s}
 
-/* the annotation pen draws itself in */
 .js .rv .pen svg path{stroke-dasharray:46; stroke-dashoffset:46}
 .js .rv.in .pen svg path{animation:drawpen .65s .3s ease both}
 .js .rv.in .pen svg path:last-child{animation-delay:.46s}
 
-/* hover feedback */
 .note,.step{transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease}
-.note:hover{transform:translateY(-2px); box-shadow:var(--shadow-l)}
+.note:hover{transform:translateY(-2px); box-shadow:var(--shadow)}
 .step:hover{transform:translateY(-2px)}
 table tr{transition:background .16s ease}
-table tr:not(.hi):hover td{background:var(--paper2)}
+table tr:not(.hi):hover td{background:var(--card2)}
 .langbtns button:hover{color:var(--ink)}
-.langbtns button.on:hover{color:var(--paper)}
+.langbtns button.on:hover{color:var(--card)}
 
-/* language swap: a short cross-fade so the switch reads as deliberate */
 main,footer{transition:opacity .16s ease}
 body.swapping main,body.swapping footer{opacity:.25}
 
 /* ════════════════════ the interactive kernel ════════════════════ */
 .k3d{
   margin:26px 0; background:var(--card); border:1px solid var(--rule);
-  border-radius:20px; overflow:hidden; box-shadow:var(--shadow);
+  border-radius:22px; overflow:hidden;
 }
 .k3d-bar{
   display:flex; align-items:center; gap:10px; flex-wrap:wrap;
-  padding:16px 20px; border-bottom:1px solid var(--rule); background:var(--paper2);
+  padding:16px 20px; border-bottom:1px solid var(--rule); background:var(--card2);
 }
 .k3d-bar .lbl{
   font-family:"IBM Plex Mono",monospace; font-size:10.5px; letter-spacing:1.8px;
   text-transform:uppercase; color:var(--muted); margin-inline-end:auto;
 }
-html[dir=rtl] .k3d-bar .lbl{font-family:"IBM Plex Sans Arabic",sans-serif; letter-spacing:0; font-size:12px}
+html[dir=rtl] .k3d-bar .lbl{font-family:"Tajawal",sans-serif; letter-spacing:0; font-size:12.5px}
 .k3d-bar button{
   font-family:"IBM Plex Mono",monospace; font-size:11px; font-weight:600; letter-spacing:.6px;
-  padding:8px 14px; border-radius:999px; cursor:pointer; background:var(--card);
+  padding:9px 15px; border-radius:999px; cursor:pointer; background:var(--card);
   border:1px solid var(--rule2); color:var(--ink); transition:all .18s ease;
 }
-html[dir=rtl] .k3d-bar button{font-family:"IBM Plex Sans Arabic",sans-serif; font-size:12.5px}
+html[dir=rtl] .k3d-bar button{font-family:"Tajawal",sans-serif; font-size:13px}
 .k3d-bar button:hover{border-color:var(--ink)}
-.k3d-bar button:focus-visible{outline:2px solid var(--coral); outline-offset:2px}
+.k3d-bar button:focus-visible{outline:2px solid var(--mark); outline-offset:2px}
 .k3d-bar button.ok{border-color:var(--dbz18); color:var(--dbz18)}
 .k3d-bar button.ok:hover{background:var(--dbz18); color:var(--card)}
 .k3d-bar button.no{border-color:var(--dbzhi); color:var(--dbzhi)}
@@ -367,7 +393,7 @@ html[dir=rtl] .k3d-bar button{font-family:"IBM Plex Sans Arabic",sans-serif; fon
 #kernel3d{display:block; width:100%; height:400px; cursor:grab; touch-action:pan-y}
 #kernel3d:active{cursor:grabbing}
 .k3d-note{
-  padding:15px 20px; border-top:1px solid var(--rule); font-size:14px;
+  padding:16px 20px; border-top:1px solid var(--rule); font-size:14px;
   line-height:1.6; color:var(--muted); min-height:62px;
 }
 .k3d-note b{color:var(--ink)}
@@ -376,7 +402,7 @@ html[dir=rtl] .k3d-bar button{font-family:"IBM Plex Sans Arabic",sans-serif; fon
 .k3d-fallback{padding:22px 20px; font-size:14px; color:var(--muted)}
 
 @media (prefers-reduced-motion:reduce){
-  .sweepg{animation:none}
+  .sweepg,.sky svg{animation:none}
   .js .rv{opacity:1}
   .js .rv.in{animation:none}
   .js .rv .gb,.js .rv .gx{transform:none}
@@ -390,6 +416,19 @@ html[dir=rtl] .k3d-bar button{font-family:"IBM Plex Sans Arabic",sans-serif; fon
 <body class="lang-en">
 <script>document.documentElement.className="js"</script>
 
+<div class="sky" aria-hidden="true"><svg viewBox="0 0 640 240" class="cl1" aria-hidden="true"><g>
+<ellipse cx="300" cy="168" rx="252" ry="56"/><circle cx="176" cy="140" r="60"/>
+<circle cx="262" cy="112" r="80"/><circle cx="362" cy="128" r="66"/>
+<circle cx="452" cy="152" r="50"/><circle cx="112" cy="162" r="42"/></g></svg><svg viewBox="0 0 640 240" class="cl2" aria-hidden="true"><g>
+<ellipse cx="300" cy="168" rx="252" ry="56"/><circle cx="176" cy="140" r="60"/>
+<circle cx="262" cy="112" r="80"/><circle cx="362" cy="128" r="66"/>
+<circle cx="452" cy="152" r="50"/><circle cx="112" cy="162" r="42"/></g></svg><svg viewBox="0 0 640 240" class="cl3" aria-hidden="true"><g>
+<ellipse cx="300" cy="168" rx="252" ry="56"/><circle cx="176" cy="140" r="60"/>
+<circle cx="262" cy="112" r="80"/><circle cx="362" cy="128" r="66"/>
+<circle cx="452" cy="152" r="50"/><circle cx="112" cy="162" r="42"/></g></svg><svg viewBox="0 0 640 240" class="cl4" aria-hidden="true"><g>
+<ellipse cx="300" cy="168" rx="252" ry="56"/><circle cx="176" cy="140" r="60"/>
+<circle cx="262" cy="112" r="80"/><circle cx="362" cy="128" r="66"/>
+<circle cx="452" cy="152" r="50"/><circle cx="112" cy="162" r="42"/></g></svg></div>
 <div id="prog"></div>
 <div id="bar">
   <div id="barin">
@@ -427,6 +466,11 @@ html[dir=rtl] .k3d-bar button{font-family:"IBM Plex Sans Arabic",sans-serif; fon
       <ellipse cx="66" cy="128" rx="13" ry="8" fill="#3F8FBE" opacity=".45" transform="rotate(16 66 128)"/>
       <ellipse cx="64" cy="127" rx="6" ry="3.6" fill="#2F8552" opacity=".5"/>
     </svg>
+    <svg class="herocloud" viewBox="0 0 1200 150" preserveAspectRatio="none" aria-hidden="true"><g>
+<ellipse cx="600" cy="126" rx="640" ry="48"/><circle cx="250" cy="104" r="52"/>
+<circle cx="360" cy="86" r="66"/><circle cx="500" cy="98" r="54"/><circle cx="700" cy="90" r="62"/>
+<circle cx="850" cy="104" r="50"/><circle cx="980" cy="112" r="42"/><circle cx="130" cy="116" r="40"/>
+</g></svg>
     <div class="scope-in">
       <span class="tag en"><i></i> Master's thesis · HITSZ · defence brief</span>
       <span class="tag ar"><i></i> أطروحة ماجستير · HITSZ · ملخّص المناقشة</span>
@@ -807,7 +851,75 @@ html[dir=rtl] .k3d-bar button{font-family:"IBM Plex Sans Arabic",sans-serif; fon
 
 <!-- ══════════════════════════ 09 ══════════════════════════ -->
 <section id="s9" class="rv">
-  <div class="eyebrow"><b>09</b> <span class="en">Your evidence</span><span class="ar">دليلك</span></div>
+  <div class="eyebrow"><b>09</b> <span class="en">The gap</span><span class="ar">الفجوة</span></div>
+  <h2 class="en">What is new, exactly <span class="pen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17c4-7 12-11 18-12"/><path d="M15 3.6l6 1.4-1.6 5.6"/></svg> memorise</span></h2>
+  <h2 class="ar">ما الجديد بالضبط <span class="pen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17c4-7 12-11 18-12"/><path d="M15 3.6l6 1.4-1.6 5.6"/></svg> احفظه</span></h2>
+
+  <p class="lead en"><b>Everyone before you trained and tested on one country&#39;s radar at a time.</b> SEVIR, MeteoNet, Shanghai and CIKM are used as four separate leaderboards. Nobody asked the obvious practical question: can you take the model that already works in America and make it work in France without collecting a French training set?</p>
+  <p class="lead ar"><b>كل من سبقك درّب واختبر على رادار دولة واحدة في كل مرة.</b> فمجموعات SEVIR وMeteoNet وشنغهاي وCIKM تُستخدم كأربعة تصنيفات منفصلة. ولم يسأل أحد السؤال العملي البديهي: هل يمكن أخذ النموذج الذي يعمل في أمريكا وجعله يعمل في فرنسا دون جمع بيانات تدريب فرنسية؟</p>
+
+  <h3 class="en">What existed, and what you add</h3>
+  <h3 class="ar">ما كان موجودًا، وما تضيفه أنت</h3>
+
+  <div class="tw en"><table>
+    <tr><th>Already done, by others</th><th>What you add</th></tr>
+    <tr><td><b>AlphaPre</b> trains a nowcasting model on SEVIR</td><td>You <b>freeze it</b> and move it to a different country</td></tr>
+    <tr><td><b>DiffCast</b> establishes the four datasets, 5→20 at 128×128</td><td>You use that protocol for <b>transfer between them</b>, which it was never used for</td></tr>
+    <tr class="hi"><td><b>S²FT</b> does PEFT by permuting rows and columns — <b>linear layers only</b></td><td>You extend it to <b>convolutional kernels</b>, which forces the question of which axes may be permuted</td></tr>
+    <tr><td><b>LoRA / FourierFT</b> — general-purpose PEFT recipes</td><td>You design around <b>measured properties of this model</b>, not a general recipe</td></tr>
+  </table></div>
+  <div class="tw ar"><table>
+    <tr><th>ما أنجزه آخرون بالفعل</th><th>ما تضيفه أنت</th></tr>
+    <tr><td><b>AlphaPre</b> يدرّب نموذج تنبؤ آني على SEVIR</td><td>أنت <b>تُجمّده</b> وتنقله إلى دولة أخرى</td></tr>
+    <tr><td><b>DiffCast</b> ترسي المجموعات الأربع وبروتوكول 5→20 بدقة 128×128</td><td>أنت تستخدم البروتوكول من أجل <b>النقل بينها</b>، وهو ما لم يُستخدم له قط</td></tr>
+    <tr class="hi"><td><b>S²FT</b> تنجز PEFT بإعادة ترتيب الصفوف والأعمدة — <b>للطبقات الخطية فقط</b></td><td>أنت تُوسّعها إلى <b>نوى الالتفاف</b>، وهو ما يفرض سؤال أي المحاور يجوز ترتيبها</td></tr>
+    <tr><td><b>LoRA / FourierFT</b> — وصفات PEFT عامة الغرض</td><td>أنت تُصمّم حول <b>خصائص مقيسة لهذا النموذج</b>، لا وصفة عامة</td></tr>
+  </table></div>
+
+  <h3 class="en">The three things that are actually yours</h3>
+  <h3 class="ar">الأشياء الثلاثة التي هي حقًا لك</h3>
+  <div class="grid g3">
+    <div class="step"><div class="no">Yours 01</div>
+      <h4 class="en">The problem framing</h4><h4 class="ar">صياغة المشكلة</h4>
+      <p class="en">Cross-dataset, few-shot nowcasting. In the literature you surveyed, all four datasets are trained and evaluated separately — no transfer, no few-shot regime. <b>That gap is the project.</b></p>
+      <p class="ar">تنبؤ آني عابر للمجموعات وبأمثلة قليلة. في الأدبيات التي مسحتَها، تُدرَّب المجموعات الأربع وتُقيَّم منفصلة — بلا نقل ولا نظام أمثلة قليلة. <b>هذه الفجوة هي المشروع.</b></p></div>
+    <div class="step hot"><div class="no">Yours 02</div>
+      <h4 class="en">The convolutional extension of S²FT</h4><h4 class="ar">التوسعة الالتفافية لـ S²FT</h4>
+      <p class="en">Your hardest technical contribution. Shuffling is only legal on an axis whose order is meaningless — and a kernel has two of each. The paper&#39;s second author confirmed he has never tried it on convolutions, and there is <b>no public implementation</b>. You derive it from the paper, not from code.</p>
+      <p class="ar">أصعب إسهاماتك التقنية. إعادة الترتيب مشروعة فقط على محور لا معنى لترتيبه — وللنواة محوران من كل نوع. وقد أكّد المؤلف الثاني للورقة أنه لم يجرّبها على الالتفافات قط، ولا يوجد <b>أي تنفيذ عام</b>. أنت تشتقّها من الورقة لا من كود.</p></div>
+    <div class="step"><div class="no">Yours 03</div>
+      <h4 class="en">The controlled comparison</h4><h4 class="ar">المقارنة المضبوطة</h4>
+      <p class="en">Two methods identical in every respect except <b>the space the update is written in</b> — original parameters against sparse spectrum — measured as target data shrink. That comparison <i>is</i> the thesis.</p>
+      <p class="ar">طريقتان متطابقتان في كل شيء إلا <b>الفضاء الذي يُكتب فيه التحديث</b> — المعاملات الأصلية مقابل الطيف المتناثر — مقيستان مع تناقص بيانات الهدف. تلك المقارنة <i>هي</i> الأطروحة.</p></div>
+  </div>
+
+  <div class="note warn">
+    <h4 class="en">What is NOT new — say this before they do <span class="pen grey">careful</span></h4>
+    <h4 class="ar">ما ليس جديدًا — قله قبل أن يقولوه <span class="pen grey">انتبه</span></h4>
+    <ul class="en">
+      <li><b>PEFT itself is not yours</b>, and neither is <b>LoRA on convolutions</b> — conv-LoRA variants already exist. Your Research Content One is a baseline and a controlled counterpart, <b>not a novelty claim</b>.</li>
+      <li><b>The amplitude/phase decomposition is AlphaPre&#39;s</b>, not yours. What is yours is using it to decide where the parameter budget goes.</li>
+      <li>The datasets, the protocol and the base model are all inherited.</li>
+    </ul>
+    <ul class="ar">
+      <li><b>PEFT نفسها ليست لك</b>، ولا <b>LoRA على الالتفافات</b> — فنسخ conv-LoRA موجودة بالفعل. محتوى بحثك الأول خط أساس ونظير مضبوط، <b>لا ادّعاء ابتكار</b>.</li>
+      <li><b>تفكيك السعة والطور من AlphaPre</b> لا منك. ما هو لك هو استخدامه لتحديد أين تُنفَق ميزانية المعاملات.</li>
+      <li>المجموعات والبروتوكول والنموذج الأساس، كلها موروثة.</li>
+    </ul>
+    <p class="en">Claiming any of those would get you caught. Volunteering them makes the real claims land harder.</p>
+    <p class="ar">ادّعاء أيٍّ منها سيوقعك. أما التطوّع بذكرها فيجعل ادّعاءاتك الحقيقية أوقع.</p>
+  </div>
+
+  <div class="say">
+    <span class="who en">The sentence for the defence</span>
+    <span class="who ar">الجملة المخصّصة للمناقشة</span>
+    <span class="q en">“Precipitation nowcasting models are trained and evaluated one country at a time. I take a frozen model from one country and adapt it to another using under 0.1% of its weights — and to do that I had to extend a spectral PEFT method, written for linear layers, to convolutional kernels, which nobody has done. Every design decision comes from a property of this model that I measured.”</span>
+    <span class="q ar">«نماذج التنبؤ الآني بالأمطار تُدرَّب وتُقيَّم على دولة واحدة في كل مرة. أنا آخذ نموذجًا مُجمَّدًا من دولة وأُكيّفه على أخرى باستخدام أقل من 0.1% من أوزانه — ولفعل ذلك كان عليّ توسيع طريقة PEFT طيفية، كُتبت للطبقات الخطية، إلى نوى الالتفاف، وهو ما لم يفعله أحد. وكل قرار تصميمي نابع من خاصية في هذا النموذج قِستُها بنفسي.»</span>
+  </div>
+</section>
+<!-- ══════════════════════════ 10 ══════════════════════════ -->
+<section id="s10" class="rv">
+  <div class="eyebrow"><b>10</b> <span class="en">Your evidence</span><span class="ar">دليلك</span></div>
   <h2 class="en">What you have already measured</h2>
   <h2 class="ar">ما قِستَه بالفعل</h2>
   <p class="src">SOURCE · prelim/experiments_summary.md · 5 SEPTEMBER 2026 · SINGLE SEED THROUGHOUT</p>
@@ -918,9 +1030,9 @@ html[dir=rtl] .k3d-bar button{font-family:"IBM Plex Sans Arabic",sans-serif; fon
 
 <svg class="thread rv" viewBox="0 0 1000 54" preserveAspectRatio="none" aria-hidden="true"><path d="M176 0 C176 28 212 38 320 42 C438 47 502 34 514 14"/></svg>
 
-<!-- ══════════════════════════ 10 ══════════════════════════ -->
-<section id="s10" class="rv">
-  <div class="eyebrow"><b>10</b> <span class="en">Honesty</span><span class="ar">الأمانة العلمية</span></div>
+<!-- ══════════════════════════ 11 ══════════════════════════ -->
+<section id="s11" class="rv">
+  <div class="eyebrow"><b>11</b> <span class="en">Honesty</span><span class="ar">الأمانة العلمية</span></div>
   <h2 class="en">What your results do <i>not</i> prove <span class="pen grey">read twice</span></h2>
   <h2 class="ar">ما <i>لا</i> تُثبته نتائجك <span class="pen grey">اقرأه مرتين</span></h2>
   <p class="en">Raising these yourself, before anyone asks, is the strongest move available in a defence. It converts a potential attack into evidence that you understand your own work.</p>
@@ -942,9 +1054,9 @@ html[dir=rtl] .k3d-bar button{font-family:"IBM Plex Sans Arabic",sans-serif; fon
   </div>
 </section>
 
-<!-- ══════════════════════════ 11 ══════════════════════════ -->
-<section id="s11" class="rv">
-  <div class="eyebrow"><b>11</b> <span class="en">The plan</span><span class="ar">الخطة</span></div>
+<!-- ══════════════════════════ 12 ══════════════════════════ -->
+<section id="s12" class="rv">
+  <div class="eyebrow"><b>12</b> <span class="en">The plan</span><span class="ar">الخطة</span></div>
   <h2 class="en">What still has to be run</h2>
   <h2 class="ar">ما تبقّى من تجارب</h2>
   <p class="en">Seven approaches × three data amounts × three target datasets, all under one protocol so the numbers can be compared.</p>
@@ -981,9 +1093,9 @@ html[dir=rtl] .k3d-bar button{font-family:"IBM Plex Sans Arabic",sans-serif; fon
 
 <svg class="thread rv" viewBox="0 0 1000 54" preserveAspectRatio="none" aria-hidden="true"><path d="M766 0 C766 26 734 36 640 42 C542 48 478 34 466 14"/></svg>
 
-<!-- ══════════════════════════ 12 ══════════════════════════ -->
-<section id="s12" class="rv">
-  <div class="eyebrow"><b>12</b> <span class="en">The defence</span><span class="ar">المناقشة</span></div>
+<!-- ══════════════════════════ 13 ══════════════════════════ -->
+<section id="s13" class="rv">
+  <div class="eyebrow"><b>13</b> <span class="en">The defence</span><span class="ar">المناقشة</span></div>
   <h2 class="en">How to present, and how to sound like you know it <span class="pen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17c4-7 12-11 18-12"/><path d="M15 3.6l6 1.4-1.6 5.6"/></svg> memorise</span></h2>
   <h2 class="ar">كيف تعرض، وكيف تبدو متمكنًا <span class="pen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17c4-7 12-11 18-12"/><path d="M15 3.6l6 1.4-1.6 5.6"/></svg> احفظه</span></h2>
 
@@ -1060,14 +1172,14 @@ html[dir=rtl] .k3d-bar button{font-family:"IBM Plex Sans Arabic",sans-serif; fon
     <h4 class="ar">السؤالان الأرجح أن يُطرحا عليك</h4>
     <p class="en"><b>"How is this different from existing convolutional PEFT work?"</b> → You are not proposing a general method, so you are not competing with them. Every design decision comes from a measured property of this model. <i>(Section 08.)</i></p>
     <p class="ar"><b>«بمَ يختلف هذا عن أعمال PEFT الالتفافية الموجودة؟»</b> ← أنت لا تقترح طريقة عامة، فلستَ منافسًا لها. وكل قرار تصميمي نابع من خاصية مقيسة في هذا النموذج. <i>(القسم 08.)</i></p>
-    <p class="en"><b>"What have you actually done?"</b> → You measured the model before designing for it, and the measurement changed the design. Then give the three experiments and their numbers. <i>(Section 09.)</i></p>
-    <p class="ar"><b>«ماذا أنجزتَ فعلًا؟»</b> ← قِستَ النموذج قبل أن تُصمّم له، والقياس غيّر التصميم. ثم اذكر التجارب الثلاث وأرقامها. <i>(القسم 09.)</i></p>
+    <p class="en"><b>"What have you actually done?"</b> → You measured the model before designing for it, and the measurement changed the design. Then give the three experiments and their numbers. <i>(Section 10.)</i></p>
+    <p class="ar"><b>«ماذا أنجزتَ فعلًا؟»</b> ← قِستَ النموذج قبل أن تُصمّم له، والقياس غيّر التصميم. ثم اذكر التجارب الثلاث وأرقامها. <i>(القسم 10.)</i></p>
   </div>
 </section>
 
-<!-- ══════════════════════════ 13 ══════════════════════════ -->
-<section id="s13" class="rv">
-  <div class="eyebrow"><b>13</b> <span class="en">Reference</span><span class="ar">مرجع</span></div>
+<!-- ══════════════════════════ 14 ══════════════════════════ -->
+<section id="s14" class="rv">
+  <div class="eyebrow"><b>14</b> <span class="en">Reference</span><span class="ar">مرجع</span></div>
   <h2 class="en">The papers you are standing on</h2>
   <h2 class="ar">الأوراق البحثية التي تقف عليها</h2>
   <p class="en">Three came out of your own laboratory, and your supervisor is an author on two. Worth knowing if someone asks why this project sits here.</p>
@@ -1101,9 +1213,9 @@ html[dir=rtl] .k3d-bar button{font-family:"IBM Plex Sans Arabic",sans-serif; fon
   </div>
 </section>
 
-<!-- ══════════════════════════ 14 ══════════════════════════ -->
-<section id="s14" class="rv">
-  <div class="eyebrow"><b>14</b> <span class="en">Reference</span><span class="ar">مصطلحات</span></div>
+<!-- ══════════════════════════ 15 ══════════════════════════ -->
+<section id="s15" class="rv">
+  <div class="eyebrow"><b>15</b> <span class="en">Reference</span><span class="ar">مصطلحات</span></div>
   <h2 class="en">The words, briefly</h2>
   <h2 class="ar">المصطلحات باختصار</h2>
   <p class="en">Only the ones you will actually hear on the day.</p>
@@ -1160,9 +1272,9 @@ html[dir=rtl] .k3d-bar button{font-family:"IBM Plex Sans Arabic",sans-serif; fon
   </dl>
 </section>
 
-<!-- ══════════════════════════ 15 ══════════════════════════ -->
-<section id="s15" class="rv">
-  <div class="eyebrow"><b>15</b> <span class="en">Where things stand</span><span class="ar">أين نحن الآن</span></div>
+<!-- ══════════════════════════ 16 ══════════════════════════ -->
+<section id="s16" class="rv">
+  <div class="eyebrow"><b>16</b> <span class="en">Where things stand</span><span class="ar">أين نحن الآن</span></div>
   <h2 class="en">Status and what is next</h2>
   <h2 class="ar">الحالة والخطوات التالية</h2>
 
@@ -1232,13 +1344,14 @@ var SECTIONS = [
   ["s6","06 · The kernel","06 · النواة"],
   ["s7","07 · Your two methods","07 · طريقتاك"],
   ["s8","08 · Where the innovation is","08 · أين الابتكار"],
-  ["s9","09 · What you measured","09 · ما قِستَه"],
-  ["s10","10 · What it does not prove","10 · ما لا تُثبته"],
-  ["s11","11 · What is still to run","11 · ما تبقّى"],
-  ["s12","12 · How to present","12 · كيف تعرض"],
-  ["s13","13 · The papers","13 · الأوراق البحثية"],
-  ["s14","14 · Glossary","14 · المصطلحات"],
-  ["s15","15 · Status and next","15 · الحالة والتالي"]
+  ["s9","09 · What is new, exactly","09 · ما الجديد بالضبط"],
+  ["s10","10 · What you measured","10 · ما قِستَه"],
+  ["s11","11 · What it does not prove","11 · ما لا تُثبته"],
+  ["s12","12 · What is still to run","12 · ما تبقّى"],
+  ["s13","13 · How to present","13 · كيف تعرض"],
+  ["s14","14 · The papers","14 · الأوراق البحثية"],
+  ["s15","15 · Glossary","15 · المصطلحات"],
+  ["s16","16 · Status and next","16 · الحالة والتالي"]
 ];
 
 function buildNav(lang){
