@@ -288,9 +288,107 @@ footer{
   font-family:"IBM Plex Mono",monospace; font-size:11px; line-height:1.9; color:var(--muted);
 }
 html[dir=rtl] footer{font-family:"IBM Plex Sans Arabic",sans-serif; font-size:12.5px}
+
+/* ════════════════════════════════════════════════════════════════
+   MOTION
+   One ambient loop (the radar sweep), one arrival per section, and
+   hover feedback. Everything is gated behind .js — with scripting off
+   the page renders complete and still. The hero and section 01 carry
+   no reveal, so the first frame is always fully readable.
+   ════════════════════════════════════════════════════════════════ */
+@keyframes sweep{to{transform:rotate(360deg)}}
+@keyframes rise{from{opacity:0; transform:translateY(18px)} to{opacity:1; transform:none}}
+@keyframes drawpen{from{stroke-dashoffset:46} to{stroke-dashoffset:0}}
+@keyframes growY{from{transform:scaleY(0)} to{transform:scaleY(1)}}
+@keyframes growX{from{transform:scaleX(0)} to{transform:scaleX(1)}}
+@keyframes fadein{from{opacity:0} to{opacity:1}}
+
+.sweepg{transform-origin:100px 100px; animation:sweep 11s linear infinite}
+
+.js .rv{opacity:0}
+.js .rv.in{animation:rise .6s cubic-bezier(.22,.75,.3,1) both}
+
+/* bars climb out of their own axis */
+.js .rv .gb{transform-box:fill-box; transform-origin:bottom; transform:scaleY(0)}
+.js .rv.in .gb{animation:growY .72s cubic-bezier(.2,.85,.3,1) both}
+.js .rv.in .gb:nth-of-type(2){animation-delay:.06s}
+.js .rv.in .gb:nth-of-type(3){animation-delay:.12s}
+.js .rv.in .gb:nth-of-type(4){animation-delay:.18s}
+
+/* the two scale bars in section 05 run horizontally instead */
+.js .rv .gx{transform-box:fill-box; transform-origin:left; transform:scaleX(0)}
+.js .rv.in .gx{animation:growX .8s cubic-bezier(.2,.85,.3,1) both}
+.js .rv.in .gx.late{animation-delay:.22s}
+
+/* the annotation pen draws itself in */
+.js .rv .pen svg path{stroke-dasharray:46; stroke-dashoffset:46}
+.js .rv.in .pen svg path{animation:drawpen .65s .3s ease both}
+.js .rv.in .pen svg path:last-child{animation-delay:.46s}
+
+/* hover feedback */
+.note,.step{transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease}
+.note:hover{transform:translateY(-2px); box-shadow:var(--shadow-l)}
+.step:hover{transform:translateY(-2px)}
+table tr{transition:background .16s ease}
+table tr:not(.hi):hover td{background:var(--paper2)}
+.langbtns button:hover{color:var(--ink)}
+.langbtns button.on:hover{color:var(--paper)}
+
+/* language swap: a short cross-fade so the switch reads as deliberate */
+main,footer{transition:opacity .16s ease}
+body.swapping main,body.swapping footer{opacity:.25}
+
+/* ════════════════════ the interactive kernel ════════════════════ */
+.k3d{
+  margin:26px 0; background:var(--card); border:1px solid var(--rule);
+  border-radius:20px; overflow:hidden; box-shadow:var(--shadow);
+}
+.k3d-bar{
+  display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+  padding:16px 20px; border-bottom:1px solid var(--rule); background:var(--paper2);
+}
+.k3d-bar .lbl{
+  font-family:"IBM Plex Mono",monospace; font-size:10.5px; letter-spacing:1.8px;
+  text-transform:uppercase; color:var(--muted); margin-inline-end:auto;
+}
+html[dir=rtl] .k3d-bar .lbl{font-family:"IBM Plex Sans Arabic",sans-serif; letter-spacing:0; font-size:12px}
+.k3d-bar button{
+  font-family:"IBM Plex Mono",monospace; font-size:11px; font-weight:600; letter-spacing:.6px;
+  padding:8px 14px; border-radius:999px; cursor:pointer; background:var(--card);
+  border:1px solid var(--rule2); color:var(--ink); transition:all .18s ease;
+}
+html[dir=rtl] .k3d-bar button{font-family:"IBM Plex Sans Arabic",sans-serif; font-size:12.5px}
+.k3d-bar button:hover{border-color:var(--ink)}
+.k3d-bar button:focus-visible{outline:2px solid var(--coral); outline-offset:2px}
+.k3d-bar button.ok{border-color:var(--dbz18); color:var(--dbz18)}
+.k3d-bar button.ok:hover{background:var(--dbz18); color:var(--card)}
+.k3d-bar button.no{border-color:var(--dbzhi); color:var(--dbzhi)}
+.k3d-bar button.no:hover{background:var(--dbzhi); color:var(--card)}
+#kernel3d{display:block; width:100%; height:400px; cursor:grab; touch-action:pan-y}
+#kernel3d:active{cursor:grabbing}
+.k3d-note{
+  padding:15px 20px; border-top:1px solid var(--rule); font-size:14px;
+  line-height:1.6; color:var(--muted); min-height:62px;
+}
+.k3d-note b{color:var(--ink)}
+.k3d-note.good b{color:var(--dbz18)}
+.k3d-note.bad b{color:var(--dbzhi)}
+.k3d-fallback{padding:22px 20px; font-size:14px; color:var(--muted)}
+
+@media (prefers-reduced-motion:reduce){
+  .sweepg{animation:none}
+  .js .rv{opacity:1}
+  .js .rv.in{animation:none}
+  .js .rv .gb,.js .rv .gx{transform:none}
+  .js .rv.in .gb,.js .rv.in .gx{animation:none}
+  .js .rv .pen svg path{stroke-dashoffset:0}
+  .js .rv.in .pen svg path{animation:none}
+  .note:hover,.step:hover{transform:none}
+}
 </style>
 </head>
 <body class="lang-en">
+<script>document.documentElement.className="js"</script>
 
 <div id="prog"></div>
 <div id="bar">
@@ -322,7 +420,7 @@ html[dir=rtl] footer{font-family:"IBM Plex Sans Arabic",sans-serif; font-size:12
         <line x1="100" y1="12" x2="100" y2="188" stroke-opacity=".3"/>
         <line x1="12" y1="100" x2="188" y2="100" stroke-opacity=".3"/>
       </g>
-      <path d="M100 100 L100 12 A88 88 0 0 1 162 38 Z" fill="url(#sweep)"/>
+      <g class="sweepg"><path d="M100 100 L100 12 A88 88 0 0 1 162 38 Z" fill="url(#sweep)"/></g>
       <ellipse cx="132" cy="74" rx="17" ry="11" fill="#3F8FBE" opacity=".55" transform="rotate(-22 132 74)"/>
       <ellipse cx="128" cy="72" rx="10" ry="6.5" fill="#2F8552" opacity=".6" transform="rotate(-22 128 72)"/>
       <ellipse cx="125" cy="71" rx="5" ry="3.4" fill="#C9971D" opacity=".75"/>
@@ -351,7 +449,7 @@ html[dir=rtl] footer{font-family:"IBM Plex Sans Arabic",sans-serif; font-size:12
   </div>
 </section>
 
-<svg class="thread" viewBox="0 0 1000 54" preserveAspectRatio="none" aria-hidden="true"><path d="M60 0 C60 26 76 34 128 40 C188 47 234 39 246 20"/></svg>
+<svg class="thread rv" viewBox="0 0 1000 54" preserveAspectRatio="none" aria-hidden="true"><path d="M60 0 C60 26 76 34 128 40 C188 47 234 39 246 20"/></svg>
 
 <!-- ══════════════════════════ 01 ══════════════════════════ -->
 <section id="s1">
@@ -380,7 +478,7 @@ html[dir=rtl] footer{font-family:"IBM Plex Sans Arabic",sans-serif; font-size:12
 </section>
 
 <!-- ══════════════════════════ 02 ══════════════════════════ -->
-<section id="s2">
+<section id="s2" class="rv">
   <div class="eyebrow"><b>02</b> <span class="en">The problem</span><span class="ar">المشكلة</span></div>
   <h2 class="en">Why a model stops working when it crosses a border</h2>
   <h2 class="ar">لماذا يتوقف النموذج عن العمل حين يعبر الحدود</h2>
@@ -397,8 +495,8 @@ html[dir=rtl] footer{font-family:"IBM Plex Sans Arabic",sans-serif; font-size:12
       <text x="66" y="212" text-anchor="end" fill="var(--muted)" font-family="IBM Plex Mono,monospace" font-size="10">0.0</text>
       <text x="66" y="62" text-anchor="end" fill="var(--muted)" font-family="IBM Plex Mono,monospace" font-size="10">1.0</text>
 
-      <rect x="122" y="58" width="54" height="150" rx="4" fill="var(--dbz12)"/>
-      <rect x="192" y="117" width="54" height="91" rx="4" fill="var(--dbz12)" opacity=".4"/>
+      <rect class="gb" x="122" y="58" width="54" height="150" rx="4" fill="var(--dbz12)"/>
+      <rect class="gb" x="192" y="117" width="54" height="91" rx="4" fill="var(--dbz12)" opacity=".4"/>
       <text x="149" y="50" text-anchor="middle" fill="var(--dbz12)" font-family="IBM Plex Mono,monospace" font-size="12.5" font-weight="600">0.9134</text>
       <text x="219" y="109" text-anchor="middle" fill="var(--dbz12)" font-family="IBM Plex Mono,monospace" font-size="12.5" font-weight="600">0.5646</text>
       <text x="149" y="201" text-anchor="middle" fill="#FFFFFF" font-family="IBM Plex Mono,monospace" font-size="9.5">frame 1</text>
@@ -407,8 +505,8 @@ html[dir=rtl] footer{font-family:"IBM Plex Sans Arabic",sans-serif; font-size:12
       <text x="184" y="249" text-anchor="middle" fill="var(--muted)" font-size="11.5">the radar it was trained on</text>
       <text x="184" y="267" text-anchor="middle" fill="var(--dbz18)" font-family="IBM Plex Mono,monospace" font-size="13" font-weight="600">61.8% RETAINED</text>
 
-      <rect x="402" y="71" width="54" height="137" rx="4" fill="var(--dbz32)"/>
-      <rect x="472" y="162" width="54" height="46" rx="4" fill="var(--dbz32)" opacity=".4"/>
+      <rect class="gb" x="402" y="71" width="54" height="137" rx="4" fill="var(--dbz32)"/>
+      <rect class="gb" x="472" y="162" width="54" height="46" rx="4" fill="var(--dbz32)" opacity=".4"/>
       <text x="429" y="63" text-anchor="middle" fill="var(--dbz32)" font-family="IBM Plex Mono,monospace" font-size="12.5" font-weight="600">0.8358</text>
       <text x="499" y="154" text-anchor="middle" fill="var(--dbz32)" font-family="IBM Plex Mono,monospace" font-size="12.5" font-weight="600">0.2821</text>
       <text x="429" y="201" text-anchor="middle" fill="#FFFFFF" font-family="IBM Plex Mono,monospace" font-size="9.5">frame 1</text>
@@ -430,7 +528,7 @@ html[dir=rtl] footer{font-family:"IBM Plex Sans Arabic",sans-serif; font-size:12
 </section>
 
 <!-- ══════════════════════════ 03 ══════════════════════════ -->
-<section id="s3">
+<section id="s3" class="rv">
   <div class="eyebrow"><b>03</b> <span class="en">The data</span><span class="ar">البيانات</span></div>
   <h2 class="en">Four radar datasets</h2>
   <h2 class="ar">أربع مجموعات بيانات رادار</h2>
@@ -468,10 +566,10 @@ html[dir=rtl] footer{font-family:"IBM Plex Sans Arabic",sans-serif; font-size:12
   </div>
 </section>
 
-<svg class="thread" viewBox="0 0 1000 54" preserveAspectRatio="none" aria-hidden="true"><path d="M888 0 C888 24 868 34 810 40 C744 47 702 38 692 18"/></svg>
+<svg class="thread rv" viewBox="0 0 1000 54" preserveAspectRatio="none" aria-hidden="true"><path d="M888 0 C888 24 868 34 810 40 C744 47 702 38 692 18"/></svg>
 
 <!-- ══════════════════════════ 04 ══════════════════════════ -->
-<section id="s4">
+<section id="s4" class="rv">
   <div class="eyebrow"><b>04</b> <span class="en">The starting point</span><span class="ar">نقطة الانطلاق</span></div>
   <h2 class="en">AlphaPre — the model you freeze</h2>
   <h2 class="ar">AlphaPre — النموذج الذي تُجمّده</h2>
@@ -494,7 +592,7 @@ html[dir=rtl] footer{font-family:"IBM Plex Sans Arabic",sans-serif; font-size:12
 </section>
 
 <!-- ══════════════════════════ 05 ══════════════════════════ -->
-<section id="s5">
+<section id="s5" class="rv">
   <div class="eyebrow"><b>05</b> <span class="en">The idea</span><span class="ar">الفكرة</span></div>
   <h2 class="en">What "parameter-efficient fine-tuning" actually means</h2>
   <h2 class="ar">ما معنى «الضبط الدقيق كفء المعاملات» فعليًا</h2>
@@ -504,12 +602,12 @@ html[dir=rtl] footer{font-family:"IBM Plex Sans Arabic",sans-serif; font-size:12
   <figure>
     <svg class="plot" viewBox="0 0 660 188" role="img" aria-label="Full fine-tuning versus LoRA parameter counts, drawn to scale">
       <text x="26" y="22" fill="var(--muted)" font-family="IBM Plex Mono,monospace" font-size="10.5" letter-spacing="1.6">FULL FINE-TUNING</text>
-      <rect x="26" y="32" width="608" height="32" rx="6" fill="var(--dbzhi)"/>
+      <rect class="gx" x="26" y="32" width="608" height="32" rx="6" fill="var(--dbzhi)"/>
       <text x="330" y="53" text-anchor="middle" fill="#FFFFFF" font-family="IBM Plex Mono,monospace" font-size="13" font-weight="600">89,030,000 trainable — 100%</text>
 
       <text x="26" y="100" fill="var(--muted)" font-family="IBM Plex Mono,monospace" font-size="10.5" letter-spacing="1.6">LORA r=4 — WHAT YOU ACTUALLY TRAIN</text>
       <rect x="26" y="110" width="608" height="32" rx="6" fill="var(--paper2)" stroke="var(--rule)"/>
-      <rect x="26" y="110" width="6" height="32" rx="3" fill="var(--dbz18)"/>
+      <rect class="gx late" x="26" y="110" width="6" height="32" rx="3" fill="var(--dbz18)"/>
       <text x="48" y="131" fill="var(--dbz18)" font-family="IBM Plex Mono,monospace" font-size="13" font-weight="600">71,680</text>
       <text x="122" y="131" fill="var(--body)" font-size="13">— 0.0805%. That green sliver is the whole thing, drawn to scale.</text>
 
@@ -532,10 +630,10 @@ html[dir=rtl] footer{font-family:"IBM Plex Sans Arabic",sans-serif; font-size:12
   </div>
 </section>
 
-<svg class="thread" viewBox="0 0 1000 54" preserveAspectRatio="none" aria-hidden="true"><path d="M116 0 C116 28 148 38 250 42 C362 47 432 35 444 14"/></svg>
+<svg class="thread rv" viewBox="0 0 1000 54" preserveAspectRatio="none" aria-hidden="true"><path d="M116 0 C116 28 148 38 250 42 C362 47 432 35 444 14"/></svg>
 
 <!-- ══════════════════════════ 06 ══════════════════════════ -->
-<section id="s6">
+<section id="s6" class="rv">
   <div class="eyebrow"><b>06</b> <span class="en">The technical core</span><span class="ar">الجوهر التقني</span></div>
   <h2 class="en">The one picture that carries your whole argument <span class="pen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17c4-7 12-11 18-12"/><path d="M15 3.6l6 1.4-1.6 5.6"/></svg> memorise</span></h2>
   <h2 class="ar">الصورة الواحدة التي تحمل حجّتك كلها <span class="pen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17c4-7 12-11 18-12"/><path d="M15 3.6l6 1.4-1.6 5.6"/></svg> احفظها</span></h2>
@@ -586,6 +684,18 @@ html[dir=rtl] footer{font-family:"IBM Plex Sans Arabic",sans-serif; font-size:12
     <figcaption class="ar"><b>الالتفاف</b> نافذة صغيرة منزلقة (عادةً 3×3) تطبّق العملية نفسها في كل مكان من الصورة. والأرقام داخلها هي <b>النواة</b>. محوران من محاورها الأربعة تسميات اعتباطية، ومحوران موضعان حقيقيان في الفضاء.</figcaption>
   </figure>
 
+  <div class="k3d">
+    <div class="k3d-bar">
+      <span class="lbl en">Drag to turn it · 5 output × 4 input channels, each a 3×3 window</span>
+      <span class="lbl ar">اسحب لتدويره · 5 قنوات خرج × 4 قنوات دخل، كلٌّ منها نافذة 3×3</span>
+      <button type="button" class="ok" id="kShuffleC"><span class="en">Shuffle channels</span><span class="ar">اخلط القنوات</span></button>
+      <button type="button" class="no" id="kShuffleS"><span class="en">Shuffle positions</span><span class="ar">اخلط المواضع</span></button>
+      <button type="button" id="kReset"><span class="en">Reset</span><span class="ar">إعادة</span></button>
+    </div>
+    <canvas id="kernel3d" aria-label="Interactive three-dimensional convolution kernel"></canvas>
+    <div class="k3d-note" id="kNote"></div>
+  </div>
+
   <div class="say">
     <span class="who en">Say it out loud like this</span>
     <span class="who ar">قُلها شفويًا هكذا</span>
@@ -602,7 +712,7 @@ html[dir=rtl] footer{font-family:"IBM Plex Sans Arabic",sans-serif; font-size:12
 </section>
 
 <!-- ══════════════════════════ 07 ══════════════════════════ -->
-<section id="s7">
+<section id="s7" class="rv">
   <div class="eyebrow"><b>07</b> <span class="en">Your contribution</span><span class="ar">إسهامك</span></div>
   <h2 class="en">Your two methods <span class="pen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17c4-7 12-11 18-12"/><path d="M15 3.6l6 1.4-1.6 5.6"/></svg> memorise</span></h2>
   <h2 class="ar">طريقتاك <span class="pen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17c4-7 12-11 18-12"/><path d="M15 3.6l6 1.4-1.6 5.6"/></svg> احفظهما</span></h2>
@@ -649,10 +759,10 @@ html[dir=rtl] footer{font-family:"IBM Plex Sans Arabic",sans-serif; font-size:12
   </div>
 </section>
 
-<svg class="thread" viewBox="0 0 1000 54" preserveAspectRatio="none" aria-hidden="true"><path d="M824 0 C824 26 794 36 700 42 C598 48 530 35 518 14"/></svg>
+<svg class="thread rv" viewBox="0 0 1000 54" preserveAspectRatio="none" aria-hidden="true"><path d="M824 0 C824 26 794 36 700 42 C598 48 530 35 518 14"/></svg>
 
 <!-- ══════════════════════════ 08 ══════════════════════════ -->
-<section id="s8">
+<section id="s8" class="rv">
   <div class="eyebrow"><b>08</b> <span class="en">Defending novelty</span><span class="ar">الدفاع عن الابتكار</span></div>
   <h2 class="en">Where the innovation is <span class="pen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17c4-7 12-11 18-12"/><path d="M15 3.6l6 1.4-1.6 5.6"/></svg> memorise</span></h2>
   <h2 class="ar">أين يكمن الابتكار <span class="pen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17c4-7 12-11 18-12"/><path d="M15 3.6l6 1.4-1.6 5.6"/></svg> احفظه</span></h2>
@@ -696,7 +806,7 @@ html[dir=rtl] footer{font-family:"IBM Plex Sans Arabic",sans-serif; font-size:12
 </section>
 
 <!-- ══════════════════════════ 09 ══════════════════════════ -->
-<section id="s9">
+<section id="s9" class="rv">
   <div class="eyebrow"><b>09</b> <span class="en">Your evidence</span><span class="ar">دليلك</span></div>
   <h2 class="en">What you have already measured</h2>
   <h2 class="ar">ما قِستَه بالفعل</h2>
@@ -735,33 +845,33 @@ html[dir=rtl] footer{font-family:"IBM Plex Sans Arabic",sans-serif; font-size:12
       <text x="56" y="202" text-anchor="end" fill="var(--muted)" font-family="IBM Plex Mono,monospace" font-size="9.5">0.30</text>
       <text x="56" y="48" text-anchor="end" fill="var(--muted)" font-family="IBM Plex Mono,monospace" font-size="9.5">0.39</text>
 
-      <rect x="80" y="166" width="56" height="32" rx="4" fill="var(--dbzhi)"/>
+      <rect class="gb" x="80" y="166" width="56" height="32" rx="4" fill="var(--dbzhi)"/>
       <text x="108" y="160" text-anchor="middle" fill="var(--dbzhi)" font-family="IBM Plex Mono,monospace" font-size="11.5" font-weight="600">0.3178</text>
       <text x="108" y="216" text-anchor="middle" fill="var(--body)" font-size="11">zero-shot</text>
       <text x="108" y="230" text-anchor="middle" fill="var(--muted)" font-size="10">no training</text>
 
-      <rect x="166" y="56" width="56" height="142" rx="4" fill="var(--dbz18)"/>
+      <rect class="gb" x="166" y="56" width="56" height="142" rx="4" fill="var(--dbz18)"/>
       <text x="194" y="50" text-anchor="middle" fill="var(--dbz18)" font-family="IBM Plex Mono,monospace" font-size="11.5" font-weight="600">0.3799</text>
       <text x="194" y="216" text-anchor="middle" fill="var(--body)" font-size="11">LoRA 10%</text>
 
-      <rect x="234" y="52" width="56" height="146" rx="4" fill="var(--dbz12)" opacity=".6"/>
+      <rect class="gb" x="234" y="52" width="56" height="146" rx="4" fill="var(--dbz12)" opacity=".6"/>
       <text x="262" y="46" text-anchor="middle" fill="var(--dbz12)" font-family="IBM Plex Mono,monospace" font-size="11.5" font-weight="600">0.3822</text>
       <text x="262" y="216" text-anchor="middle" fill="var(--body)" font-size="11">full 10%</text>
 
-      <rect x="320" y="45" width="56" height="153" rx="4" fill="var(--dbz18)"/>
+      <rect class="gb" x="320" y="45" width="56" height="153" rx="4" fill="var(--dbz18)"/>
       <text x="348" y="39" text-anchor="middle" fill="var(--dbz18)" font-family="IBM Plex Mono,monospace" font-size="11.5" font-weight="600">0.3862</text>
       <text x="348" y="216" text-anchor="middle" fill="var(--body)" font-size="11">LoRA 5%</text>
 
-      <rect x="388" y="44" width="56" height="154" rx="4" fill="var(--dbz12)" opacity=".6"/>
+      <rect class="gb" x="388" y="44" width="56" height="154" rx="4" fill="var(--dbz12)" opacity=".6"/>
       <text x="416" y="38" text-anchor="middle" fill="var(--dbz12)" font-family="IBM Plex Mono,monospace" font-size="11.5" font-weight="600">0.3868</text>
       <text x="416" y="216" text-anchor="middle" fill="var(--body)" font-size="11">full 5%</text>
 
-      <rect x="474" y="42" width="56" height="156" rx="4" fill="var(--dbz18)"/>
+      <rect class="gb" x="474" y="42" width="56" height="156" rx="4" fill="var(--dbz18)"/>
       <text x="502" y="36" text-anchor="middle" fill="var(--dbz18)" font-family="IBM Plex Mono,monospace" font-size="11.5" font-weight="700">0.3878</text>
       <text x="502" y="216" text-anchor="middle" fill="var(--coral)" font-size="11" font-weight="600">LoRA 1%</text>
       <text x="502" y="230" text-anchor="middle" fill="var(--coral)" font-family="IBM Plex Mono,monospace" font-size="9.5">BEST OVERALL</text>
 
-      <rect x="542" y="46" width="56" height="152" rx="4" fill="var(--dbz12)" opacity=".6"/>
+      <rect class="gb" x="542" y="46" width="56" height="152" rx="4" fill="var(--dbz12)" opacity=".6"/>
       <text x="570" y="40" text-anchor="middle" fill="var(--dbz12)" font-family="IBM Plex Mono,monospace" font-size="11.5" font-weight="600">0.3856</text>
       <text x="570" y="216" text-anchor="middle" fill="var(--body)" font-size="11">full 1%</text>
 
@@ -806,10 +916,10 @@ html[dir=rtl] footer{font-family:"IBM Plex Sans Arabic",sans-serif; font-size:12
   </figure>
 </section>
 
-<svg class="thread" viewBox="0 0 1000 54" preserveAspectRatio="none" aria-hidden="true"><path d="M176 0 C176 28 212 38 320 42 C438 47 502 34 514 14"/></svg>
+<svg class="thread rv" viewBox="0 0 1000 54" preserveAspectRatio="none" aria-hidden="true"><path d="M176 0 C176 28 212 38 320 42 C438 47 502 34 514 14"/></svg>
 
 <!-- ══════════════════════════ 10 ══════════════════════════ -->
-<section id="s10">
+<section id="s10" class="rv">
   <div class="eyebrow"><b>10</b> <span class="en">Honesty</span><span class="ar">الأمانة العلمية</span></div>
   <h2 class="en">What your results do <i>not</i> prove <span class="pen grey">read twice</span></h2>
   <h2 class="ar">ما <i>لا</i> تُثبته نتائجك <span class="pen grey">اقرأه مرتين</span></h2>
@@ -833,7 +943,7 @@ html[dir=rtl] footer{font-family:"IBM Plex Sans Arabic",sans-serif; font-size:12
 </section>
 
 <!-- ══════════════════════════ 11 ══════════════════════════ -->
-<section id="s11">
+<section id="s11" class="rv">
   <div class="eyebrow"><b>11</b> <span class="en">The plan</span><span class="ar">الخطة</span></div>
   <h2 class="en">What still has to be run</h2>
   <h2 class="ar">ما تبقّى من تجارب</h2>
@@ -869,10 +979,10 @@ html[dir=rtl] footer{font-family:"IBM Plex Sans Arabic",sans-serif; font-size:12
   </div>
 </section>
 
-<svg class="thread" viewBox="0 0 1000 54" preserveAspectRatio="none" aria-hidden="true"><path d="M766 0 C766 26 734 36 640 42 C542 48 478 34 466 14"/></svg>
+<svg class="thread rv" viewBox="0 0 1000 54" preserveAspectRatio="none" aria-hidden="true"><path d="M766 0 C766 26 734 36 640 42 C542 48 478 34 466 14"/></svg>
 
 <!-- ══════════════════════════ 12 ══════════════════════════ -->
-<section id="s12">
+<section id="s12" class="rv">
   <div class="eyebrow"><b>12</b> <span class="en">The defence</span><span class="ar">المناقشة</span></div>
   <h2 class="en">How to present, and how to sound like you know it <span class="pen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17c4-7 12-11 18-12"/><path d="M15 3.6l6 1.4-1.6 5.6"/></svg> memorise</span></h2>
   <h2 class="ar">كيف تعرض، وكيف تبدو متمكنًا <span class="pen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17c4-7 12-11 18-12"/><path d="M15 3.6l6 1.4-1.6 5.6"/></svg> احفظه</span></h2>
@@ -956,7 +1066,7 @@ html[dir=rtl] footer{font-family:"IBM Plex Sans Arabic",sans-serif; font-size:12
 </section>
 
 <!-- ══════════════════════════ 13 ══════════════════════════ -->
-<section id="s13">
+<section id="s13" class="rv">
   <div class="eyebrow"><b>13</b> <span class="en">Reference</span><span class="ar">مرجع</span></div>
   <h2 class="en">The papers you are standing on</h2>
   <h2 class="ar">الأوراق البحثية التي تقف عليها</h2>
@@ -992,7 +1102,7 @@ html[dir=rtl] footer{font-family:"IBM Plex Sans Arabic",sans-serif; font-size:12
 </section>
 
 <!-- ══════════════════════════ 14 ══════════════════════════ -->
-<section id="s14">
+<section id="s14" class="rv">
   <div class="eyebrow"><b>14</b> <span class="en">Reference</span><span class="ar">مصطلحات</span></div>
   <h2 class="en">The words, briefly</h2>
   <h2 class="ar">المصطلحات باختصار</h2>
@@ -1051,7 +1161,7 @@ html[dir=rtl] footer{font-family:"IBM Plex Sans Arabic",sans-serif; font-size:12
 </section>
 
 <!-- ══════════════════════════ 15 ══════════════════════════ -->
-<section id="s15">
+<section id="s15" class="rv">
   <div class="eyebrow"><b>15</b> <span class="en">Where things stand</span><span class="ar">أين نحن الآن</span></div>
   <h2 class="en">Status and what is next</h2>
   <h2 class="ar">الحالة والخطوات التالية</h2>
@@ -1110,6 +1220,7 @@ html[dir=rtl] footer{font-family:"IBM Plex Sans Arabic",sans-serif; font-size:12
   <div class="ar">ملخّص دراسي خاص · كل شكل ورقم مُستخرج من نتائج مقيسة في <code>prelim/experiments_summary.md</code> · لا شيء هنا منقول من بحث أو مُقدَّر تخمينًا</div>
 </footer>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 var SECTIONS = [
   ["hero","Start","البداية"],
@@ -1146,25 +1257,249 @@ document.getElementById("sel").addEventListener("change", function(e){
   if (el) el.scrollIntoView({behavior:"smooth"});
 });
 
-function setLang(l){
-  document.body.className = "lang-" + l;
+function applyLang(l){
+  document.body.classList.remove("lang-en", "lang-ar");
+  document.body.classList.add("lang-" + l);
   document.documentElement.lang = l;
   document.documentElement.dir = (l === "ar") ? "rtl" : "ltr";
   document.getElementById("bEN").className = (l === "en") ? "on" : "";
   document.getElementById("bAR").className = (l === "ar") ? "on" : "";
   buildNav(l);
+  if (window.k3dRelabel) window.k3dRelabel();
   try { localStorage.setItem("brief-lang", l); } catch (err) {}
+}
+
+/* Clicking the toggle cross-fades; the initial call must not, or the page
+   would open mid-fade. applyLang uses classList, so "swapping" survives it. */
+var swapTimer = null;
+function setLang(l){
+  if (document.body.classList.contains("lang-" + l)) return;
+  var reduced = window.matchMedia &&
+                window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduced){ applyLang(l); return; }
+  document.body.classList.add("swapping");
+  clearTimeout(swapTimer);
+  swapTimer = setTimeout(function(){
+    applyLang(l);
+    requestAnimationFrame(function(){ document.body.classList.remove("swapping"); });
+  }, 160);
 }
 
 var saved = "en";
 try { saved = localStorage.getItem("brief-lang") || "en"; } catch (err) {}
-setLang(saved);
+applyLang(saved);
 
 window.addEventListener("scroll", function(){
   var h = document.documentElement;
   var max = h.scrollHeight - h.clientHeight;
   document.getElementById("prog").style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + "%";
 }, {passive:true});
+
+/* ── scroll reveal. If IntersectionObserver is missing, every section is
+   simply marked visible rather than left hidden. ── */
+(function(){
+  var items = document.querySelectorAll(".rv");
+  if (!("IntersectionObserver" in window)){
+    for (var i = 0; i < items.length; i++) items[i].classList.add("in");
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if (en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target); }
+    });
+  }, {rootMargin:"0px 0px -8% 0px", threshold:.06});
+  for (var j = 0; j < items.length; j++) io.observe(items[j]);
+})();
+
+/* ════════════════════════════════════════════════════════════════
+   The interactive kernel.
+
+   This is the argument of section 06, made touchable: shuffling the two
+   channel axes moves whole 3×3 tiles and every filter survives intact;
+   shuffling the two spatial axes scrambles the pattern inside each tile
+   and the filters are destroyed. That asymmetry is the reason the
+   method only touches the channel axes.
+   ════════════════════════════════════════════════════════════════ */
+(function(){
+  var canvas = document.getElementById("kernel3d");
+  var note   = document.getElementById("kNote");
+  if (!canvas || !note) return;
+
+  var MSG = {
+    idle: ["Both shuffles are one click away. Try the green one, then the red one, and watch what happens to the pattern inside each tile.",
+           "كلا الخلطين على بُعد نقرة. جرّب الأخضر ثم الأحمر، وراقب ما يحدث للنمط داخل كل بلاطة."],
+    chan: ["<b>Valid.</b> The tiles moved, but the pattern inside each one is untouched — every filter still works. Channel numbers are only labels, so reordering them changes nothing that matters. <b>This is the shuffle your method is allowed to make.</b>",
+           "<b>مسموح.</b> تحرّكت البلاطات، لكن النمط داخل كل واحدة لم يُمَس — وكل مُرشِّح ما زال يعمل. أرقام القنوات مجرد تسميات، فإعادة ترتيبها لا تغيّر شيئًا مهمًا. <b>هذا هو الخلط المسموح لطريقتك.</b>"],
+    spat: ["<b>Broken.</b> The tiles stayed where they were, but the pattern inside each one is now noise. Those nine cells are real positions in space — (0,0) genuinely sits next to (0,1) — so reordering them destroys what the filter detects. <b>This is the shuffle your method must never make.</b>",
+           "<b>مُعطَّل.</b> بقيت البلاطات مكانها، لكن النمط داخل كل واحدة صار ضجيجًا. تلك الخلايا التسع مواضع حقيقية في الفضاء — فالموضع (0,0) مجاور فعلًا لـ(0,1) — وإعادة ترتيبها تُتلف ما يكشفه المُرشِّح. <b>هذا هو الخلط الممنوع على طريقتك.</b>"],
+    reset:["Back to the original kernel.", "عودة إلى النواة الأصلية."]
+  };
+  function say(key, tone){
+    var ar = document.body.classList.contains("lang-ar");
+    note.innerHTML = MSG[key][ar ? 1 : 0];
+    note.className = "k3d-note" + (tone ? " " + tone : "");
+    note._key = key; note._tone = tone;
+  }
+  window.k3dRelabel = function(){ if (note._key) say(note._key, note._tone); };
+  say("idle", "");
+
+  if (typeof THREE === "undefined" || !window.WebGLRenderingContext){
+    canvas.outerHTML = '<div class="k3d-fallback">The interactive kernel needs WebGL, which this browser did not provide. The diagram above carries the same argument.</div>';
+    return;
+  }
+
+  var OUT = 5, IN = 4, K = 3;      // C_out × C_in, each a 3×3 window
+  var SP = 0.42, TP = 1.68;        // spacing within a tile, and between tiles
+  var css = getComputedStyle(document.documentElement);
+  function tok(n, fb){ var v = css.getPropertyValue(n).trim(); return v || fb; }
+
+  var renderer, scene, camera, cubes = [], reduced =
+    window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  try {
+    renderer = new THREE.WebGLRenderer({canvas:canvas, antialias:true, alpha:true});
+  } catch (e) {
+    canvas.outerHTML = '<div class="k3d-fallback">The interactive kernel could not start WebGL here. The diagram above carries the same argument.</div>';
+    return;
+  }
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  scene  = new THREE.Scene();
+  camera = new THREE.PerspectiveCamera(38, 2, 0.1, 100);
+  camera.position.set(5.4, 4.0, 8.2);
+  camera.lookAt(0, 0, 0);
+  scene.add(new THREE.AmbientLight(0xffffff, 0.76));
+  var key = new THREE.DirectionalLight(0xffffff, 0.62);
+  key.position.set(4, 7, 6); scene.add(key);
+
+  var GREEN = new THREE.Color(tok("--dbz18", "#2F8552"));
+  var RED   = new THREE.Color(tok("--dbzhi", "#A32F22"));
+  var WHITE = new THREE.Color(0xffffff);
+  var geo   = new THREE.BoxGeometry(0.33, 0.33, 0.33);
+  var root  = new THREE.Group(); scene.add(root);
+
+  function homeXYZ(tileO, tileI, h, w){
+    return new THREE.Vector3(
+      (tileO - (OUT - 1) / 2) * TP + (w - (K - 1) / 2) * SP,
+      ((K - 1) / 2 - h) * SP,
+      (tileI - (IN - 1) / 2) * TP
+    );
+  }
+
+  // Each tile gets its own oriented gradient, so it reads as a filter bank
+  // rather than a uniform block — that is what makes damage visible.
+  var dirs = [];
+  for (var t = 0; t < OUT * IN; t++){
+    var a = (t * 2.399) % (Math.PI * 2);
+    dirs.push([Math.cos(a), Math.sin(a)]);
+  }
+  function intensity(tile, h, w){
+    var d = dirs[tile];
+    var v = (d[0] * (w - 1) + d[1] * (h - 1)) / 1.4142;
+    return Math.max(0, Math.min(1, (v + 1) / 2));
+  }
+  function shade(base, t){ return base.clone().lerp(WHITE, 0.10 + 0.62 * t); }
+
+  for (var o = 0; o < OUT; o++){
+    for (var i = 0; i < IN; i++){
+      var tile = o * IN + i;
+      for (var h = 0; h < K; h++){
+        for (var w = 0; w < K; w++){
+          var inten = intensity(tile, h, w);
+          var m = new THREE.Mesh(geo, new THREE.MeshLambertMaterial({color:shade(GREEN, inten)}));
+          m.position.copy(homeXYZ(o, i, h, w));
+          root.add(m);
+          cubes.push({m:m, o:o, i:i, h:h, w:w, tile:tile, inten:inten,
+                      target:m.position.clone(), colTarget:m.material.color.clone()});
+        }
+      }
+    }
+  }
+
+  function perm(n){
+    var a = []; for (var x = 0; x < n; x++) a.push(x);
+    for (var y = n - 1; y > 0; y--){ var r = Math.floor(Math.random() * (y + 1)); var s = a[y]; a[y] = a[r]; a[r] = s; }
+    return a;
+  }
+
+  function shuffleChannels(){
+    var po = perm(OUT), pi = perm(IN);
+    cubes.forEach(function(c){
+      c.target.copy(homeXYZ(po[c.o], pi[c.i], c.h, c.w));
+      c.colTarget.copy(shade(GREEN, c.inten));       // pattern intact
+    });
+    say("chan", "good");
+  }
+  function shufflePositions(){
+    var byTile = {};
+    cubes.forEach(function(c){ if (!byTile[c.tile]) byTile[c.tile] = perm(K * K); });
+    cubes.forEach(function(c){
+      var p  = byTile[c.tile][c.h * K + c.w];
+      var nh = Math.floor(p / K), nw = p % K;
+      c.target.copy(homeXYZ(c.o, c.i, nh, nw));
+      c.colTarget.copy(shade(RED, c.inten));         // pattern destroyed
+    });
+    say("spat", "bad");
+  }
+  function reset(){
+    cubes.forEach(function(c){
+      c.target.copy(homeXYZ(c.o, c.i, c.h, c.w));
+      c.colTarget.copy(shade(GREEN, c.inten));
+    });
+    say("reset", "");
+  }
+  document.getElementById("kShuffleC").addEventListener("click", shuffleChannels);
+  document.getElementById("kShuffleS").addEventListener("click", shufflePositions);
+  document.getElementById("kReset").addEventListener("click", reset);
+
+  // drag to turn
+  var yaw = 0.5, pitch = 0.26, drag = false, lx = 0, ly = 0, idle = 0;
+  canvas.addEventListener("pointerdown", function(e){
+    drag = true; lx = e.clientX; ly = e.clientY; idle = 0;
+    canvas.setPointerCapture(e.pointerId);
+  });
+  canvas.addEventListener("pointermove", function(e){
+    if (!drag) return;
+    yaw   += (e.clientX - lx) * 0.008;
+    pitch += (e.clientY - ly) * 0.005;
+    pitch  = Math.max(-0.9, Math.min(1.1, pitch));
+    lx = e.clientX; ly = e.clientY; idle = 0;
+  });
+  ["pointerup","pointercancel","pointerleave"].forEach(function(ev){
+    canvas.addEventListener(ev, function(){ drag = false; });
+  });
+
+  function resize(){
+    var w = canvas.clientWidth, h = canvas.clientHeight;
+    if (!w || !h) return;
+    renderer.setSize(w, h, false);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+  }
+  window.addEventListener("resize", resize);
+  resize();
+
+  var visible = true;
+  if ("IntersectionObserver" in window){
+    new IntersectionObserver(function(en){ visible = en[0].isIntersecting; },
+      {threshold:0}).observe(canvas);
+  }
+
+  function frame(){
+    requestAnimationFrame(frame);
+    if (!visible) return;
+    if (!drag && !reduced){ idle++; if (idle > 90) yaw += 0.0016; }
+    root.rotation.y = yaw;
+    root.rotation.x = pitch;
+    for (var n = 0; n < cubes.length; n++){
+      var c = cubes[n];
+      c.m.position.lerp(c.target, 0.13);
+      c.m.material.color.lerp(c.colTarget, 0.11);
+    }
+    renderer.render(scene, camera);
+  }
+  resize();
+  frame();
+})();
 </script>
 </body>
 </html>
