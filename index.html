@@ -113,6 +113,14 @@ html[dir=rtl] #barin{padding:7px 20px 7px 8px}
 }
 .langbtns button.on{background:var(--ink); color:var(--card)}
 .langbtns button:focus-visible{outline:2px solid var(--mark); outline-offset:2px}
+.themebtn{
+  flex:none; width:34px; height:34px; border-radius:999px; cursor:pointer;
+  background:var(--card2); border:1px solid var(--rule); color:var(--muted);
+  font-size:15px; line-height:1; display:grid; place-items:center;
+  transition:color .18s, background .18s, border-color .18s;
+}
+.themebtn:hover{color:var(--ink); border-color:var(--rule2)}
+.themebtn:focus-visible{outline:2px solid var(--mark); outline-offset:2px}
 
 /* ════════════════════ layout — white sheets on the sky ════════════════════ */
 main{max-width:1120px; margin:0 auto; padding:0 22px 90px; position:relative; z-index:1}
@@ -410,7 +418,15 @@ html[dir=rtl] .k3d-bar button{font-family:"Tajawal",sans-serif; font-size:13px}
 </style>
 </head>
 <body class="lang-en">
-<script>document.documentElement.className="js"</script>
+<script>
+document.documentElement.className = "js";
+(function () {
+  try {
+    var t = localStorage.getItem("brief-theme");
+    if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+  } catch (e) {}
+})();
+</script>
 
 <div id="prog"></div>
 <div id="bar">
@@ -421,6 +437,7 @@ html[dir=rtl] .k3d-bar button{font-family:"Tajawal",sans-serif; font-size:13px}
       <button id="bEN" class="on" type="button" onclick="setLang('en')">EN</button>
       <button id="bAR" type="button" onclick="setLang('ar')">ع</button>
     </div>
+    <button id="theme" class="themebtn" type="button" aria-label="Switch colour theme"></button>
   </div>
 </div>
 
@@ -492,7 +509,7 @@ html[dir=rtl] .k3d-bar button{font-family:"Tajawal",sans-serif; font-size:13px}
 
   <figure>
     <svg class="plot" viewBox="0 0 660 272" role="img" aria-label="Forecast skill retained on the source radar versus an unseen radar">
-      <text x="330" y="18" text-anchor="middle" fill="var(--ink)" font-family="Fraunces,Georgia,serif" font-size="15.5" font-weight="600">Forecast skill surviving after ~100 minutes</text>
+      <text x="330" y="18" text-anchor="middle" fill="var(--ink)" font-family="Archivo,Georgia,sans-serif" font-size="15.5" font-weight="600">Forecast skill surviving after ~100 minutes</text>
       <line x1="74" y1="208" x2="618" y2="208" stroke="var(--rule2)" stroke-width="1.2"/>
       <line x1="74" y1="58" x2="618" y2="58" stroke="var(--rule)" stroke-width="1" stroke-dasharray="3 5"/>
       <text x="66" y="212" text-anchor="end" fill="var(--muted)" font-family="IBM Plex Mono,monospace" font-size="10">0.0</text>
@@ -504,7 +521,7 @@ html[dir=rtl] .k3d-bar button{font-family:"Tajawal",sans-serif; font-size:13px}
       <text x="219" y="109" text-anchor="middle" fill="var(--dbz12)" font-family="IBM Plex Mono,monospace" font-size="12.5" font-weight="600">0.5646</text>
       <text x="149" y="201" text-anchor="middle" fill="#FFFFFF" font-family="IBM Plex Mono,monospace" font-size="9.5">frame 1</text>
       <text x="219" y="201" text-anchor="middle" fill="var(--ink)" font-family="IBM Plex Mono,monospace" font-size="9.5">100 min</text>
-      <text x="184" y="232" text-anchor="middle" fill="var(--ink)" font-family="Fraunces,Georgia,serif" font-size="15" font-weight="600">SEVIR · USA</text>
+      <text x="184" y="232" text-anchor="middle" fill="var(--ink)" font-family="Archivo,Georgia,sans-serif" font-size="15" font-weight="600">SEVIR · USA</text>
       <text x="184" y="249" text-anchor="middle" fill="var(--muted)" font-size="11.5">the radar it was trained on</text>
       <text x="184" y="267" text-anchor="middle" fill="var(--dbz18)" font-family="IBM Plex Mono,monospace" font-size="13" font-weight="600">61.8% RETAINED</text>
 
@@ -514,7 +531,7 @@ html[dir=rtl] .k3d-bar button{font-family:"Tajawal",sans-serif; font-size:13px}
       <text x="499" y="154" text-anchor="middle" fill="var(--dbz32)" font-family="IBM Plex Mono,monospace" font-size="12.5" font-weight="600">0.2821</text>
       <text x="429" y="201" text-anchor="middle" fill="#FFFFFF" font-family="IBM Plex Mono,monospace" font-size="9.5">frame 1</text>
       <text x="499" y="201" text-anchor="middle" fill="var(--ink)" font-family="IBM Plex Mono,monospace" font-size="9.5">100 min</text>
-      <text x="464" y="232" text-anchor="middle" fill="var(--ink)" font-family="Fraunces,Georgia,serif" font-size="15" font-weight="600">MeteoNet · France</text>
+      <text x="464" y="232" text-anchor="middle" fill="var(--ink)" font-family="Archivo,Georgia,sans-serif" font-size="15" font-weight="600">MeteoNet · France</text>
       <text x="464" y="249" text-anchor="middle" fill="var(--muted)" font-size="11.5">a radar it has never seen</text>
       <text x="464" y="267" text-anchor="middle" fill="var(--dbzhi)" font-family="IBM Plex Mono,monospace" font-size="13" font-weight="600">33.8% RETAINED</text>
     </svg>
@@ -609,12 +626,12 @@ html[dir=rtl] .k3d-bar button{font-family:"Tajawal",sans-serif; font-size:13px}
       <text x="330" y="53" text-anchor="middle" fill="#FFFFFF" font-family="IBM Plex Mono,monospace" font-size="13" font-weight="600">89,030,000 trainable — 100%</text>
 
       <text x="26" y="100" fill="var(--muted)" font-family="IBM Plex Mono,monospace" font-size="10.5" letter-spacing="1.6">LORA r=4 — WHAT YOU ACTUALLY TRAIN</text>
-      <rect x="26" y="110" width="608" height="32" rx="6" fill="var(--paper2)" stroke="var(--rule)"/>
+      <rect x="26" y="110" width="608" height="32" rx="6" fill="var(--card2)" stroke="var(--rule)"/>
       <rect class="gx late" x="26" y="110" width="6" height="32" rx="3" fill="var(--dbz18)"/>
       <text x="48" y="131" fill="var(--dbz18)" font-family="IBM Plex Mono,monospace" font-size="13" font-weight="600">71,680</text>
       <text x="122" y="131" fill="var(--body)" font-size="13">— 0.0805%. That green sliver is the whole thing, drawn to scale.</text>
 
-      <text x="330" y="176" text-anchor="middle" fill="var(--coral)" font-family="Fraunces,Georgia,serif" font-size="17" font-weight="600">1 / 1,242 of the parameters — and it scores the same</text>
+      <text x="330" y="176" text-anchor="middle" fill="var(--mark)" font-family="Archivo,Georgia,sans-serif" font-size="17" font-weight="600">1 / 1,242 of the parameters — and it scores the same</text>
     </svg>
     <figcaption class="en">Nothing here is exaggerated for effect. 0.0805% really is that small, and it reaches the same accuracy as retraining everything.</figcaption>
     <figcaption class="ar">لا شيء هنا مبالغ فيه. نسبة 0.0805% صغيرة إلى هذا الحد فعلًا، ومع ذلك تحقق الدقة نفسها التي يحققها إعادة تدريب كل شيء.</figcaption>
@@ -663,7 +680,7 @@ html[dir=rtl] .k3d-bar button{font-family:"Tajawal",sans-serif; font-size:13px}
         <text x="75" y="158">7</text><text x="113" y="158">2</text><text x="151" y="158">9</text>
         <text x="189" y="158">1</text><text x="227" y="158">4</text><text x="265" y="158">5</text>
       </g>
-      <text x="174" y="194" text-anchor="middle" fill="var(--dbz18)" font-family="Fraunces,Georgia,serif" font-size="15" font-weight="600">✓ MAY be shuffled</text>
+      <text x="174" y="194" text-anchor="middle" fill="var(--dbz18)" font-family="Archivo,Georgia,sans-serif" font-size="15" font-weight="600">✓ MAY be shuffled</text>
       <text x="174" y="214" text-anchor="middle" fill="var(--muted)" font-size="11.5">renumber them all and nothing breaks</text>
 
       <rect x="340" y="76" width="292" height="152" rx="14" fill="none" stroke="var(--dbzhi)" stroke-width="1.6"/>
@@ -677,10 +694,10 @@ html[dir=rtl] .k3d-bar button{font-family:"Tajawal",sans-serif; font-size:13px}
         <rect x="472" y="166" width="26" height="26" rx="5" opacity=".52"/>
         <rect x="502" y="166" width="26" height="26" rx="5" opacity=".52"/>
       </g>
-      <text x="486" y="212" text-anchor="middle" fill="var(--dbzhi)" font-family="Fraunces,Georgia,serif" font-size="15" font-weight="600">✗ may NOT be shuffled</text>
+      <text x="486" y="212" text-anchor="middle" fill="var(--dbzhi)" font-family="Archivo,Georgia,sans-serif" font-size="15" font-weight="600">✗ may NOT be shuffled</text>
 
-      <rect x="28" y="244" width="604" height="46" rx="12" fill="var(--coral-s)" stroke="var(--coral)"/>
-      <text x="330" y="264" text-anchor="middle" fill="var(--coral)" font-family="Fraunces,Georgia,serif" font-size="15" font-weight="600">Channel entries outnumber spatial entries ≈ 49,900 : 1</text>
+      <rect x="28" y="244" width="604" height="46" rx="12" fill="var(--sun-soft)" stroke="var(--mark)"/>
+      <text x="330" y="264" text-anchor="middle" fill="var(--mark)" font-family="Archivo,Georgia,sans-serif" font-size="15" font-weight="600">Channel entries outnumber spatial entries ≈ 49,900 : 1</text>
       <text x="330" y="281" text-anchor="middle" fill="var(--body)" font-size="12">so restricting adaptation to the channel axes is arithmetic, not preference</text>
     </svg>
     <figcaption class="en">A <b>convolution</b> is a small sliding window (usually 3×3) applying the same calculation everywhere in the picture. The numbers inside it are the <b>kernel</b>. Two of its four axes are arbitrary labels; two are real positions in space.</figcaption>
@@ -726,8 +743,8 @@ html[dir=rtl] .k3d-bar button{font-family:"Tajawal",sans-serif; font-size:13px}
     <svg class="plot" viewBox="0 0 680 248" role="img" aria-label="The two research contents compared side by side">
       <rect x="10" y="16" width="302" height="190" rx="16" fill="none" stroke="var(--dbz12)" stroke-width="1.6"/>
       <text x="161" y="42" text-anchor="middle" fill="var(--dbz12)" font-family="IBM Plex Mono,monospace" font-size="10.5" font-weight="600" letter-spacing="1.6">RESEARCH CONTENT ONE</text>
-      <text x="161" y="68" text-anchor="middle" fill="var(--ink)" font-family="Fraunces,Georgia,serif" font-size="17" font-weight="600">Original parameter space</text>
-      <rect x="38" y="84" width="246" height="30" rx="8" fill="var(--paper2)"/>
+      <text x="161" y="68" text-anchor="middle" fill="var(--ink)" font-family="Archivo,Georgia,sans-serif" font-size="17" font-weight="600">Original parameter space</text>
+      <rect x="38" y="84" width="246" height="30" rx="8" fill="var(--card2)"/>
       <text x="161" y="104" text-anchor="middle" fill="var(--body)" font-size="12.5">take the big grid of changes</text>
       <text x="161" y="131" text-anchor="middle" fill="var(--faint)" font-size="15">↓</text>
       <rect x="38" y="140" width="246" height="30" rx="8" fill="var(--dbz12)" opacity=".18"/>
@@ -736,19 +753,19 @@ html[dir=rtl] .k3d-bar button{font-family:"Tajawal",sans-serif; font-size:13px}
 
       <rect x="368" y="16" width="302" height="190" rx="16" fill="none" stroke="var(--dbz32)" stroke-width="1.6"/>
       <text x="519" y="42" text-anchor="middle" fill="var(--dbz32)" font-family="IBM Plex Mono,monospace" font-size="10.5" font-weight="600" letter-spacing="1.6">RESEARCH CONTENT TWO</text>
-      <text x="519" y="68" text-anchor="middle" fill="var(--ink)" font-family="Fraunces,Georgia,serif" font-size="17" font-weight="600">Sparse spectrum space</text>
-      <rect x="396" y="84" width="246" height="30" rx="8" fill="var(--paper2)"/>
+      <text x="519" y="68" text-anchor="middle" fill="var(--ink)" font-family="Archivo,Georgia,sans-serif" font-size="17" font-weight="600">Sparse spectrum space</text>
+      <rect x="396" y="84" width="246" height="30" rx="8" fill="var(--card2)"/>
       <text x="519" y="104" text-anchor="middle" fill="var(--body)" font-size="12.5">shuffle rows/cols until smooth</text>
       <text x="519" y="131" text-anchor="middle" fill="var(--faint)" font-size="15">↓</text>
       <rect x="396" y="140" width="246" height="30" rx="8" fill="var(--dbz32)" opacity=".18"/>
       <text x="519" y="160" text-anchor="middle" fill="var(--dbz32)" font-size="12.5" font-weight="600">keep k spectral coefficients</text>
       <text x="519" y="192" text-anchor="middle" fill="var(--muted)" font-size="12">the dial is k — how many you keep</text>
 
-      <g fill="var(--coral)" font-family="IBM Plex Mono,monospace" font-size="9.5" font-weight="600" text-anchor="middle">
+      <g fill="var(--mark)" font-family="IBM Plex Mono,monospace" font-size="9.5" font-weight="600" text-anchor="middle">
         <text x="340" y="104">SAME</text><text x="340" y="118">MODEL</text>
         <text x="340" y="142">SAME</text><text x="340" y="156">AXES</text>
       </g>
-      <text x="340" y="238" text-anchor="middle" fill="var(--ink)" font-family="Fraunces,Georgia,serif" font-size="16" font-weight="600">Identical in every respect except how the change is represented</text>
+      <text x="340" y="238" text-anchor="middle" fill="var(--ink)" font-family="Archivo,Georgia,sans-serif" font-size="16" font-weight="600">Identical in every respect except how the change is represented</text>
     </svg>
     <figcaption class="en">Same frozen model, same axes touched, same merge back at the end. <b>Only the description differs.</b> That is what makes the comparison fair — and the comparison <i>is</i> the thesis.</figcaption>
     <figcaption class="ar">النموذج المُجمَّد نفسه، والمحاور نفسها، والدمج النهائي نفسه. <b>الوصف وحده هو ما يختلف.</b> وهذا ما يجعل المقارنة عادلة — والمقارنة <i>هي</i> الأطروحة.</figcaption>
@@ -771,7 +788,7 @@ html[dir=rtl] .k3d-bar button{font-family:"Tajawal",sans-serif; font-size:13px}
   <h2 class="ar">أين يكمن الابتكار <span class="pen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17c4-7 12-11 18-12"/><path d="M15 3.6l6 1.4-1.6 5.6"/></svg> احفظه</span></h2>
 
   <div class="note key">
-    <p class="en" style="font-size:21px;font-family:Fraunces,Georgia,serif;line-height:1.42;color:var(--ink);margin:0;max-width:none">You are not proposing a better general method.<br>You are designing it for <i>this</i> kind of model.</p>
+    <p class="en" style="font-size:21px;font-family:Archivo,Georgia,sans-serif;line-height:1.42;color:var(--ink);margin:0;max-width:none">You are not proposing a better general method.<br>You are designing it for <i>this</i> kind of model.</p>
     <p class="ar" style="font-size:19px;line-height:1.75;color:var(--ink);margin:0;font-weight:700;max-width:none">أنت لا تقترح طريقة عامة أفضل.<br>أنت تُصمّمها من أجل <i>هذا</i> النوع من النماذج تحديدًا.</p>
   </div>
 
@@ -911,7 +928,7 @@ html[dir=rtl] .k3d-bar button{font-family:"Tajawal",sans-serif; font-size:13px}
 
   <figure>
     <svg class="plot" viewBox="0 0 680 260" role="img" aria-label="Test CSI on MeteoNet by adaptation method and data budget">
-      <text x="340" y="18" text-anchor="middle" fill="var(--ink)" font-family="Fraunces,Georgia,serif" font-size="15.5" font-weight="600">Test CSI on MeteoNet after adaptation</text>
+      <text x="340" y="18" text-anchor="middle" fill="var(--ink)" font-family="Archivo,Georgia,sans-serif" font-size="15.5" font-weight="600">Test CSI on MeteoNet after adaptation</text>
       <line x1="64" y1="198" x2="662" y2="198" stroke="var(--rule2)" stroke-width="1.2"/>
       <text x="56" y="202" text-anchor="end" fill="var(--muted)" font-family="IBM Plex Mono,monospace" font-size="9.5">0.30</text>
       <text x="56" y="48" text-anchor="end" fill="var(--muted)" font-family="IBM Plex Mono,monospace" font-size="9.5">0.39</text>
@@ -939,8 +956,8 @@ html[dir=rtl] .k3d-bar button{font-family:"Tajawal",sans-serif; font-size:13px}
 
       <rect class="gb" x="474" y="42" width="56" height="156" rx="4" fill="var(--dbz18)"/>
       <text x="502" y="36" text-anchor="middle" fill="var(--dbz18)" font-family="IBM Plex Mono,monospace" font-size="11.5" font-weight="700">0.3878</text>
-      <text x="502" y="216" text-anchor="middle" fill="var(--coral)" font-size="11" font-weight="600">LoRA 1%</text>
-      <text x="502" y="230" text-anchor="middle" fill="var(--coral)" font-family="IBM Plex Mono,monospace" font-size="9.5">BEST OVERALL</text>
+      <text x="502" y="216" text-anchor="middle" fill="var(--mark)" font-size="11" font-weight="600">LoRA 1%</text>
+      <text x="502" y="230" text-anchor="middle" fill="var(--mark)" font-family="IBM Plex Mono,monospace" font-size="9.5">BEST OVERALL</text>
 
       <rect class="gb" x="542" y="46" width="56" height="152" rx="4" fill="var(--dbz12)" opacity=".6"/>
       <text x="570" y="40" text-anchor="middle" fill="var(--dbz12)" font-family="IBM Plex Mono,monospace" font-size="11.5" font-weight="600">0.3856</text>
@@ -963,9 +980,9 @@ html[dir=rtl] .k3d-bar button{font-family:"Tajawal",sans-serif; font-size:13px}
 
   <figure>
     <svg class="plot" viewBox="0 0 620 236" role="img" aria-label="Full fine-tuning minus LoRA across shrinking data budgets">
-      <text x="310" y="18" text-anchor="middle" fill="var(--ink)" font-family="Fraunces,Georgia,serif" font-size="15.5" font-weight="600">Full fine-tuning minus LoRA (CSI)</text>
-      <line x1="70" y1="120" x2="544" y2="120" stroke="var(--coral)" stroke-width="1.4" stroke-dasharray="5 5"/>
-      <text x="552" y="124" fill="var(--coral)" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="600">ZERO</text>
+      <text x="310" y="18" text-anchor="middle" fill="var(--ink)" font-family="Archivo,Georgia,sans-serif" font-size="15.5" font-weight="600">Full fine-tuning minus LoRA (CSI)</text>
+      <line x1="70" y1="120" x2="544" y2="120" stroke="var(--mark)" stroke-width="1.4" stroke-dasharray="5 5"/>
+      <text x="552" y="124" fill="var(--mark)" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="600">ZERO</text>
 
       <path d="M150 66 L315 106 L480 171" stroke="var(--dbz12)" stroke-width="2" fill="none" opacity=".5"/>
       <circle cx="150" cy="66" r="7" fill="var(--dbz12)"/>
@@ -1554,6 +1571,30 @@ var SECTIONS = [
   ["s18","18 · Status and next","18 · الحالة والتالي"]
 ];
 
+/* auto follows the device; light and dark override it. Stamping data-theme is
+   what the token blocks key off, so this needs no other wiring. */
+var THEME_ORDER = ["auto", "light", "dark"];
+var THEME_GLYPH = { auto: "◐", light: "☀", dark: "☾" };
+var THEME_LABEL = { auto: "Theme: follows device", light: "Theme: light", dark: "Theme: dark" };
+var theme = "auto";
+try { theme = localStorage.getItem("brief-theme") || "auto"; } catch (err) {}
+
+function applyTheme(t){
+  var root = document.documentElement;
+  if (t === "auto") root.removeAttribute("data-theme");
+  else root.setAttribute("data-theme", t);
+  var b = document.getElementById("theme");
+  if (b){ b.textContent = THEME_GLYPH[t]; b.title = THEME_LABEL[t]; }
+  try { localStorage.setItem("brief-theme", t); } catch (err) {}
+  // the 3D kernel took its colours from the tokens at start-up
+  if (window.k3dRetheme) window.k3dRetheme();
+}
+applyTheme(theme);
+document.getElementById("theme").addEventListener("click", function(){
+  theme = THEME_ORDER[(THEME_ORDER.indexOf(theme) + 1) % THEME_ORDER.length];
+  applyTheme(theme);
+});
+
 function buildNav(lang){
   var s = document.getElementById("sel");
   s.innerHTML = "";
@@ -1957,12 +1998,22 @@ window.addEventListener("scroll", function(){
     return a;
   }
 
+  var mode = "ok";   // which palette the cubes are currently showing
+
+  window.k3dRetheme = function(){
+    GREEN.set(tok("--dbz18", "#2F8552"));
+    RED.set(tok("--dbzhi", "#A32F22"));
+    var base = mode === "broken" ? RED : GREEN;
+    cubes.forEach(function(c){ c.colTarget.copy(shade(base, c.inten)); });
+  };
+
   function shuffleChannels(){
     var po = perm(OUT), pi = perm(IN);
     cubes.forEach(function(c){
       c.target.copy(homeXYZ(po[c.o], pi[c.i], c.h, c.w));
       c.colTarget.copy(shade(GREEN, c.inten));       // pattern intact
     });
+    mode = "ok";
     say("chan", "good");
   }
   function shufflePositions(){
@@ -1974,6 +2025,7 @@ window.addEventListener("scroll", function(){
       c.target.copy(homeXYZ(c.o, c.i, nh, nw));
       c.colTarget.copy(shade(RED, c.inten));         // pattern destroyed
     });
+    mode = "broken";
     say("spat", "bad");
   }
   function reset(){
@@ -1981,6 +2033,7 @@ window.addEventListener("scroll", function(){
       c.target.copy(homeXYZ(c.o, c.i, c.h, c.w));
       c.colTarget.copy(shade(GREEN, c.inten));
     });
+    mode = "ok";
     say("reset", "");
   }
   document.getElementById("kShuffleC").addEventListener("click", shuffleChannels);
