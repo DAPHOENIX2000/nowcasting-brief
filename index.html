@@ -83,21 +83,6 @@ html[dir=rtl] body{font-family:"Tajawal","IBM Plex Sans Arabic",Tahoma,sans-seri
 body.lang-en .ar{display:none!important}
 body.lang-ar .en{display:none!important}
 
-/* ════════════════════ drifting cloud field ════════════════════
-   Drawn here as blurred ellipse clusters — the reference's clouds are
-   photographic and are not reused. They sit behind the white sheets, so
-   they read in the gaps without ever competing with running text. */
-.sky{position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden}
-.sky svg{position:absolute; fill:var(--cloud); opacity:var(--cloud-op); filter:blur(7px)}
-.cl1{width:min(760px,88vw); top:5%;  left:-10%}
-.cl2{width:min(620px,74vw); top:34%; right:-14%}
-.cl3{width:min(880px,96vw); bottom:-6%; left:-6%; opacity:calc(var(--cloud-op) * 1.5)}
-.cl4{width:min(520px,64vw); top:64%; left:4%}
-@keyframes drift{from{transform:translateX(0)} to{transform:translateX(46px)}}
-.cl1{animation:drift 34s ease-in-out infinite alternate}
-.cl2{animation:drift 46s ease-in-out infinite alternate-reverse}
-.cl3{animation:drift 62s ease-in-out infinite alternate}
-.cl4{animation:drift 40s ease-in-out infinite alternate-reverse}
 
 /* ════════════════════ top bar ════════════════════ */
 #prog{position:fixed; inset-inline-start:0; top:0; height:3px; width:0; background:var(--sun); z-index:70}
@@ -173,14 +158,25 @@ a{color:var(--mark)}
 .scope{
   position:relative; border-radius:30px; overflow:hidden;
   background:linear-gradient(170deg,#5E93B4,#3C6885 52%,#2C4A5C);
-  box-shadow:var(--shadow-l); padding:38px 38px 96px; margin-bottom:18px;
+  box-shadow:var(--shadow-l); padding:38px 38px 40px; margin-bottom:18px;
 }
 .scope h1{color:#FFFFFF}
 .scope .lead{color:#D8E9F3}
 .scope .lead b,.scope h1 i{color:var(--sun); font-style:normal}
-.radar{position:absolute; inset-inline-end:-38px; top:-34px; width:330px; height:330px; opacity:.34}
-html[dir=rtl] .radar{transform:scaleX(-1)}
-.herocloud{position:absolute; left:-4%; right:-4%; bottom:-14px; width:108%; fill:#FFFFFF; opacity:.9}
+/* One effect, and it is the subject itself: an evolving precipitation field
+   on a radar scope, banded by the same reflectivity ramp as the charts. */
+.radar{
+  position:absolute; inset-inline-end:-56px; top:-52px;
+  width:min(392px,54vw); height:min(392px,54vw);
+  pointer-events:none; opacity:.92;
+  mask-image:radial-gradient(circle at 50% 50%, #000 62%, transparent 76%);
+  -webkit-mask-image:radial-gradient(circle at 50% 50%, #000 62%, transparent 76%);
+}
+/* keeps the headline readable over the brightest frame of the sweep */
+.scope::after{
+  content:""; position:absolute; inset:0; pointer-events:none;
+  background:linear-gradient(100deg, rgba(20,45,62,.55) 0%, rgba(20,45,62,.25) 46%, transparent 72%);
+}
 .scope-in{position:relative; z-index:2}
 .tag{
   display:inline-flex; align-items:center; gap:8px; font-family:"IBM Plex Mono",monospace;
@@ -416,19 +412,6 @@ html[dir=rtl] .k3d-bar button{font-family:"Tajawal",sans-serif; font-size:13px}
 <body class="lang-en">
 <script>document.documentElement.className="js"</script>
 
-<div class="sky" aria-hidden="true"><svg viewBox="0 0 640 240" class="cl1" aria-hidden="true"><g>
-<ellipse cx="300" cy="168" rx="252" ry="56"/><circle cx="176" cy="140" r="60"/>
-<circle cx="262" cy="112" r="80"/><circle cx="362" cy="128" r="66"/>
-<circle cx="452" cy="152" r="50"/><circle cx="112" cy="162" r="42"/></g></svg><svg viewBox="0 0 640 240" class="cl2" aria-hidden="true"><g>
-<ellipse cx="300" cy="168" rx="252" ry="56"/><circle cx="176" cy="140" r="60"/>
-<circle cx="262" cy="112" r="80"/><circle cx="362" cy="128" r="66"/>
-<circle cx="452" cy="152" r="50"/><circle cx="112" cy="162" r="42"/></g></svg><svg viewBox="0 0 640 240" class="cl3" aria-hidden="true"><g>
-<ellipse cx="300" cy="168" rx="252" ry="56"/><circle cx="176" cy="140" r="60"/>
-<circle cx="262" cy="112" r="80"/><circle cx="362" cy="128" r="66"/>
-<circle cx="452" cy="152" r="50"/><circle cx="112" cy="162" r="42"/></g></svg><svg viewBox="0 0 640 240" class="cl4" aria-hidden="true"><g>
-<ellipse cx="300" cy="168" rx="252" ry="56"/><circle cx="176" cy="140" r="60"/>
-<circle cx="262" cy="112" r="80"/><circle cx="362" cy="128" r="66"/>
-<circle cx="452" cy="152" r="50"/><circle cx="112" cy="162" r="42"/></g></svg></div>
 <div id="prog"></div>
 <div id="bar">
   <div id="barin">
@@ -446,31 +429,7 @@ html[dir=rtl] .k3d-bar button{font-family:"Tajawal",sans-serif; font-size:13px}
 <!-- ══════════════════════════ HERO ══════════════════════════ -->
 <section id="hero">
   <div class="scope">
-    <svg class="radar" viewBox="0 0 200 200" aria-hidden="true">
-      <defs><radialGradient id="sweep" cx="50%" cy="50%" r="50%">
-        <stop offset="0%" stop-color="#ffffff" stop-opacity=".6"/>
-        <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
-      </radialGradient></defs>
-      <g fill="none" stroke="#ffffff">
-        <circle cx="100" cy="100" r="88" stroke-opacity=".55"/>
-        <circle cx="100" cy="100" r="64" stroke-opacity=".42"/>
-        <circle cx="100" cy="100" r="40" stroke-opacity=".32"/>
-        <circle cx="100" cy="100" r="16" stroke-opacity=".26"/>
-        <line x1="100" y1="12" x2="100" y2="188" stroke-opacity=".3"/>
-        <line x1="12" y1="100" x2="188" y2="100" stroke-opacity=".3"/>
-      </g>
-      <g class="sweepg"><path d="M100 100 L100 12 A88 88 0 0 1 162 38 Z" fill="url(#sweep)"/></g>
-      <ellipse cx="132" cy="74" rx="17" ry="11" fill="#3F8FBE" opacity=".55" transform="rotate(-22 132 74)"/>
-      <ellipse cx="128" cy="72" rx="10" ry="6.5" fill="#2F8552" opacity=".6" transform="rotate(-22 128 72)"/>
-      <ellipse cx="125" cy="71" rx="5" ry="3.4" fill="#C9971D" opacity=".75"/>
-      <ellipse cx="66" cy="128" rx="13" ry="8" fill="#3F8FBE" opacity=".45" transform="rotate(16 66 128)"/>
-      <ellipse cx="64" cy="127" rx="6" ry="3.6" fill="#2F8552" opacity=".5"/>
-    </svg>
-    <svg class="herocloud" viewBox="0 0 1200 150" preserveAspectRatio="none" aria-hidden="true"><g>
-<ellipse cx="600" cy="126" rx="640" ry="48"/><circle cx="250" cy="104" r="52"/>
-<circle cx="360" cy="86" r="66"/><circle cx="500" cy="98" r="54"/><circle cx="700" cy="90" r="62"/>
-<circle cx="850" cy="104" r="50"/><circle cx="980" cy="112" r="42"/><circle cx="130" cy="116" r="40"/>
-</g></svg>
+    <canvas class="radar" id="scope" aria-hidden="true"></canvas>
     <div class="scope-in">
       <span class="tag en"><i></i> Master's thesis · HITSZ · defence brief</span>
       <span class="tag ar"><i></i> أطروحة ماجستير · HITSZ · ملخّص المناقشة</span>
@@ -1648,6 +1607,229 @@ window.addEventListener("scroll", function(){
   var max = h.scrollHeight - h.clientHeight;
   document.getElementById("prog").style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + "%";
 }, {passive:true});
+
+
+/* ════════════════════════════════════════════════════════════════
+   The radar scope.
+
+   A tileable value-noise field is generated once; each frame samples it at two
+   slowly diverging offsets and multiplies them, which gives echoes that drift
+   AND change shape rather than sliding rigidly across the screen. Values are
+   banded into the reflectivity ramp, so what is on screen reads the way a real
+   radar product does — light rain at the edges of a cell, heavy at its core.
+   ════════════════════════════════════════════════════════════════ */
+(function(){
+  var cv = document.getElementById("scope");
+  if (!cv || !cv.getContext) return;
+  var ctx = cv.getContext("2d", { alpha: true });
+  if (!ctx) return;
+
+  var reduced = window.matchMedia &&
+                window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // ── one tileable fBm field, built once ──
+  var N = 128;                       // lattice size, power of two so it wraps
+  var field = new Float32Array(N * N);
+  (function build(){
+    function lattice(size){
+      var g = new Float32Array(size * size);
+      for (var i = 0; i < g.length; i++) g[i] = Math.random();
+      return g;
+    }
+    function sample(g, size, x, y){
+      var xi = Math.floor(x), yi = Math.floor(y);
+      var xf = x - xi, yf = y - yi;
+      var sx = xf * xf * (3 - 2 * xf), sy = yf * yf * (3 - 2 * yf);
+      function at(a, b){ return g[((b % size) + size) % size * size + ((a % size) + size) % size]; }
+      var a = at(xi, yi), b = at(xi + 1, yi), c = at(xi, yi + 1), d = at(xi + 1, yi + 1);
+      return (a * (1 - sx) + b * sx) * (1 - sy) + (c * (1 - sx) + d * sx) * sy;
+    }
+    var octaves = [4, 8, 16, 32], amp = [0.5, 0.26, 0.15, 0.09], gs = [];
+    for (var o = 0; o < octaves.length; o++) gs.push(lattice(octaves[o]));
+    for (var y = 0; y < N; y++) for (var x = 0; x < N; x++){
+      var v = 0;
+      for (var k = 0; k < octaves.length; k++)
+        v += amp[k] * sample(gs[k], octaves[k], x / N * octaves[k], y / N * octaves[k]);
+      field[y * N + x] = v;
+    }
+    // Rescale to [0,1]. Without this the thresholds are guesses against
+    // whatever range the octave weights happen to produce, and the top of the
+    // ramp is simply never reached — the field renders as a flat wash with no
+    // intense cores, which is not what radar looks like.
+    var lo = Infinity, hi = -Infinity;
+    for (var i = 0; i < field.length; i++){
+      if (field[i] < lo) lo = field[i];
+      if (field[i] > hi) hi = field[i];
+    }
+    var span = (hi - lo) || 1;
+    for (i = 0; i < field.length; i++) field[i] = (field[i] - lo) / span;
+  })();
+
+  function fld(x, y){
+    var xi = ((Math.round(x) % N) + N) % N, yi = ((Math.round(y) % N) + N) % N;
+    return field[yi * N + xi];
+  }
+
+  // Reflectivity ramp, light rain through to the core of a cell. The colours
+  // are fixed; the thresholds are not, because guessing where to put them on
+  // whatever range the noise happens to produce gives either a flat wash or an
+  // empty scope. They are derived below from the field's own distribution.
+  var BANDS = [
+    [62, 138, 180, 0.40],
+    [46, 150, 120, 0.58],
+    [96, 168, 78, 0.70],
+    [214, 178, 46, 0.80],
+    [220, 122, 44, 0.88],
+    [186, 60, 42, 0.94],
+  ];
+
+  function combine(u, v, ax, ay, bx, by){
+    return fld(u + ax, v + ay) * 0.62 + fld(u * 1.7 + bx, v * 1.7 + by) * 0.38;
+  }
+
+  // Percentiles chosen to look like weather: a fifth of the scope carrying
+  // something, and intense cores rare.
+  var PCT = [0.78, 0.875, 0.932, 0.965, 0.986, 0.9955];
+  var THRESH = (function(){
+    var samples = [];
+    for (var y = 0; y < 160; y++)
+      for (var x = 0; x < 160; x++)
+        samples.push(combine(x / 160 * N, y / 160 * N, 0, 0, 0, 0));
+    samples.sort(function(p, q){ return p - q; });
+    return PCT.map(function(p){
+      return samples[Math.min(samples.length - 1, Math.floor(p * samples.length))];
+    });
+  })();
+
+  var R = 0, buf = null, img = null, dpr = 1;
+  function resize(){
+    var css = cv.clientWidth || 320;
+    dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+    cv.width = Math.round(css * dpr);
+    cv.height = Math.round(css * dpr);
+    R = cv.width / 2;
+    var side = Math.max(64, Math.round(cv.width / 3));   // echoes render coarse
+    buf = document.createElement("canvas");
+    buf.width = buf.height = side;
+    img = buf.getContext("2d").createImageData(side, side);
+  }
+
+  function echoes(t){
+    var side = buf.width, d = img.data, half = side / 2;
+    var ax = t * 7.5, ay = t * 2.4;          // advection
+    var bx = -t * 3.1, by = t * 5.0;         // second field, diverging
+    for (var y = 0; y < side; y++){
+      for (var x = 0; x < side; x++){
+        var i = (y * side + x) * 4;
+        var dx = (x - half) / half, dy = (y - half) / half;
+        var rr = dx * dx + dy * dy;
+        if (rr > 1){ d[i + 3] = 0; continue; }
+        var val = combine(x / side * N, y / side * N, ax, ay, bx, by);
+        var fade = 1 - rr * 0.42;             // cells thin toward the scope edge
+        var band = -1;
+        for (var k = THRESH.length - 1; k >= 0; k--)
+          if (val * fade >= THRESH[k] * (1 - (1 - fade) * 0.35)){ band = k; break; }
+        if (band < 0){ d[i + 3] = 0; continue; }
+        var col = BANDS[band];
+        d[i] = col[0]; d[i + 1] = col[1]; d[i + 2] = col[2];
+        d[i + 3] = Math.round(col[3] * 255 * fade);
+      }
+    }
+    buf.getContext("2d").putImageData(img, 0, 0);
+  }
+
+  function chrome(t){
+    var cx = R, cy = R;
+    ctx.save();
+    ctx.translate(cx, cy);
+    // scope ground
+    var g = ctx.createRadialGradient(0, 0, 0, 0, 0, R);
+    g.addColorStop(0, "rgba(9,32,46,.34)");
+    g.addColorStop(1, "rgba(9,32,46,.06)");
+    ctx.fillStyle = g;
+    ctx.beginPath(); ctx.arc(0, 0, R * 0.97, 0, Math.PI * 2); ctx.fill();
+    ctx.restore();
+
+    // echoes, clipped to the scope
+    ctx.save();
+    ctx.beginPath(); ctx.arc(cx, cy, R * 0.97, 0, Math.PI * 2); ctx.clip();
+    ctx.imageSmoothingEnabled = true;
+    ctx.drawImage(buf, 0, 0, cv.width, cv.height);
+    ctx.restore();
+
+    // range rings, crosshair, ticks
+    ctx.save();
+    ctx.translate(cx, cy);
+    ctx.strokeStyle = "rgba(255,255,255,.30)";
+    ctx.lineWidth = Math.max(1, dpr * 0.75);
+    for (var k = 1; k <= 4; k++){
+      ctx.globalAlpha = k === 4 ? 0.62 : 0.32;
+      ctx.beginPath(); ctx.arc(0, 0, R * 0.97 * k / 4, 0, Math.PI * 2); ctx.stroke();
+    }
+    ctx.globalAlpha = 0.26;
+    ctx.beginPath();
+    ctx.moveTo(-R * 0.97, 0); ctx.lineTo(R * 0.97, 0);
+    ctx.moveTo(0, -R * 0.97); ctx.lineTo(0, R * 0.97);
+    ctx.stroke();
+    ctx.globalAlpha = 0.5;
+    for (var a = 0; a < 360; a += 15){
+      var rad = a * Math.PI / 180, o = R * 0.97, inn = o - (a % 45 === 0 ? R * 0.055 : R * 0.028);
+      ctx.beginPath();
+      ctx.moveTo(Math.cos(rad) * inn, Math.sin(rad) * inn);
+      ctx.lineTo(Math.cos(rad) * o, Math.sin(rad) * o);
+      ctx.stroke();
+    }
+
+    // sweep: a soft trailing wedge, then the arm
+    if (!reduced){
+      var ang = (t * 0.45) % (Math.PI * 2);
+      var wedge = ctx.createConicGradient
+        ? ctx.createConicGradient(ang - 1.1, 0, 0) : null;
+      if (wedge){
+        wedge.addColorStop(0, "rgba(255,255,255,0)");
+        wedge.addColorStop(0.30, "rgba(190,225,245,.16)");
+        wedge.addColorStop(0.305, "rgba(255,255,255,0)");
+        ctx.globalAlpha = 1;
+        ctx.fillStyle = wedge;
+        ctx.beginPath(); ctx.arc(0, 0, R * 0.97, 0, Math.PI * 2); ctx.fill();
+      }
+      ctx.globalAlpha = 0.5;
+      ctx.strokeStyle = "rgba(214,238,250,.85)";
+      ctx.lineWidth = Math.max(1, dpr);
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.lineTo(Math.cos(ang) * R * 0.97, Math.sin(ang) * R * 0.97);
+      ctx.stroke();
+    }
+    ctx.restore();
+  }
+
+  var visible = true, last = 0, t0 = performance.now();
+  if ("IntersectionObserver" in window){
+    new IntersectionObserver(function(e){ visible = e[0].isIntersecting; },
+      { threshold: 0 }).observe(cv);
+  }
+
+  function frame(now){
+    if (!reduced) requestAnimationFrame(frame);
+    if (!visible) return;
+    if (now - last < 55) return;            // ~18fps is plenty for weather
+    last = now;
+    var t = (now - t0) / 1000;
+    ctx.clearRect(0, 0, cv.width, cv.height);
+    echoes(t);
+    chrome(t);
+  }
+
+  var ro = window.ResizeObserver ? new ResizeObserver(function(){
+    resize(); if (reduced){ ctx.clearRect(0,0,cv.width,cv.height); echoes(8); chrome(8); }
+  }) : null;
+  resize();
+  if (ro) ro.observe(cv); else window.addEventListener("resize", resize);
+
+  if (reduced){ echoes(8); chrome(8); }
+  else requestAnimationFrame(frame);
+})();
 
 /* ── scroll reveal. If IntersectionObserver is missing, every section is
    simply marked visible rather than left hidden. ── */
