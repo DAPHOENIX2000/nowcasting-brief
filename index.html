@@ -251,6 +251,8 @@ math{direction:ltr; color:var(--ink)}
 .eqn{font-family:"IBM Plex Mono",monospace; font-size:13px; color:var(--muted)}
 .eqrow p{grid-column:1/-1; margin:6px 0 0; font-size:15px; color:var(--body)}
 p math, li math{font-size:1.05em}
+.vid{display:block; width:100%; aspect-ratio:16/9; margin:18px 0 4px; border-radius:18px; background:#0a1720;
+  border:1px solid var(--rule); box-shadow:var(--shadow)}
 .eqm::-webkit-scrollbar{height:4px}
 .eqm::-webkit-scrollbar-thumb{background:var(--rule2); border-radius:4px}
 @media (max-width:600px){
@@ -490,6 +492,18 @@ document.documentElement.className = "js";
 </section>
 
 <svg class="thread rv" viewBox="0 0 1000 54" preserveAspectRatio="none" aria-hidden="true"><path d="M60 0 C60 26 76 34 128 40 C188 47 234 39 246 20"/></svg>
+
+<!-- ========================== video ========================== -->
+<section id="video" class="rv">
+  <div class="eyebrow"><b>▶</b> <span class="en">Watch first</span><span class="ar">شاهد أولًا</span></div>
+  <h2 class="en">The whole project in one video</h2>
+  <h2 class="ar">المشروع كله في فيديو واحد</h2>
+  <p class="en">A ten-minute walkthrough of my project, from the problem to the plan, in simple steps. English narration with subtitles.</p>
+  <p class="ar">جولة من عشر دقائق في مشروعي، من المشكلة إلى الخطة، بخطوات بسيطة. بتعليق صوتي بالإنجليزية مع نص مكتوب.</p>
+  <video class="vid" controls preload="metadata" playsinline poster="media/nowcast-poster.jpg">
+    <source src="media/nowcast-explainer.mp4" type="video/mp4">
+  </video>
+</section>
 
 <!-- ========================== 01 ========================== -->
 <section id="s1">
@@ -1625,6 +1639,7 @@ document.documentElement.className = "js";
 <script>
 var SECTIONS = [
   ["hero","Start","البداية"],
+  ["video","▶ · The video","▶ · الفيديو"],
   ["s1","01 · In five sentences","01 · في خمس جمل"],
   ["s2","02 · The problem","02 · المشكلة"],
   ["s3","03 · The four datasets","03 · المجموعات الأربع"],
