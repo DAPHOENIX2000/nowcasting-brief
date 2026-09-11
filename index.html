@@ -468,22 +468,22 @@ document.documentElement.className = "js";
   <div class="scope">
     <canvas class="radar" id="scope" aria-hidden="true"></canvas>
     <div class="scope-in">
-      <span class="tag en"><i></i> Master's thesis · HITSZ · defence brief</span>
-      <span class="tag ar"><i></i> أطروحة ماجستير · HITSZ · ملخّص المناقشة</span>
+      <span class="tag en"><i></i> Master's thesis · HITSZ · Yassine Achouak</span>
+      <span class="tag ar"><i></i> أطروحة ماجستير · HITSZ · ياسين أشواك</span>
       <div class="en">
         <h1>Making a rain model work in a country it was never trained on — by retraining 0.08% of it.</h1>
-        <p class="lead">Everything you need to understand your own project, explain it out loud, and answer the committee. Every number here came from running code — none of it is quoted from a paper.</p>
+        <p class="lead">I'm Yassine Achouak, a master's student at HIT Shenzhen. This is my thesis project: the problem I'm working on, the methods I'm building, and what I've measured so far. Every number here came from running my own code — none of it is quoted from a paper.</p>
       </div>
       <div class="ar">
         <h1>جعل نموذج المطر يعمل في بلد لم يُدرَّب عليه — بإعادة تدريب 0.08% منه فقط.</h1>
-        <p class="lead">كل ما تحتاجه لفهم مشروعك، وشرحه شفويًا، والإجابة على أسئلة اللجنة. كل رقم هنا نتج عن تشغيل الكود فعليًا — ولا شيء منه منقول من بحث.</p>
+        <p class="lead">أنا ياسين أشواك، طالب ماجستير في معهد هاربين للتكنولوجيا بشنتشن. هذا مشروع أطروحتي: المشكلة التي أعمل عليها، والطريقتان اللتان أبنيهما، وما قِستُه حتى الآن. كل رقم هنا نتج عن تشغيل الكود الخاص بي فعليًا — ولا شيء منه منقول من بحث.</p>
       </div>
     </div>
   </div>
 
   <div class="stats">
-    <div><div class="n c12">89,059,718</div><div class="l en">parameters in the model you adapt</div><div class="l ar">معامل في النموذج الذي تكيّفه</div></div>
-    <div><div class="n c18">0.0805%</div><div class="l en">of them you actually train</div><div class="l ar">فقط هي ما تدرّبه فعليًا</div></div>
+    <div><div class="n c12">89,059,718</div><div class="l en">parameters in the model I adapt</div><div class="l ar">معامل في النموذج الذي أُكيّفه</div></div>
+    <div><div class="n c18">0.0805%</div><div class="l en">of them I actually train</div><div class="l ar">فقط هي ما أدرّبه فعليًا</div></div>
     <div><div class="n c24">4</div><div class="l en">radar datasets, three countries</div><div class="l ar">مجموعات بيانات رادار، ثلاث دول</div></div>
     <div><div class="n c32">3</div><div class="l en">experiments already run</div><div class="l ar">تجارب أُجريت بالفعل</div></div>
   </div>
@@ -494,10 +494,10 @@ document.documentElement.className = "js";
 <!-- ========================== 01 ========================== -->
 <section id="s1">
   <div class="eyebrow"><b>01</b> <span class="en">The core</span><span class="ar">الجوهر</span></div>
-  <h2 class="en">The five sentences <span class="pen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17c4-7 12-11 18-12"/><path d="M15 3.6l6 1.4-1.6 5.6"/></svg> memorise</span></h2>
-  <h2 class="ar">الجمل الخمس <span class="pen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17c4-7 12-11 18-12"/><path d="M15 3.6l6 1.4-1.6 5.6"/></svg> احفظها</span></h2>
-  <p class="en">If your mind goes blank in the defence, these five get you back on the rails.</p>
-  <p class="ar">إذا توقف ذهنك أثناء المناقشة، هذه الجمل الخمس تعيدك إلى المسار.</p>
+  <h2 class="en">My project in five sentences</h2>
+  <h2 class="ar">مشروعي في خمس جمل</h2>
+  <p class="en">If you only read one part of this page, read this one.</p>
+  <p class="ar">إن لم تقرأ من هذه الصفحة إلا جزءًا واحدًا، فليكن هذا.</p>
 
   <div class="note key">
     <ol class="en" style="font-size:17px">
@@ -560,10 +560,10 @@ document.documentElement.className = "js";
   </figure>
 
   <div class="note warn">
-    <h4 class="en">A trap the committee may set <span class="pen grey">careful</span></h4>
-    <h4 class="ar">فخ قد تنصبه اللجنة <span class="pen grey">انتبه</span></h4>
-    <p class="en">Do <b>not</b> say "CSI drops from 0.3508 to 0.3178 across datasets." Those averages are over <b>different physical quantities</b> (VIL vs dBZ) at <b>different thresholds</b>. Comparing them is meaningless, and their closeness is coincidence. The valid comparison is <b>decay relative to each curve's own first frame</b>, matched on minutes — the 61.8% vs 33.8% above.</p>
-    <p class="ar"><b>لا</b> تقل: «قيمة CSI تنخفض من 0.3508 إلى 0.3178 بين المجموعتين». فهذان المتوسطان محسوبان على <b>كميات فيزيائية مختلفة</b> (VIL مقابل dBZ) وعند <b>عتبات مختلفة</b>. مقارنتهما بلا معنى، وتقاربهما محض صدفة. المقارنة الصحيحة هي <b>نسبة التدهور بالنسبة إلى اللقطة الأولى لكل منحنى</b> — أي 61.8% مقابل 33.8% أعلاه.</p>
+    <h4 class="en">A comparison I don't make</h4>
+    <h4 class="ar">مقارنة لا أُجريها</h4>
+    <p class="en">I do <b>not</b> say "CSI drops from 0.3508 to 0.3178 across datasets." Those averages are over <b>different physical quantities</b> (VIL vs dBZ) at <b>different thresholds</b>. Comparing them is meaningless, and their closeness is coincidence. The valid comparison is <b>decay relative to each curve's own first frame</b>, matched on minutes — the 61.8% vs 33.8% above.</p>
+    <p class="ar"><b>لا</b> أقول: «قيمة CSI تنخفض من 0.3508 إلى 0.3178 بين المجموعتين». فهذان المتوسطان محسوبان على <b>كميات فيزيائية مختلفة</b> (VIL مقابل dBZ) وعند <b>عتبات مختلفة</b>. مقارنتهما بلا معنى، وتقاربهما محض صدفة. المقارنة الصحيحة هي <b>نسبة التدهور بالنسبة إلى اللقطة الأولى لكل منحنى</b> — أي 61.8% مقابل 33.8% أعلاه.</p>
   </div>
 </section>
 
@@ -572,8 +572,8 @@ document.documentElement.className = "js";
   <div class="eyebrow"><b>03</b> <span class="en">The data</span><span class="ar">البيانات</span></div>
   <h2 class="en">Four radar datasets</h2>
   <h2 class="ar">أربع مجموعات بيانات رادار</h2>
-  <p class="en">One is the <b>source</b> (where the model was trained). The rest are <b>targets</b> (where you must make it work). Your supervisor confirmed all four are in scope.</p>
-  <p class="ar">واحدة هي <b>المصدر</b> (حيث دُرِّب النموذج). والبقية <b>أهداف</b>. وقد أكّد مشرفك أن الأربع جميعها ضمن النطاق.</p>
+  <p class="en">One is the <b>source</b> (where the model was trained). The rest are <b>targets</b> (where I need to make it work). My supervisor confirmed all four are in scope.</p>
+  <p class="ar">واحدة هي <b>المصدر</b> (حيث دُرِّب النموذج). والبقية <b>أهداف</b> (حيث عليّ أن أجعله يعمل). وقد أكّد مشرفي أن الأربع جميعها ضمن النطاق.</p>
 
   <div class="tw en"><table>
     <tr><th>Dataset</th><th>Region</th><th>Resolution</th><th>Role</th></tr>
@@ -593,16 +593,16 @@ document.documentElement.className = "js";
   <div class="grid g3">
     <div class="step"><div class="no">Trap 01</div>
       <h4 class="en">Different quantities</h4><h4 class="ar">كميات مختلفة</h4>
-      <p class="en">SEVIR stores VIL as 0–255; MeteoNet stores reflectivity in dBZ. You cannot rescale one onto the other — decode both to real physical units first.</p>
-      <p class="ar">SEVIR تخزّن VIL بقيم 0–255؛ وMeteoNet تخزّن الانعكاسية بـ dBZ. لا يمكن إعادة تحجيم إحداهما لتوافق الأخرى — فُكّ ترميزهما إلى وحدات فيزيائية أولًا.</p></div>
+      <p class="en">SEVIR stores VIL as 0–255; MeteoNet stores reflectivity in dBZ. One can't simply be rescaled onto the other, so I decode both to real physical units first.</p>
+      <p class="ar">SEVIR تخزّن VIL بقيم 0–255؛ وMeteoNet تخزّن الانعكاسية بـ dBZ. لا يمكن إعادة تحجيم إحداهما لتوافق الأخرى، لذا أفكّ ترميزهما إلى وحدات فيزيائية أولًا.</p></div>
     <div class="step"><div class="no">Trap 02</div>
       <h4 class="en">Different clocks</h4><h4 class="ar">ساعات مختلفة</h4>
-      <p class="en">SEVIR samples every 5 minutes, the others every 6. So "20 frames" is 100 minutes in one and 120 in another. <b>Report lead time in minutes, never frames.</b></p>
-      <p class="ar">SEVIR تأخذ عينة كل 5 دقائق، والبقية كل 6. أي أن «20 لقطة» تعني 100 دقيقة هنا و120 هناك. <b>اذكر الزمن بالدقائق لا باللقطات.</b></p></div>
+      <p class="en">SEVIR samples every 5 minutes, the others every 6. So "20 frames" is 100 minutes in one and 120 in another. <b>So I report lead time in minutes, never frames.</b></p>
+      <p class="ar">SEVIR تأخذ عينة كل 5 دقائق، والبقية كل 6. أي أن «20 لقطة» تعني 100 دقيقة هنا و120 هناك. <b>لذا أذكر الزمن بالدقائق لا باللقطات.</b></p></div>
     <div class="step"><div class="no">Trap 03</div>
       <h4 class="en">CIKM breaks the protocol</h4><h4 class="ar">CIKM تكسر البروتوكول</h4>
-      <p class="en">Its sequences are 15 frames, so it is 5→10, not 5→20. Its numbers are not directly comparable — say so before someone catches it.</p>
-      <p class="ar">تسلسلاتها 15 لقطة، أي 5→10 لا 5→20. أرقامها ليست قابلة للمقارنة المباشرة — قل ذلك قبل أن يكتشفه أحد.</p></div>
+      <p class="en">Its sequences are 15 frames, so it is 5→10, not 5→20. Its numbers are not directly comparable, and I say so up front.</p>
+      <p class="ar">تسلسلاتها 15 لقطة، أي 5→10 لا 5→20. أرقامها ليست قابلة للمقارنة المباشرة، وأقول ذلك منذ البداية.</p></div>
   </div>
 </section>
 
@@ -611,10 +611,10 @@ document.documentElement.className = "js";
 <!-- ========================== 04 ========================== -->
 <section id="s4" class="rv">
   <div class="eyebrow"><b>04</b> <span class="en">The starting point</span><span class="ar">نقطة الانطلاق</span></div>
-  <h2 class="en">AlphaPre — the model you freeze</h2>
-  <h2 class="ar">AlphaPre — النموذج الذي تُجمّده</h2>
-  <p class="en">AlphaPre is a nowcasting model from <b>your own laboratory</b> (CVPR 2025). You did not build it and you do not claim it — you download its trained weights, freeze them, and adapt them. Being clear about that separation is one of the fastest ways to sound competent.</p>
-  <p class="ar">AlphaPre نموذج تنبؤ آني من <b>مختبرك أنت</b> (CVPR 2025). لم تبنِه ولا تدّعي ملكيته — أنت تُنزِّل أوزانه المدرَّبة، وتُجمِّدها، ثم تُكيّفها. والوضوح في هذا الفصل من أسرع الطرق لتبدو متمكنًا.</p>
+  <h2 class="en">AlphaPre — the model I freeze</h2>
+  <h2 class="ar">AlphaPre — النموذج الذي أُجمّده</h2>
+  <p class="en">AlphaPre is a nowcasting model from <b>my own laboratory</b> (CVPR 2025). I didn't build it and I don't claim it — I download its trained weights, freeze them, and adapt them. I keep that separation clear everywhere in the project.</p>
+  <p class="ar">AlphaPre نموذج تنبؤ آني من <b>مختبري</b> (CVPR 2025). لم أبنِه ولا أدّعي ملكيته — أنا أُنزِّل أوزانه المدرَّبة، وأُجمِّدها، ثم أُكيّفها. وأحرص على وضوح هذا الفصل في المشروع كله.</p>
 
   <div class="stats">
     <div><div class="n c12">89,059,718</div><div class="l en">total parameters — measured</div><div class="l ar">إجمالي المعاملات — مقيس</div></div>
@@ -624,10 +624,10 @@ document.documentElement.className = "js";
   </div>
 
   <div class="note key">
-    <h4 class="en">Why that 0.02% is the whole reason your project exists</h4>
-    <h4 class="ar">لماذا تُمثّل نسبة 0.02% سببَ وجود مشروعك كله</h4>
-    <p class="en">The method you extend (S²FT) was written for <b>linear layers only</b>. Linear layers are 0.02% of this model. So the existing method, applied as published, could adapt <b>almost nothing</b>. That is not something you read — you measured it on the checkpoint file. This one number justifies the entire thesis.</p>
-    <p class="ar">الطريقة التي تُوسّعها (S²FT) كُتبت من أجل <b>الطبقات الخطية فقط</b>. والطبقات الخطية تمثّل 0.02% من هذا النموذج. أي أن الطريقة الحالية، كما نُشرت، لا تستطيع تكييف <b>شيء يُذكر</b>. وهذا ليس شيئًا قرأته — بل قِستَه على ملف الأوزان. هذا الرقم وحده يبرّر الأطروحة بأكملها.</p>
+    <h4 class="en">Why that 0.02% is the whole reason my project exists</h4>
+    <h4 class="ar">لماذا تُمثّل نسبة 0.02% سببَ وجود مشروعي كله</h4>
+    <p class="en">The method I extend (S²FT) was written for <b>linear layers only</b>. Linear layers are 0.02% of this model. So the existing method, applied as published, could adapt <b>almost nothing</b>. That is not something I read — I measured it on the checkpoint file. This one number justifies the entire thesis.</p>
+    <p class="ar">الطريقة التي أُوسّعها (S²FT) كُتبت من أجل <b>الطبقات الخطية فقط</b>. والطبقات الخطية تمثّل 0.02% من هذا النموذج. أي أن الطريقة الحالية، كما نُشرت، لا تستطيع تكييف <b>شيء يُذكر</b>. وهذا ليس شيئًا قرأتُه — بل قِستُه على ملف الأوزان. هذا الرقم وحده يبرّر الأطروحة بأكملها.</p>
   </div>
 </section>
 
@@ -636,8 +636,8 @@ document.documentElement.className = "js";
   <div class="eyebrow"><b>05</b> <span class="en">The idea</span><span class="ar">الفكرة</span></div>
   <h2 class="en">What "parameter-efficient fine-tuning" actually means</h2>
   <h2 class="ar">ما معنى «الضبط الدقيق كفء المعاملات» فعليًا</h2>
-  <p class="en"><b>Fine-tuning</b> = taking a trained model and adjusting it for a related job. Normally you adjust <i>every</i> number in it. <b>PEFT</b> = freeze all of them, add a tiny set of new trainable numbers, train only those.</p>
-  <p class="ar"><b>الضبط الدقيق</b> = أخذ نموذج مدرَّب وتعديله لمهمة قريبة. عادةً تُعدّل <i>كل</i> رقم فيه. أما <b>PEFT</b> = تجميد كل الأرقام، وإضافة مجموعة صغيرة جدًا قابلة للتدريب، وتدريب تلك فقط.</p>
+  <p class="en"><b>Fine-tuning</b> = taking a trained model and adjusting it for a related job. Normally <i>every</i> number in it is adjusted. <b>PEFT</b> = freeze all of them, add a tiny set of new trainable numbers, train only those.</p>
+  <p class="ar"><b>الضبط الدقيق</b> = أخذ نموذج مدرَّب وتعديله لمهمة قريبة. عادةً يُعدَّل <i>كل</i> رقم فيه. أما <b>PEFT</b> = تجميد كل الأرقام، وإضافة مجموعة صغيرة جدًا قابلة للتدريب، وتدريب تلك فقط.</p>
 
   <figure>
     <svg class="plot" viewBox="0 0 660 188" role="img" aria-label="Full fine-tuning versus LoRA parameter counts, drawn to scale">
@@ -645,7 +645,7 @@ document.documentElement.className = "js";
       <rect class="gx" x="26" y="32" width="608" height="32" rx="6" fill="var(--dbzhi)"/>
       <text x="330" y="53" text-anchor="middle" fill="#FFFFFF" font-family="IBM Plex Mono,monospace" font-size="13" font-weight="600">89,030,000 trainable — 100%</text>
 
-      <text x="26" y="100" fill="var(--muted)" font-family="IBM Plex Mono,monospace" font-size="10.5" letter-spacing="1.6">LORA r=4 — WHAT YOU ACTUALLY TRAIN</text>
+      <text x="26" y="100" fill="var(--muted)" font-family="IBM Plex Mono,monospace" font-size="10.5" letter-spacing="1.6">LORA r=4 — WHAT I ACTUALLY TRAIN</text>
       <rect x="26" y="110" width="608" height="32" rx="6" fill="var(--card2)" stroke="var(--rule)"/>
       <rect class="gx late" x="26" y="110" width="6" height="32" rx="3" fill="var(--dbz18)"/>
       <text x="48" y="131" fill="var(--dbz18)" font-family="IBM Plex Mono,monospace" font-size="13" font-weight="600">71,680</text>
@@ -665,8 +665,8 @@ document.documentElement.className = "js";
       <p class="en">Far less memory and time to train.</p>
       <p class="ar">ذاكرة ووقت تدريب أقل بكثير.</p></div>
     <div class="step hot"><div class="no">Reason 03</div><h4 class="en">Regularisation — the interesting one</h4><h4 class="ar">التنظيم — وهو الأهم</h4>
-      <p class="en">With very little target data, 89 million free parameters <b>overfit</b>. 71,680 cannot as easily. In the few-shot regime being small is not a compromise — it is an <b>advantage</b>. Your results hint at exactly this.</p>
-      <p class="ar">مع بيانات هدف قليلة، 89 مليون معامل حر <b>تُفرِط في التخصيص</b>. أما 71,680 فلا تستطيع بسهولة. في نظام البيانات الشحيحة، الصِّغَر ليس تنازلًا بل <b>ميزة</b>. ونتائجك تشير إلى هذا بالضبط.</p></div>
+      <p class="en">With very little target data, 89 million free parameters <b>overfit</b>. 71,680 cannot as easily. In the few-shot regime being small is not a compromise — it is an <b>advantage</b>. My results hint at exactly this.</p>
+      <p class="ar">مع بيانات هدف قليلة، 89 مليون معامل حر <b>تُفرِط في التخصيص</b>. أما 71,680 فلا تستطيع بسهولة. في نظام البيانات الشحيحة، الصِّغَر ليس تنازلًا بل <b>ميزة</b>. ونتائجي تشير إلى هذا بالضبط.</p></div>
   </div>
 </section>
 
@@ -675,10 +675,10 @@ document.documentElement.className = "js";
 <!-- ========================== 06 ========================== -->
 <section id="s6" class="rv">
   <div class="eyebrow"><b>06</b> <span class="en">The technical core</span><span class="ar">الجوهر التقني</span></div>
-  <h2 class="en">The one picture that carries your whole argument <span class="pen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17c4-7 12-11 18-12"/><path d="M15 3.6l6 1.4-1.6 5.6"/></svg> memorise</span></h2>
-  <h2 class="ar">الصورة الواحدة التي تحمل حجّتك كلها <span class="pen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17c4-7 12-11 18-12"/><path d="M15 3.6l6 1.4-1.6 5.6"/></svg> احفظها</span></h2>
-  <p class="en">If you learn only one technical thing here, learn this. It is where your contribution stops being borrowed and starts being yours.</p>
-  <p class="ar">إن لم تتعلم هنا إلا شيئًا تقنيًا واحدًا، فليكن هذا. هنا يتوقف إسهامك عن كونه مُستعارًا ويصبح إسهامك أنت.</p>
+  <h2 class="en">The one picture that carries my whole argument</h2>
+  <h2 class="ar">الصورة الواحدة التي تحمل حجّتي كلها</h2>
+  <p class="en">If there is one technical idea to take from this page, it is this one. It is where my contribution stops being borrowed and becomes my own.</p>
+  <p class="ar">إن كانت هناك فكرة تقنية واحدة تُؤخذ من هذه الصفحة، فهي هذه. هنا يتوقف إسهامي عن كونه مُستعارًا ويصبح إسهامي أنا.</p>
 
   <figure>
     <svg class="plot" viewBox="0 0 660 300" role="img" aria-label="The four axes of a convolution kernel and which of them may be permuted">
@@ -737,25 +737,25 @@ document.documentElement.className = "js";
   </div>
 
   <div class="say">
-    <span class="who en">Say it out loud like this</span>
-    <span class="who ar">قُلها شفويًا هكذا</span>
+    <span class="who en">How I put it</span>
+    <span class="who ar">كيف أشرحها</span>
     <span class="q en">“The method I extend works by <b>shuffling</b>. Shuffling is only legitimate on an axis whose order carries no meaning. Two of a kernel's four axes are just labels, so they may be shuffled. Two are positions in space, so they may not. That is why my method touches the channels and leaves the spatial part alone.”</span>
     <span class="q ar">«الطريقة التي أُوسّعها تعمل عبر <b>إعادة الترتيب</b>. وإعادة الترتيب مشروعة فقط على محور لا يحمل ترتيبُه أي معنى. محوران من محاور النواة الأربعة مجرد تسميات، فيجوز إعادة ترتيبهما. ومحوران موضعان في الفضاء، فلا يجوز. ولهذا تعمل طريقتي على القنوات وتترك الجزء المكاني كما هو.»</span>
   </div>
 
   <div class="note flat">
-    <h4 class="en">Where this insight came from — a good story to tell</h4>
-    <h4 class="ar">من أين جاءت هذه الفكرة — قصة تستحق أن تُروى</h4>
-    <p class="en">Yu Zhehao, second author of the S²FT paper, warned you directly: <i>卷积核相比于线性层多了空间上的相关性</i> — "convolution kernels, unlike linear layers, carry spatial correlation." He has never tried the method on convolutions, and there is <b>no public implementation</b>. You are not adapting someone's code; you are deriving the extension from the paper and from a property you measured.</p>
-    <p class="ar">حذّرك «يو تشيهاو»، المؤلف الثاني لورقة S²FT، مباشرةً: <i>卷积核相比于线性层多了空间上的相关性</i> — أي أن «نوى الالتفاف، بخلاف الطبقات الخطية، تحمل ارتباطًا مكانيًا». وهو لم يجرّب الطريقة على الالتفافات قط، ولا يوجد <b>أي تنفيذ عام</b>. أنت لا تُكيّف كود أحد، بل تشتق التوسعة من الورقة ومن خاصية قِستَها بنفسك.</p>
+    <h4 class="en">Where this insight came from</h4>
+    <h4 class="ar">من أين جاءت هذه الفكرة</h4>
+    <p class="en">Yu Zhehao, second author of the S²FT paper, warned me directly: <i>卷积核相比于线性层多了空间上的相关性</i> — "convolution kernels, unlike linear layers, carry spatial correlation." The method has never been tried on convolutions, and there is <b>no public implementation</b>. I am not adapting someone's code; I am deriving the extension from the paper and from a property I measured.</p>
+    <p class="ar">حذّرني «يو تشيهاو»، المؤلف الثاني لورقة S²FT، مباشرةً: <i>卷积核相比于线性层多了空间上的相关性</i> — أي أن «نوى الالتفاف، بخلاف الطبقات الخطية، تحمل ارتباطًا مكانيًا». ولم تُجرَّب الطريقة على الالتفافات قط، ولا يوجد <b>أي تنفيذ عام</b>. أنا لا أُكيّف كود أحد، بل أشتق التوسعة من الورقة ومن خاصية قِستُها بنفسي.</p>
   </div>
 </section>
 
 <!-- ========================== 07 ========================== -->
 <section id="s7" class="rv">
-  <div class="eyebrow"><b>07</b> <span class="en">Your contribution</span><span class="ar">إسهامك</span></div>
-  <h2 class="en">Your two methods <span class="pen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17c4-7 12-11 18-12"/><path d="M15 3.6l6 1.4-1.6 5.6"/></svg> memorise</span></h2>
-  <h2 class="ar">طريقتاك <span class="pen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17c4-7 12-11 18-12"/><path d="M15 3.6l6 1.4-1.6 5.6"/></svg> احفظهما</span></h2>
+  <div class="eyebrow"><b>07</b> <span class="en">My contribution</span><span class="ar">إسهامي</span></div>
+  <h2 class="en">My two methods</h2>
+  <h2 class="ar">طريقتاي</h2>
   <p class="en">Both do <b>exactly the same job</b>: describe how the model should change, using far fewer numbers than the model contains. They differ only in <b>how they write that description down</b>.</p>
   <p class="ar">كلتاهما تؤدّيان <b>المهمة نفسها تمامًا</b>: وصف الكيفية التي ينبغي أن يتغيّر بها النموذج، بأرقام أقل بكثير مما يحتويه. وتختلفان فقط في <b>كيفية كتابة ذلك الوصف</b>.</p>
 
@@ -779,7 +779,7 @@ document.documentElement.className = "js";
       <text x="519" y="131" text-anchor="middle" fill="var(--faint)" font-size="15">↓</text>
       <rect x="396" y="140" width="246" height="30" rx="8" fill="var(--dbz32)" opacity=".18"/>
       <text x="519" y="160" text-anchor="middle" fill="var(--dbz32)" font-size="12.5" font-weight="600">keep k spectral coefficients</text>
-      <text x="519" y="192" text-anchor="middle" fill="var(--muted)" font-size="12">the dial is k — how many you keep</text>
+      <text x="519" y="192" text-anchor="middle" fill="var(--muted)" font-size="12">the dial is k — how many are kept</text>
 
       <g fill="var(--mark)" font-family="IBM Plex Mono,monospace" font-size="9.5" font-weight="600" text-anchor="middle">
         <text x="340" y="104">SAME</text><text x="340" y="118">MODEL</text>
@@ -792,16 +792,16 @@ document.documentElement.className = "js";
   </figure>
 
   <div class="note key">
-    <h4 class="en">The question your thesis actually answers</h4>
-    <h4 class="ar">السؤال الذي تجيب عنه أطروحتك فعليًا</h4>
+    <h4 class="en">The question my thesis actually answers</h4>
+    <h4 class="ar">السؤال الذي تجيب عنه أطروحتي فعليًا</h4>
     <p class="en">For this problem, is it better to describe the change <b>directly</b>, or <b>in a transformed space</b>? And — the interesting part — <b>does the answer flip when target data become scarce?</b></p>
     <p class="ar">بالنسبة لهذه المسألة، هل الأفضل وصف التغيير <b>مباشرةً</b>، أم <b>في فضاء محوَّل</b>؟ والأهم — <b>هل ينقلب الجواب عندما تصبح بيانات الهدف شحيحة؟</b></p>
   </div>
 
   <h3 class="en">The same two methods, written as maths</h3>
   <h3 class="ar">الطريقتان نفسهما، مكتوبتين رياضيًا</h3>
-  <p class="en">These are equations (3-1), (3-2), (3-6) and (3-7) of the proposal, and they are on the “Method in Equations” slide. You don't need to derive them. You need to say in one sentence what each one means.</p>
-  <p class="ar">هذه هي المعادلات (3-1) و(3-2) و(3-6) و(3-7) في المقترح، وهي نفسها في شريحة «الطريقة بالمعادلات». لا تحتاج إلى اشتقاقها، بل إلى أن تقول في جملة واحدة ماذا تعني كل واحدة منها.</p>
+  <p class="en">These are equations (3-1), (3-2), (3-6) and (3-7) of my proposal, and they are on the “Method in Equations” slide of my defence. Each one is explained in one sentence below.</p>
+  <p class="ar">هذه هي المعادلات (3-1) و(3-2) و(3-6) و(3-7) في مقترحي، وهي نفسها في شريحة «الطريقة بالمعادلات» في عرضي. وتحت كل واحدة منها شرح في جملة واحدة.</p>
   <div class="eqs">
     <div class="eqgrp"><span class="en">Research content one · original parameter space</span><span class="ar">المحتوى البحثي الأول · فضاء المعاملات الأصلي</span></div>
     <div class="eqrow">
@@ -820,8 +820,8 @@ document.documentElement.className = "js";
     <div class="eqrow">
       <div class="eqm"><math display="block"><mi mathvariant="normal">Δ</mi><msup><mi>K</mi><mrow><mo stretchy="false">(</mo><mi>i</mi><mo>,</mo><mi>j</mi><mo stretchy="false">)</mo></mrow></msup><mo>=</mo><msubsup><mi>P</mi><mtext>out</mtext><mi mathvariant="normal">T</mi></msubsup><mi>Re</mi><mo>[</mo><msup><mi>ℱ</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>(</mo><msub><mi>S</mi><msup><mi>E</mi><mrow><mo stretchy="false">(</mo><mi>i</mi><mo>,</mo><mi>j</mi><mo stretchy="false">)</mo></mrow></msup></msub><mo>(</mo><msup><mi>c</mi><mrow><mo stretchy="false">(</mo><mi>i</mi><mo>,</mo><mi>j</mi><mo stretchy="false">)</mo></mrow></msup><mo>)</mo><mo>)</mo><mo>]</mo><msub><mi>P</mi><mtext>in</mtext></msub></math></div>
       <span class="eqn">(3-6)</span>
-      <p class="en"><b>Your extension.</b> Keep a few coefficients <i>c</i>, place them in a spectrum (<i>S</i>), transform back (ℱ<sup>−1</sup>), keep the real part, then undo the channel reordering with <i>P</i><sub>out</sub> and <i>P</i><sub>in</sub>. Notice that <i>P</i><sub>out</sub> and <i>P</i><sub>in</sub> have no (i, j): one channel order is shared by all nine positions.</p>
-      <p class="ar"><b>توسعتك.</b> تحتفظ بعدد قليل من المعاملات <i>c</i>، وتضعها في طيف (<i>S</i>)، ثم تعكس التحويل (ℱ<sup>−1</sup>)، وتأخذ الجزء الحقيقي، ثم تُلغي إعادة ترتيب القنوات بـ <i>P</i><sub>out</sub> و<i>P</i><sub>in</sub>. لاحظ أن <i>P</i><sub>out</sub> و<i>P</i><sub>in</sub> لا تحملان (i, j): ترتيب واحد للقنوات مشترك بين المواضع التسعة كلها.</p>
+      <p class="en"><b>My extension.</b> I keep a few coefficients <i>c</i>, place them in a spectrum (<i>S</i>), transform back (ℱ<sup>−1</sup>), keep the real part, then undo the channel reordering with <i>P</i><sub>out</sub> and <i>P</i><sub>in</sub>. Notice that <i>P</i><sub>out</sub> and <i>P</i><sub>in</sub> have no (i, j): one channel order is shared by all nine positions.</p>
+      <p class="ar"><b>توسعتي.</b> أحتفظ بعدد قليل من المعاملات <i>c</i>، وأضعها في طيف (<i>S</i>)، ثم أعكس التحويل (ℱ<sup>−1</sup>)، وآخذ الجزء الحقيقي، ثم أُلغي إعادة ترتيب القنوات بـ <i>P</i><sub>out</sub> و<i>P</i><sub>in</sub>. لاحظ أن <i>P</i><sub>out</sub> و<i>P</i><sub>in</sub> لا تحملان (i, j): ترتيب واحد للقنوات مشترك بين المواضع التسعة كلها.</p>
     </div>
     <div class="eqrow">
       <div class="eqm"><math display="block"><msub><mi>N</mi><mtext>S²FT</mtext></msub><mo>=</mo><msub><mi>k</mi><mi mathvariant="normal">h</mi></msub><msub><mi>k</mi><mi mathvariant="normal">w</mi></msub><mo>·</mo><mi>k</mi></math></div>
@@ -831,10 +831,10 @@ document.documentElement.className = "js";
     </div>
   </div>
   <div class="note key">
-    <h4 class="en">The one sentence to remember</h4>
-    <h4 class="ar">الجملة الواحدة التي تحفظها</h4>
-    <p class="en">Compare (3-2) with (3-7). LoRA's cost has <i>C</i><sub>out</sub> + <i>C</i><sub>in</sub> in it and grows with the layer. Yours is 9<i>k</i> for every 3 × 3 kernel, whatever its width.</p>
-    <p class="ar">قارن (3-2) بـ (3-7). كلفة LoRA فيها <i>C</i><sub>out</sub> + <i>C</i><sub>in</sub> فتكبر مع الطبقة. أما كلفتك فهي 9<i>k</i> لكل نواة ٣ × ٣، مهما كان عرضها.</p>
+    <h4 class="en">The point of the two cost equations</h4>
+    <h4 class="ar">مغزى معادلتَي الكلفة</h4>
+    <p class="en">Compare (3-2) with (3-7). LoRA's cost has <i>C</i><sub>out</sub> + <i>C</i><sub>in</sub> in it and grows with the layer. Mine is 9<i>k</i> for every 3 × 3 kernel, whatever its width.</p>
+    <p class="ar">قارن (3-2) بـ (3-7). كلفة LoRA فيها <i>C</i><sub>out</sub> + <i>C</i><sub>in</sub> فتكبر مع الطبقة. أما كلفة طريقتي فهي 9<i>k</i> لكل نواة ٣ × ٣، مهما كان عرضها.</p>
   </div>
 </section>
 
@@ -842,17 +842,17 @@ document.documentElement.className = "js";
 
 <!-- ========================== 08 ========================== -->
 <section id="s8" class="rv">
-  <div class="eyebrow"><b>08</b> <span class="en">Defending novelty</span><span class="ar">الدفاع عن الابتكار</span></div>
-  <h2 class="en">Where the innovation is <span class="pen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17c4-7 12-11 18-12"/><path d="M15 3.6l6 1.4-1.6 5.6"/></svg> memorise</span></h2>
-  <h2 class="ar">أين يكمن الابتكار <span class="pen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17c4-7 12-11 18-12"/><path d="M15 3.6l6 1.4-1.6 5.6"/></svg> احفظه</span></h2>
+  <div class="eyebrow"><b>08</b> <span class="en">Novelty</span><span class="ar">الابتكار</span></div>
+  <h2 class="en">Where the innovation is</h2>
+  <h2 class="ar">أين يكمن الابتكار</h2>
 
   <div class="note key">
-    <p class="en" style="font-size:21px;font-family:Archivo,Georgia,sans-serif;line-height:1.42;color:var(--ink);margin:0;max-width:none">You are not proposing a better general method.<br>You are designing it for <i>this</i> kind of model.</p>
-    <p class="ar" style="font-size:19px;line-height:1.75;color:var(--ink);margin:0;font-weight:700;max-width:none">أنت لا تقترح طريقة عامة أفضل.<br>أنت تُصمّمها من أجل <i>هذا</i> النوع من النماذج تحديدًا.</p>
+    <p class="en" style="font-size:21px;font-family:Archivo,Georgia,sans-serif;line-height:1.42;color:var(--ink);margin:0;max-width:none">I am not proposing a better general method.<br>I am designing it for <i>this</i> kind of model.</p>
+    <p class="ar" style="font-size:19px;line-height:1.75;color:var(--ink);margin:0;font-weight:700;max-width:none">أنا لا أقترح طريقة عامة أفضل.<br>أنا أُصمّمها من أجل <i>هذا</i> النوع من النماذج تحديدًا.</p>
   </div>
 
-  <p class="en">This is your supervisor's own framing, and it answers the hardest question you will get. If someone says <i>"other people have already done efficient fine-tuning for convolutions"</i> — they have, and it does not touch you. Those are general recipes tested on photographs. You are not competing with them, because you are not offering a general recipe.</p>
-  <p class="ar">هذه صياغة مشرفك نفسه، وهي الجواب على أصعب سؤال قد تواجهه. فإن قال أحدهم: «لقد سبق أن أنجز آخرون ضبطًا دقيقًا كفؤًا للالتفافات» — نعم فعلوا، وهذا لا يمسّك. تلك وصفات عامة اختُبرت على الصور. وأنت لا تنافسها، لأنك لا تقدّم وصفة عامة.</p>
+  <p class="en">This framing comes from my supervisor, and it answers the hardest question about the project. Other people <i>have</i> already done efficient fine-tuning for convolutions — but those are general recipes, tested on photographs. I am not competing with them, because I am not offering a general recipe.</p>
+  <p class="ar">هذه الصياغة من مشرفي، وهي تجيب عن أصعب سؤال يُطرح على المشروع. نعم، سبق أن أنجز آخرون ضبطًا دقيقًا كفؤًا للالتفافات — لكنها وصفات عامة اختُبرت على الصور. وأنا لا أنافسها، لأنني لا أقدّم وصفة عامة.</p>
 
   <div class="tw en"><table>
     <tr><th>What is true of THIS model — measured</th><th>So the method must</th></tr>
@@ -870,117 +870,117 @@ document.documentElement.className = "js";
   </table></div>
 
   <div class="say">
-    <span class="who en">The exact sentence to have ready</span>
-    <span class="who ar">الجملة التي يجب أن تكون جاهزة</span>
+    <span class="who en">In one sentence</span>
+    <span class="who ar">في جملة واحدة</span>
     <span class="q en">“I am not proposing a general-purpose method, so I am not competing with those. Every design decision I make comes from a property of a precipitation nowcasting model that <b>I measured</b>. A general method has no basis for choosing any of them.”</span>
     <span class="q ar">«أنا لا أقترح طريقة عامة الغرض، ولذلك لا أنافس تلك الطرق. كل قرار تصميمي اتخذتُه نابع من خاصية في نموذج تنبؤ آني بالأمطار <b>قِستُها بنفسي</b>. والطريقة العامة لا تملك أي أساس لاختيار أيٍّ منها.»</span>
   </div>
 
   <div class="note flat">
-    <h4 class="en">A naming trap <span class="pen grey">careful</span></h4>
-    <h4 class="ar">فخ في التسمية <span class="pen grey">انتبه</span></h4>
-    <p class="en"><b>Two different papers are called S²FT.</b> Yours is the one about <b>sparse spectrum</b>, from your lab. The other is about structured sparsity, by an unrelated group. Say the full name once at the start so nobody is thinking of the wrong paper.</p>
-    <p class="ar"><b>هناك ورقتان مختلفتان تحملان اسم S²FT.</b> ورقتك هي المتعلقة بـ<b>الطيف المتناثر</b>، من مختبرك. والأخرى تتناول التناثر المُهيكَل، من مجموعة لا صلة لها. اذكر الاسم الكامل مرة في البداية حتى لا يفكّر أحد في الورقة الخطأ.</p>
+    <h4 class="en">A note on the name</h4>
+    <h4 class="ar">ملاحظة حول الاسم</h4>
+    <p class="en"><b>Two different papers are called S²FT.</b> Mine is the one about <b>sparse spectrum</b>, from my lab. The other is about structured sparsity, by an unrelated group. I say the full name once at the start so nobody is thinking of the wrong paper.</p>
+    <p class="ar"><b>هناك ورقتان مختلفتان تحملان اسم S²FT.</b> ورقتي هي المتعلقة بـ<b>الطيف المتناثر</b>، من مختبري. والأخرى تتناول التناثر المُهيكَل، من مجموعة لا صلة لها. لذا أذكر الاسم الكامل مرة في البداية حتى لا يفكّر أحد في الورقة الخطأ.</p>
   </div>
 </section>
 
 <!-- ========================== 09 ========================== -->
 <section id="s9" class="rv">
   <div class="eyebrow"><b>09</b> <span class="en">The gap</span><span class="ar">الفجوة</span></div>
-  <h2 class="en">What is new, exactly <span class="pen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17c4-7 12-11 18-12"/><path d="M15 3.6l6 1.4-1.6 5.6"/></svg> memorise</span></h2>
-  <h2 class="ar">ما الجديد بالضبط <span class="pen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17c4-7 12-11 18-12"/><path d="M15 3.6l6 1.4-1.6 5.6"/></svg> احفظه</span></h2>
+  <h2 class="en">What is new, exactly</h2>
+  <h2 class="ar">ما الجديد بالضبط</h2>
 
-  <p class="lead en"><b>Everyone before you trained and tested on one country&#39;s radar at a time.</b> SEVIR, MeteoNet, Shanghai and CIKM are used as four separate leaderboards. Nobody asked the obvious practical question: can you take the model that already works in America and make it work in France without collecting a French training set?</p>
-  <p class="lead ar"><b>كل من سبقك درّب واختبر على رادار دولة واحدة في كل مرة.</b> فمجموعات SEVIR وMeteoNet وشنغهاي وCIKM تُستخدم كأربعة تصنيفات منفصلة. ولم يسأل أحد السؤال العملي البديهي: هل يمكن أخذ النموذج الذي يعمل في أمريكا وجعله يعمل في فرنسا دون جمع بيانات تدريب فرنسية؟</p>
+  <p class="lead en"><b>Everyone before me trained and tested on one country&#39;s radar at a time.</b> SEVIR, MeteoNet, Shanghai and CIKM are used as four separate leaderboards. Nobody asked the obvious practical question: can you take the model that already works in America and make it work in France without collecting a French training set?</p>
+  <p class="lead ar"><b>كل من سبقني درّب واختبر على رادار دولة واحدة في كل مرة.</b> فمجموعات SEVIR وMeteoNet وشنغهاي وCIKM تُستخدم كأربعة تصنيفات منفصلة. ولم يسأل أحد السؤال العملي البديهي: هل يمكن أخذ النموذج الذي يعمل في أمريكا وجعله يعمل في فرنسا دون جمع بيانات تدريب فرنسية؟</p>
 
-  <h3 class="en">What existed, and what you add</h3>
-  <h3 class="ar">ما كان موجودًا، وما تضيفه أنت</h3>
+  <h3 class="en">What existed, and what I add</h3>
+  <h3 class="ar">ما كان موجودًا، وما أضيفه أنا</h3>
 
   <div class="tw en"><table>
-    <tr><th>Already done, by others</th><th>What you add</th></tr>
-    <tr><td><b>AlphaPre</b> trains a nowcasting model on SEVIR</td><td>You <b>freeze it</b> and move it to a different country</td></tr>
-    <tr><td><b>DiffCast</b> establishes the four datasets, 5→20 at 128×128</td><td>You use that protocol for <b>transfer between them</b>, which it was never used for</td></tr>
-    <tr class="hi"><td><b>S²FT</b> does PEFT by permuting rows and columns — <b>linear layers only</b></td><td>You extend it to <b>convolutional kernels</b>, which forces the question of which axes may be permuted</td></tr>
-    <tr><td><b>LoRA / FourierFT</b> — general-purpose PEFT recipes</td><td>You design around <b>measured properties of this model</b>, not a general recipe</td></tr>
+    <tr><th>Already done, by others</th><th>What I add</th></tr>
+    <tr><td><b>AlphaPre</b> trains a nowcasting model on SEVIR</td><td>I <b>freeze it</b> and move it to a different country</td></tr>
+    <tr><td><b>DiffCast</b> establishes the four datasets, 5→20 at 128×128</td><td>I use that protocol for <b>transfer between them</b>, which it was never used for</td></tr>
+    <tr class="hi"><td><b>S²FT</b> does PEFT by permuting rows and columns — <b>linear layers only</b></td><td>I extend it to <b>convolutional kernels</b>, which forces the question of which axes may be permuted</td></tr>
+    <tr><td><b>LoRA / FourierFT</b> — general-purpose PEFT recipes</td><td>I design around <b>measured properties of this model</b>, not a general recipe</td></tr>
   </table></div>
   <div class="tw ar"><table>
-    <tr><th>ما أنجزه آخرون بالفعل</th><th>ما تضيفه أنت</th></tr>
-    <tr><td><b>AlphaPre</b> يدرّب نموذج تنبؤ آني على SEVIR</td><td>أنت <b>تُجمّده</b> وتنقله إلى دولة أخرى</td></tr>
-    <tr><td><b>DiffCast</b> ترسي المجموعات الأربع وبروتوكول 5→20 بدقة 128×128</td><td>أنت تستخدم البروتوكول من أجل <b>النقل بينها</b>، وهو ما لم يُستخدم له قط</td></tr>
-    <tr class="hi"><td><b>S²FT</b> تنجز PEFT بإعادة ترتيب الصفوف والأعمدة — <b>للطبقات الخطية فقط</b></td><td>أنت تُوسّعها إلى <b>نوى الالتفاف</b>، وهو ما يفرض سؤال أي المحاور يجوز ترتيبها</td></tr>
-    <tr><td><b>LoRA / FourierFT</b> — وصفات PEFT عامة الغرض</td><td>أنت تُصمّم حول <b>خصائص مقيسة لهذا النموذج</b>، لا وصفة عامة</td></tr>
+    <tr><th>ما أنجزه آخرون بالفعل</th><th>ما أضيفه أنا</th></tr>
+    <tr><td><b>AlphaPre</b> يدرّب نموذج تنبؤ آني على SEVIR</td><td>أنا <b>أُجمّده</b> وأنقله إلى دولة أخرى</td></tr>
+    <tr><td><b>DiffCast</b> ترسي المجموعات الأربع وبروتوكول 5→20 بدقة 128×128</td><td>أنا أستخدم البروتوكول من أجل <b>النقل بينها</b>، وهو ما لم يُستخدم له قط</td></tr>
+    <tr class="hi"><td><b>S²FT</b> تنجز PEFT بإعادة ترتيب الصفوف والأعمدة — <b>للطبقات الخطية فقط</b></td><td>أنا أُوسّعها إلى <b>نوى الالتفاف</b>، وهو ما يفرض سؤال أي المحاور يجوز ترتيبها</td></tr>
+    <tr><td><b>LoRA / FourierFT</b> — وصفات PEFT عامة الغرض</td><td>أنا أُصمّم حول <b>خصائص مقيسة لهذا النموذج</b>، لا وصفة عامة</td></tr>
   </table></div>
 
-  <h3 class="en">The three things that are actually yours</h3>
-  <h3 class="ar">الأشياء الثلاثة التي هي حقًا لك</h3>
+  <h3 class="en">The three things that are actually mine</h3>
+  <h3 class="ar">الأشياء الثلاثة التي هي حقًا لي</h3>
   <div class="grid g3">
-    <div class="step"><div class="no">Yours 01</div>
+    <div class="step"><div class="no">Mine 01</div>
       <h4 class="en">The problem framing</h4><h4 class="ar">صياغة المشكلة</h4>
-      <p class="en">Cross-dataset, few-shot nowcasting. In the literature you surveyed, all four datasets are trained and evaluated separately — no transfer, no few-shot regime. <b>That gap is the project.</b></p>
-      <p class="ar">تنبؤ آني عابر للمجموعات وبأمثلة قليلة. في الأدبيات التي مسحتَها، تُدرَّب المجموعات الأربع وتُقيَّم منفصلة — بلا نقل ولا نظام أمثلة قليلة. <b>هذه الفجوة هي المشروع.</b></p></div>
-    <div class="step hot"><div class="no">Yours 02</div>
+      <p class="en">Cross-dataset, few-shot nowcasting. In the literature I surveyed, all four datasets are trained and evaluated separately — no transfer, no few-shot regime. <b>That gap is the project.</b></p>
+      <p class="ar">تنبؤ آني عابر للمجموعات وبأمثلة قليلة. في الأدبيات التي مسحتُها، تُدرَّب المجموعات الأربع وتُقيَّم منفصلة — بلا نقل ولا نظام أمثلة قليلة. <b>هذه الفجوة هي المشروع.</b></p></div>
+    <div class="step hot"><div class="no">Mine 02</div>
       <h4 class="en">The convolutional extension of S²FT</h4><h4 class="ar">التوسعة الالتفافية لـ S²FT</h4>
-      <p class="en">Your hardest technical contribution. Shuffling is only legal on an axis whose order is meaningless — and a kernel has two of each. The paper&#39;s second author confirmed he has never tried it on convolutions, and there is <b>no public implementation</b>. You derive it from the paper, not from code.</p>
-      <p class="ar">أصعب إسهاماتك التقنية. إعادة الترتيب مشروعة فقط على محور لا معنى لترتيبه — وللنواة محوران من كل نوع. وقد أكّد المؤلف الثاني للورقة أنه لم يجرّبها على الالتفافات قط، ولا يوجد <b>أي تنفيذ عام</b>. أنت تشتقّها من الورقة لا من كود.</p></div>
-    <div class="step"><div class="no">Yours 03</div>
+      <p class="en">My hardest technical contribution. Shuffling is only legal on an axis whose order is meaningless — and a kernel has two of each. The paper&#39;s second author confirmed to me that it has never been tried on convolutions, and there is <b>no public implementation</b>. I derive it from the paper, not from code.</p>
+      <p class="ar">أصعب إسهاماتي التقنية. إعادة الترتيب مشروعة فقط على محور لا معنى لترتيبه — وللنواة محوران من كل نوع. وقد أكّد لي المؤلف الثاني للورقة أنها لم تُجرَّب على الالتفافات قط، ولا يوجد <b>أي تنفيذ عام</b>. أنا أشتقّها من الورقة لا من كود.</p></div>
+    <div class="step"><div class="no">Mine 03</div>
       <h4 class="en">The controlled comparison</h4><h4 class="ar">المقارنة المضبوطة</h4>
       <p class="en">Two methods identical in every respect except <b>the space the update is written in</b> — original parameters against sparse spectrum — measured as target data shrink. That comparison <i>is</i> the thesis.</p>
       <p class="ar">طريقتان متطابقتان في كل شيء إلا <b>الفضاء الذي يُكتب فيه التحديث</b> — المعاملات الأصلية مقابل الطيف المتناثر — مقيستان مع تناقص بيانات الهدف. تلك المقارنة <i>هي</i> الأطروحة.</p></div>
   </div>
 
   <div class="note warn">
-    <h4 class="en">What is NOT new — say this before they do <span class="pen grey">careful</span></h4>
-    <h4 class="ar">ما ليس جديدًا — قله قبل أن يقولوه <span class="pen grey">انتبه</span></h4>
+    <h4 class="en">What is NOT new</h4>
+    <h4 class="ar">ما ليس جديدًا</h4>
     <ul class="en">
-      <li><b>PEFT itself is not yours</b>, and neither is <b>LoRA on convolutions</b> — conv-LoRA variants already exist. Your Research Content One is a baseline and a controlled counterpart, <b>not a novelty claim</b>.</li>
-      <li><b>The amplitude/phase decomposition is AlphaPre&#39;s</b>, not yours. What is yours is using it to decide where the parameter budget goes.</li>
+      <li><b>PEFT itself is not mine</b>, and neither is <b>LoRA on convolutions</b> — conv-LoRA variants already exist. My Research Content One is a baseline and a controlled counterpart, <b>not a novelty claim</b>.</li>
+      <li><b>The amplitude/phase decomposition is AlphaPre&#39;s</b>, not mine. What is mine is using it to decide where the parameter budget goes.</li>
       <li>The datasets, the protocol and the base model are all inherited.</li>
     </ul>
     <ul class="ar">
-      <li><b>PEFT نفسها ليست لك</b>، ولا <b>LoRA على الالتفافات</b> — فنسخ conv-LoRA موجودة بالفعل. محتوى بحثك الأول خط أساس ونظير مضبوط، <b>لا ادّعاء ابتكار</b>.</li>
-      <li><b>تفكيك السعة والطور من AlphaPre</b> لا منك. ما هو لك هو استخدامه لتحديد أين تُنفَق ميزانية المعاملات.</li>
+      <li><b>PEFT نفسها ليست لي</b>، ولا <b>LoRA على الالتفافات</b> — فنسخ conv-LoRA موجودة بالفعل. محتوى بحثي الأول خط أساس ونظير مضبوط، <b>لا ادّعاء ابتكار</b>.</li>
+      <li><b>تفكيك السعة والطور من AlphaPre</b> لا مني. ما هو لي هو استخدامه لتحديد أين تُنفَق ميزانية المعاملات.</li>
       <li>المجموعات والبروتوكول والنموذج الأساس، كلها موروثة.</li>
     </ul>
-    <p class="en">Claiming any of those would get you caught. Volunteering them makes the real claims land harder.</p>
-    <p class="ar">ادّعاء أيٍّ منها سيوقعك. أما التطوّع بذكرها فيجعل ادّعاءاتك الحقيقية أوقع.</p>
+    <p class="en">I don't claim any of those. Being clear about them is what makes the real claims credible.</p>
+    <p class="ar">لا أدّعي أيًّا منها. والوضوح بشأنها هو ما يمنح ادّعاءاتي الحقيقية مصداقيتها.</p>
   </div>
 
   <div class="say">
-    <span class="who en">The sentence for the defence</span>
-    <span class="who ar">الجملة المخصّصة للمناقشة</span>
+    <span class="who en">The whole project in one paragraph</span>
+    <span class="who ar">المشروع كله في فقرة واحدة</span>
     <span class="q en">“Precipitation nowcasting models are trained and evaluated one country at a time. I take a frozen model from one country and adapt it to another using under 0.1% of its weights — and to do that I had to extend a spectral PEFT method, written for linear layers, to convolutional kernels, which nobody has done. Every design decision comes from a property of this model that I measured.”</span>
     <span class="q ar">«نماذج التنبؤ الآني بالأمطار تُدرَّب وتُقيَّم على دولة واحدة في كل مرة. أنا آخذ نموذجًا مُجمَّدًا من دولة وأُكيّفه على أخرى باستخدام أقل من 0.1% من أوزانه — ولفعل ذلك كان عليّ توسيع طريقة PEFT طيفية، كُتبت للطبقات الخطية، إلى نوى الالتفاف، وهو ما لم يفعله أحد. وكل قرار تصميمي نابع من خاصية في هذا النموذج قِستُها بنفسي.»</span>
   </div>
 </section>
 <!-- ========================== 10 ========================== -->
 <section id="s10" class="rv">
-  <div class="eyebrow"><b>10</b> <span class="en">Your evidence</span><span class="ar">دليلك</span></div>
-  <h2 class="en">What you have already measured</h2>
-  <h2 class="ar">ما قِستَه بالفعل</h2>
+  <div class="eyebrow"><b>10</b> <span class="en">My evidence</span><span class="ar">دليلي</span></div>
+  <h2 class="en">What I have already measured</h2>
+  <h2 class="ar">ما قِستُه بالفعل</h2>
   <p class="src">SOURCE · prelim/experiments_summary.md · 5 SEPTEMBER 2026 · SINGLE SEED THROUGHOUT</p>
-  <p class="en">Three experiments, all run on real data with real code. This is your proof that you have done something — <b>know these cold</b>.</p>
-  <p class="ar">ثلاث تجارب، جميعها نُفِّذت على بيانات حقيقية بكود حقيقي. وهذه هي البرهان على أنك أنجزت شيئًا — <b>احفظها جيدًا</b>.</p>
+  <p class="en">Three experiments, all run on real data with real code. They are the evidence that the project already works end to end.</p>
+  <p class="ar">ثلاث تجارب، جميعها نُفِّذت على بيانات حقيقية بكود حقيقي. وهي البرهان على أن المشروع يعمل بالفعل من البداية إلى النهاية.</p>
 
   <h3 class="en">Experiment 1 — the parameter census</h3>
   <h3 class="ar">التجربة 1 — إحصاء المعاملات</h3>
-  <p class="en">You downloaded the trained model and counted its numbers. No dataset, no GPU, one afternoon. It did three things at once:</p>
-  <p class="ar">نزّلت النموذج المدرَّب وأحصيت أرقامه. بلا بيانات، وبلا معالج رسومي، وفي فترة بعد ظهر واحدة. وقد حقّق ثلاثة أشياء دفعة واحدة:</p>
+  <p class="en">I downloaded the trained model and counted its numbers. No dataset, no GPU, one afternoon. It did three things at once:</p>
+  <p class="ar">نزّلتُ النموذج المدرَّب وأحصيتُ أرقامه. بلا بيانات، وبلا معالج رسومي، وفي فترة بعد ظهر واحدة. وقد حقّق ثلاثة أشياء دفعة واحدة:</p>
   <div class="grid g3">
     <div class="step"><div class="no">Result 01</div><h4 class="en">Proved the project is needed</h4><h4 class="ar">أثبتَ أن المشروع ضروري</h4>
       <p class="en">Only 0.02% is linear, so the existing method could adapt almost nothing.</p>
       <p class="ar">0.02% فقط خطية، أي أن الطريقة الحالية لا تكاد تُكيّف شيئًا.</p></div>
-    <div class="step"><div class="no">Result 02</div><h4 class="en">Told you where to spend</h4><h4 class="ar">دلّك على أين تُنفق</h4>
+    <div class="step"><div class="no">Result 02</div><h4 class="en">Told me where to spend</h4><h4 class="ar">دلّني على أين أُنفق</h4>
       <p class="en">Channels outnumber positions 49,900:1. There is nothing to compress in nine positions.</p>
       <p class="ar">القنوات تفوق المواضع بنسبة 49,900:1. ولا شيء يُضغط في تسعة مواضع.</p></div>
     <div class="step hot"><div class="no">Result 03</div><h4 class="en">Caught a mistake early</h4><h4 class="ar">التقطَ خطأً مبكرًا</h4>
-      <p class="en">Amplitude has 534× more parameters than phase, so comparing them directly compares <i>size</i>, not the thing you care about.</p>
-      <p class="ar">مسار السعة يملك معاملات أكثر بـ534 مرة من الطور، فمقارنتهما مباشرةً تقارن <i>الحجم</i> لا ما يهمّك.</p></div>
+      <p class="en">Amplitude has 534× more parameters than phase, so comparing them directly compares <i>size</i>, not the thing I care about.</p>
+      <p class="ar">مسار السعة يملك معاملات أكثر بـ534 مرة من الطور، فمقارنتهما مباشرةً تقارن <i>الحجم</i> لا ما يهمّني.</p></div>
   </div>
 
   <h3 class="en">Experiment 2 — the cross-dataset baseline</h3>
   <h3 class="ar">التجربة 2 — خط الأساس عبر المجموعات</h3>
-  <p class="en">Shown in section 02: <b>61.8%</b> skill retained on its own radar, <b>33.8%</b> on an unseen one. Crucially you also ran a <b>control on SEVIR itself</b>, which proves a low transfer score cannot be blamed on a broken data loader. Committees respect controls.</p>
-  <p class="ar">عُرضت في القسم 02: <b>61.8%</b> من المهارة محفوظة على رادارها الأصلي، و<b>33.8%</b> على رادار لم ترَه. والأهم أنك أجريت <b>ضابطًا على SEVIR نفسها</b>، وهذا يثبت أن ضعف نتيجة النقل لا يُفسَّر بخلل في محمّل البيانات. واللجان تحترم الضوابط.</p>
+  <p class="en">Shown in section 02: <b>61.8%</b> skill retained on its own radar, <b>33.8%</b> on an unseen one. Crucially I also ran a <b>control on SEVIR itself</b>, which shows a low transfer score cannot be blamed on a broken data loader.</p>
+  <p class="ar">عُرضت في القسم 02: <b>61.8%</b> من المهارة محفوظة على رادارها الأصلي، و<b>33.8%</b> على رادار لم يرَه. والأهم أنني أجريتُ <b>ضابطًا على SEVIR نفسها</b>، وهذا يثبت أن ضعف نتيجة النقل لا يُفسَّر بخلل في محمّل البيانات.</p>
 
   <h3 class="en">Experiment 3 — the adaptation comparison</h3>
   <h3 class="ar">التجربة 3 — مقارنة التكييف</h3>
@@ -1058,8 +1058,8 @@ document.documentElement.className = "js";
 
       <text x="310" y="230" text-anchor="middle" fill="var(--muted)" font-family="IBM Plex Mono,monospace" font-size="9.5">← MORE TARGET DATA · LESS TARGET DATA →</text>
     </svg>
-    <figcaption class="en">As target data shrink, the advantage of retraining all 89 million parameters <b>shrinks monotonically and crosses zero</b>. This is the regularisation effect predicted in your proposal: with only 63 training sequences, the big model overfits before the small one does.</figcaption>
-    <figcaption class="ar">كلما قلّت بيانات الهدف، تتناقص أفضلية إعادة تدريب الـ89 مليون معامل <b>تناقصًا مطّردًا حتى تعبر الصفر</b>. هذا أثر التنظيم الذي تنبّأتَ به في مقترحك: فمع 63 تسلسلًا تدريبيًا فقط، يُفرِط النموذج الكبير في التخصيص قبل الصغير.</figcaption>
+    <figcaption class="en">As target data shrink, the advantage of retraining all 89 million parameters <b>shrinks monotonically and crosses zero</b>. This is the regularisation effect predicted in my proposal: with only 63 training sequences, the big model overfits before the small one does.</figcaption>
+    <figcaption class="ar">كلما قلّت بيانات الهدف، تتناقص أفضلية إعادة تدريب الـ89 مليون معامل <b>تناقصًا مطّردًا حتى تعبر الصفر</b>. هذا أثر التنظيم الذي تنبّأتُ به في مقترحي: فمع 63 تسلسلًا تدريبيًا فقط، يُفرِط النموذج الكبير في التخصيص قبل الصغير.</figcaption>
   </figure>
 </section>
 
@@ -1068,24 +1068,24 @@ document.documentElement.className = "js";
 <!-- ========================== 11 ========================== -->
 <section id="s11" class="rv">
   <div class="eyebrow"><b>11</b> <span class="en">Honesty</span><span class="ar">الأمانة العلمية</span></div>
-  <h2 class="en">What your results do <i>not</i> prove <span class="pen grey">read twice</span></h2>
-  <h2 class="ar">ما <i>لا</i> تُثبته نتائجك <span class="pen grey">اقرأه مرتين</span></h2>
-  <p class="en">Raising these yourself, before anyone asks, is the strongest move available in a defence. It converts a potential attack into evidence that you understand your own work.</p>
-  <p class="ar">أن تطرح هذه النقاط بنفسك قبل أن يسألك أحد هو أقوى تحرّك متاح في المناقشة. فهو يحوّل هجومًا محتملًا إلى دليل على أنك تفهم عملك.</p>
+  <h2 class="en">What my results do <i>not</i> prove</h2>
+  <h2 class="ar">ما <i>لا</i> تُثبته نتائجي</h2>
+  <p class="en">These are the limits of what I have shown so far. I would rather state them myself than leave them for someone else to find.</p>
+  <p class="ar">هذه حدود ما أثبتُّه حتى الآن. وأفضّل أن أذكرها بنفسي على أن أتركها لغيري ليكتشفها.</p>
 
   <div class="grid g2">
     <div class="note"><h4 class="en">The margins are small</h4><h4 class="ar">الفوارق صغيرة</h4>
-      <p class="en">±0.002 CSI is within what a single random seed can produce. The sign flip is <b>suggestive and consistent across three budgets</b>, but it is <b>not proven</b>. Never present it as a demonstrated win.</p>
-      <p class="ar">±0.002 من CSI تقع ضمن ما قد تنتجه بذرة عشوائية واحدة. انقلاب الإشارة <b>مُرجِّح ومتّسق عبر ثلاث ميزانيات</b>، لكنه <b>غير مُثبَت</b>. لا تقدّمه كانتصار مُبرهَن.</p></div>
+      <p class="en">±0.002 CSI is within what a single random seed can produce. The sign flip is <b>suggestive and consistent across three budgets</b>, but it is <b>not proven</b>. I don't present it as a demonstrated win.</p>
+      <p class="ar">±0.002 من CSI تقع ضمن ما قد تنتجه بذرة عشوائية واحدة. انقلاب الإشارة <b>مُرجِّح ومتّسق عبر ثلاث ميزانيات</b>، لكنه <b>غير مُثبَت</b>. ولا أقدّمه كانتصار مُبرهَن.</p></div>
     <div class="note"><h4 class="en">Single seed, no error bars</h4><h4 class="ar">بذرة واحدة، بلا أشرطة خطأ</h4>
-      <p class="en">Every number is one run. Seed repeats are the obvious next step, and saying so first shows you know what rigour requires.</p>
-      <p class="ar">كل رقم ناتج عن تشغيل واحد. تكرار البذور هو الخطوة التالية البديهية، وذِكرُك لذلك أولًا يُظهر أنك تعرف ما تتطلبه الدقة العلمية.</p></div>
+      <p class="en">Every number is one run. Seed repeats are the obvious next step, and they are first on my list.</p>
+      <p class="ar">كل رقم ناتج عن تشغيل واحد. تكرار البذور هو الخطوة التالية البديهية، وهو أول ما في قائمتي.</p></div>
     <div class="note"><h4 class="en">One ordering is unexplained</h4><h4 class="ar">ترتيب واحد بلا تفسير</h4>
       <p class="en">LoRA scores <i>higher</i> at 1% (0.3878) than at 10% (0.3799). Every arm was early-stopped at its own validation peak, so the 10% arm never consumed its extra data before overfitting. Whether that is real or seed noise is <b>not resolved</b>.</p>
       <p class="ar">تسجّل LoRA نتيجة <i>أعلى</i> عند 1% (0.3878) منها عند 10% (0.3799). فكل ذراع أُوقفت عند ذروة تحقّقها، فلم تستهلك ذراع الـ10% بياناتها الإضافية قبل الإفراط. وهل هذا حقيقي أم ضجيج بذرة؟ <b>غير محسوم</b>.</p></div>
     <div class="note warn"><h4 class="en">Half the thesis is unbuilt</h4><h4 class="ar">نصف الأطروحة لم يُبنَ بعد</h4>
-      <p class="en"><b>Research Content Two does not exist yet.</b> Only the low-rank arm is implemented, so the actual research question — parameter space vs spectral space — remains unmeasured. Say this plainly; it is a proposal, not a finished thesis.</p>
-      <p class="ar"><b>محتوى البحث الثاني غير موجود بعد.</b> لم يُنفَّذ سوى ذراع الرتبة المنخفضة، فيبقى سؤال البحث الفعلي — فضاء المعاملات مقابل الفضاء الطيفي — بلا قياس. قل هذا بوضوح؛ فهذا مقترح لا أطروحة مكتملة.</p></div>
+      <p class="en"><b>Research Content Two does not exist yet.</b> Only the low-rank arm is implemented, so the actual research question — parameter space vs spectral space — remains unmeasured. I say this plainly: it is a proposal, not a finished thesis.</p>
+      <p class="ar"><b>محتوى البحث الثاني غير موجود بعد.</b> لم يُنفَّذ سوى ذراع الرتبة المنخفضة، فيبقى سؤال البحث الفعلي — فضاء المعاملات مقابل الفضاء الطيفي — بلا قياس. وأقول هذا بوضوح: هذا مقترح لا أطروحة مكتملة.</p></div>
   </div>
 </section>
 
@@ -1105,7 +1105,7 @@ document.documentElement.className = "js";
     <tr><td class="mono">4</td><td>Adapter tuning</td><td>the other standard baseline</td><td class="todo">to do</td></tr>
     <tr class="hi"><td class="mono">5</td><td><b>S²FT + conv extension</b></td><td>Research Content Two — the point of the thesis</td><td><b>not built</b></td></tr>
     <tr><td class="mono">6</td><td>From scratch on target subset</td><td>the only arm proving pretraining helped</td><td class="todo">to do</td></tr>
-    <tr><td class="mono">7</td><td>AdaBN (statistics only)</td><td>costs nothing. If it wins, you must say so.</td><td class="todo">to do</td></tr>
+    <tr><td class="mono">7</td><td>AdaBN (statistics only)</td><td>costs nothing. If it wins, I have to say so.</td><td class="todo">to do</td></tr>
   </table></div>
   <div class="tw ar"><table>
     <tr><th></th><th>المقاربة</th><th>سبب وجودها في القائمة</th><th>الحالة</th></tr>
@@ -1115,14 +1115,14 @@ document.documentElement.className = "js";
     <tr><td class="mono">4</td><td>ضبط المحوِّلات (Adapters)</td><td>خط الأساس القياسي الآخر</td><td class="todo">متبقٍّ</td></tr>
     <tr class="hi"><td class="mono">5</td><td><b>S²FT + التوسعة الالتفافية</b></td><td>محتوى البحث الثاني — جوهر الأطروحة</td><td><b>لم يُبنَ</b></td></tr>
     <tr><td class="mono">6</td><td>التدريب من الصفر على عيّنة الهدف</td><td>الذراع الوحيدة التي تُثبت فائدة التدريب المسبق</td><td class="todo">متبقٍّ</td></tr>
-    <tr><td class="mono">7</td><td>AdaBN (إحصاءات فقط)</td><td>لا تكلّف شيئًا. وإن تفوّقت وجب أن تقول ذلك.</td><td class="todo">متبقٍّ</td></tr>
+    <tr><td class="mono">7</td><td>AdaBN (إحصاءات فقط)</td><td>لا تكلّف شيئًا. وإن تفوّقت وجب أن أقول ذلك.</td><td class="todo">متبقٍّ</td></tr>
   </table></div>
 
   <div class="note key">
-    <h4 class="en">Arm 7 is the honest one — and it protects you</h4>
-    <h4 class="ar">الذراع السابعة هي الأمينة — وهي تحميك</h4>
-    <p class="en">AdaBN changes <b>no weights at all</b> — it just recomputes some averages. If the difference between countries really is mostly intensity, it might close much of the gap for free. Your method has to beat it. <b>Including it is what makes the study credible</b>, and volunteering that makes you look rigorous rather than defensive.</p>
-    <p class="ar">لا تُغيّر AdaBN <b>أي وزن على الإطلاق</b> — بل تعيد حساب بعض المتوسطات فقط. فإن كان الفرق بين الدول يعود في معظمه إلى الشدة، فقد تُغلق جزءًا كبيرًا من الفجوة مجانًا. وعلى طريقتك أن تتفوّق عليها. <b>إدراجها هو ما يجعل الدراسة ذات مصداقية</b>، والتطوّع بذكرها يجعلك تبدو دقيقًا لا دفاعيًا.</p>
+    <h4 class="en">Arm 7 is the honest one</h4>
+    <h4 class="ar">الذراع السابعة هي الأمينة</h4>
+    <p class="en">AdaBN changes <b>no weights at all</b> — it just recomputes some averages. If the difference between countries really is mostly intensity, it might close much of the gap for free. My method has to beat it. <b>Including it is what makes the study credible.</b></p>
+    <p class="ar">لا تُغيّر AdaBN <b>أي وزن على الإطلاق</b> — بل تعيد حساب بعض المتوسطات فقط. فإن كان الفرق بين الدول يعود في معظمه إلى الشدة، فقد تُغلق جزءًا كبيرًا من الفجوة مجانًا. وعلى طريقتي أن تتفوّق عليها. <b>إدراجها هو ما يجعل الدراسة ذات مصداقية.</b></p>
   </div>
 </section>
 
@@ -1131,96 +1131,94 @@ document.documentElement.className = "js";
 <!-- ========================== 13 ========================== -->
 <section id="s13" class="rv">
   <div class="eyebrow"><b>13</b> <span class="en">The defence</span><span class="ar">المناقشة</span></div>
-  <h2 class="en">How to present, and how to sound like you know it <span class="pen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17c4-7 12-11 18-12"/><path d="M15 3.6l6 1.4-1.6 5.6"/></svg> memorise</span></h2>
-  <h2 class="ar">كيف تعرض، وكيف تبدو متمكنًا <span class="pen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17c4-7 12-11 18-12"/><path d="M15 3.6l6 1.4-1.6 5.6"/></svg> احفظه</span></h2>
+  <h2 class="en">How I am presenting it</h2>
+  <h2 class="ar">كيف أقدّم العرض</h2>
 
   <h3 class="en">The three moments that matter</h3>
   <h3 class="ar">اللحظات الثلاث الحاسمة</h3>
   <div class="grid g3">
     <div class="step"><div class="no">Moment 01</div><h4 class="en">The first 30 seconds</h4><h4 class="ar">الثلاثون ثانية الأولى</h4>
-      <p class="en">Do <b>not</b> start with the literature. Start with the problem: a rain warning is only useful if it arrives in time, and these models do not cross borders. Then say what you do about it in one sentence. The room decides early whether you are confident.</p>
-      <p class="ar"><b>لا</b> تبدأ بمراجعة الأدبيات. ابدأ بالمشكلة: التحذير من المطر لا يفيد إلا إذا وصل في وقته، وهذه النماذج لا تعبر الحدود. ثم قل ماذا تفعل حيال ذلك في جملة واحدة. القاعة تقرّر مبكرًا إن كنت واثقًا.</p></div>
+      <p class="en">I do <b>not</b> start with the literature. I start with the problem: a rain warning is only useful if it arrives in time, and these models do not cross borders. Then I say what I do about it in one sentence.</p>
+      <p class="ar"><b>لا</b> أبدأ بمراجعة الأدبيات. أبدأ بالمشكلة: التحذير من المطر لا يفيد إلا إذا وصل في وقته، وهذه النماذج لا تعبر الحدود. ثم أقول ماذا أفعل حيال ذلك في جملة واحدة.</p></div>
     <div class="step hot"><div class="no">Moment 02</div><h4 class="en">The kernel slide</h4><h4 class="ar">شريحة النواة</h4>
-      <p class="en">Slow down here. Point at the four axes. Say which two may be shuffled and which two may not, and why. <b>If you rush this slide, the whole contribution sounds borrowed.</b></p>
-      <p class="ar">تمهّل هنا. أشِر إلى المحاور الأربعة. قل أيّ محورين يجوز إعادة ترتيبهما وأيّهما لا، ولماذا. <b>إن تسرّعت في هذه الشريحة، بدا الإسهام كله مُستعارًا.</b></p></div>
+      <p class="en">I slow down here. I point at the four axes and say which two may be shuffled, which two may not, and why. <b>This slide is where the contribution becomes mine, so I don't rush it.</b></p>
+      <p class="ar">أتمهّل هنا. أشير إلى المحاور الأربعة وأقول أيّ محورين يجوز إعادة ترتيبهما وأيّهما لا، ولماذا. <b>في هذه الشريحة يصبح الإسهام إسهامي، لذا لا أتسرّع فيها.</b></p></div>
     <div class="step"><div class="no">Moment 03</div><h4 class="en">The results slide</h4><h4 class="ar">شريحة النتائج</h4>
-      <p class="en">Give the numbers out loud — 99.93%, 0.0805%, 1/1,242, 61.8% vs 33.8%. <b>Specific numbers are the fastest way to sound like someone who did the work</b>, because only someone who did it would know them.</p>
-      <p class="ar">انطق الأرقام بصوت مسموع — 99.93%، و0.0805%، و1/1,242، و61.8% مقابل 33.8%. <b>الأرقام المحددة أسرع طريقة لتبدو كمن أنجز العمل</b>، لأن من أنجزه وحده يعرفها.</p></div>
+      <p class="en">I give the numbers out loud — 99.93%, 0.0805%, 1/1,242, 61.8% vs 33.8%. <b>They are specific because I measured them.</b></p>
+      <p class="ar">أنطق الأرقام بصوت مسموع — 99.93%، و0.0805%، و1/1,242، و61.8% مقابل 33.8%. <b>وهي محددة لأنني قِستُها بنفسي.</b></p></div>
   </div>
 
-  <h3 class="en">Six habits that make you sound like you understand it</h3>
-  <h3 class="ar">ست عادات تجعلك تبدو فاهمًا لعملك</h3>
+  <h3 class="en">Six habits I keep while presenting</h3>
+  <h3 class="ar">ست عادات ألتزم بها أثناء العرض</h3>
   <ul class="en">
-    <li><b>Slow down deliberately.</b> Nervous people speed up, and speed reads as uncertainty. Say the first sentence of each slide slower than feels natural.</li>
-    <li><b>Never read the slide.</b> They can read. Say the thing the slide does <i>not</i> say — why it matters, or what it cost you to find out.</li>
-    <li><b>Signpost constantly.</b> "There are two research contents. This is the first." "That was the method; now the experiments." It makes you sound in control of a structure — because you are.</li>
-    <li><b>Use exact numbers.</b> "About 99%" sounds vague. "99.93%, and 0.02% is linear" sounds measured — because it was.</li>
-    <li><b>Say what is not yours.</b> "The frequency decomposition is AlphaPre's, not mine. What is mine is using it to decide where the budget goes." Nothing signals competence faster than cleanly separating your contribution from your inheritance.</li>
-    <li><b>Name the weakness first.</b> "AdaBN costs nothing and might beat me — that is why it is in the comparison." Raising it yourself removes its power as an attack.</li>
+    <li><b>I slow down deliberately.</b> Nerves make people speed up, and speed reads as uncertainty. I say the first sentence of each slide slower than feels natural.</li>
+    <li><b>I don't read the slides.</b> The committee can read. I say what the slide does <i>not</i> say — why it matters, or what it took to find out.</li>
+    <li><b>I signpost.</b> "There are two research contents. This is the first." "That was the method; now the experiments." It keeps the structure of the talk visible.</li>
+    <li><b>I use exact numbers.</b> "About 99%" sounds vague. "99.93%, and 0.02% is linear" sounds measured — because it was.</li>
+    <li><b>I say what is not mine.</b> "The frequency decomposition is AlphaPre's, not mine. What is mine is using it to decide where the budget goes." I keep my contribution cleanly separate from what I inherited.</li>
+    <li><b>I name the weakness first.</b> "AdaBN costs nothing and might beat me — that is why it is in the comparison."</li>
   </ul>
   <ul class="ar">
-    <li><b>تمهّل عمدًا.</b> المتوتّرون يُسرعون، والسرعة تُقرأ على أنها عدم يقين. انطق الجملة الأولى من كل شريحة أبطأ مما يبدو طبيعيًا.</li>
-    <li><b>لا تقرأ الشريحة أبدًا.</b> هم يستطيعون القراءة. قل ما <i>لا</i> تقوله الشريحة — لماذا يهمّ، أو ماذا كلّفك اكتشافه.</li>
-    <li><b>ضع لافتات إرشادية باستمرار.</b> «هناك محتويان بحثيان. هذا هو الأول.» «تلك كانت الطريقة؛ والآن التجارب.» هذا يجعلك تبدو مسيطرًا على بنية واضحة — لأنك كذلك فعلًا.</li>
-    <li><b>استخدم أرقامًا دقيقة.</b> «حوالي 99%» تبدو مبهمة. أما «99.93%، و0.02% خطية» فتبدو مقيسة — لأنها كذلك.</li>
-    <li><b>قل ما ليس لك.</b> «التفكيك الترددي من AlphaPre وليس مني. ما هو لي هو استخدامه لتحديد أين تُنفَق الميزانية.» لا شيء يدل على الكفاءة أسرع من فصل إسهامك عن ميراثك بوضوح.</li>
-    <li><b>اذكر نقطة الضعف أولًا.</b> «AdaBN لا تكلّف شيئًا وقد تتفوّق عليّ — ولهذا أدرجتُها في المقارنة.» طرحُها بنفسك يجرّدها من قدرتها على أن تكون هجومًا.</li>
+    <li><b>أتمهّل عمدًا.</b> التوتر يدفع إلى الإسراع، والسرعة تُقرأ على أنها عدم يقين. فأنطق الجملة الأولى من كل شريحة أبطأ مما يبدو طبيعيًا.</li>
+    <li><b>لا أقرأ الشرائح.</b> فاللجنة تستطيع القراءة. أقول ما <i>لا</i> تقوله الشريحة — لماذا يهمّ، أو ماذا تطلّب اكتشافه.</li>
+    <li><b>أضع لافتات إرشادية.</b> «هناك محتويان بحثيان. هذا هو الأول.» «تلك كانت الطريقة؛ والآن التجارب.» هذا يُبقي بنية العرض واضحة.</li>
+    <li><b>أستخدم أرقامًا دقيقة.</b> «حوالي 99%» تبدو مبهمة. أما «99.93%، و0.02% خطية» فتبدو مقيسة — لأنها كذلك.</li>
+    <li><b>أقول ما ليس لي.</b> «التفكيك الترددي من AlphaPre وليس مني. ما هو لي هو استخدامه لتحديد أين تُنفَق الميزانية.» وأُبقي إسهامي منفصلًا بوضوح عمّا ورثتُه.</li>
+    <li><b>أذكر نقطة الضعف أولًا.</b> «AdaBN لا تكلّف شيئًا وقد تتفوّق عليّ — ولهذا أدرجتُها في المقارنة.»</li>
   </ul>
 
   <div class="note">
-    <h4 class="en">The most common mistake — and one thing never to do</h4>
-    <h4 class="ar">أشيع خطأ — وأمر لا تفعله أبدًا</h4>
-    <p class="en">Spending eight minutes on related work because it feels safe, then rushing your own contribution because time is short. <b>The committee is not grading your summary of other people's papers.</b> Cut the literature to two minutes if you have to.</p>
-    <p class="ar">أن تقضي ثماني دقائق في الأعمال ذات الصلة لأنها تبدو آمنة، ثم تتسرّع في إسهامك لأن الوقت ضاق. <b>اللجنة لا تقيّم تلخيصك لأوراق الآخرين.</b> اختصر الأدبيات إلى دقيقتين إن اضطررت.</p>
-    <p class="en"><b>And never apologise.</b> Not for your English, not for having partial results, not for anything. You are defending a plan backed by three real experiments — more than most people bring. Apologising invites them to agree that something is wrong.</p>
-    <p class="ar"><b>ولا تعتذر أبدًا.</b> لا عن لغتك الإنجليزية، ولا عن كون نتائجك جزئية، ولا عن أي شيء. أنت تدافع عن خطة مدعومة بثلاث تجارب حقيقية — أكثر مما يحضره معظم الناس. والاعتذار يدعوهم للاتفاق على أن ثمة خطأ.</p>
+    <h4 class="en">Two things I avoid</h4>
+    <h4 class="ar">أمران أتجنّبهما</h4>
+    <p class="en">Spending eight minutes on related work because it feels safe, then rushing my own contribution because time is short. <b>The committee is not grading a summary of other people's papers</b>, so I keep the literature to about two minutes.</p>
+    <p class="ar">أن أقضي ثماني دقائق في الأعمال ذات الصلة لأنها تبدو آمنة، ثم أتسرّع في إسهامي لأن الوقت ضاق. <b>فاللجنة لا تقيّم تلخيصًا لأوراق الآخرين</b>، لذا أختصر الأدبيات إلى نحو دقيقتين.</p>
+    <p class="en"><b>And apologising.</b> Not for my English, not for having partial results. I am defending a plan backed by three real experiments, and there is nothing to apologise for.</p>
+    <p class="ar"><b>والاعتذار.</b> لا عن لغتي الإنجليزية، ولا عن كون نتائجي جزئية. فأنا أدافع عن خطة مدعومة بثلاث تجارب حقيقية، ولا شيء يستدعي الاعتذار.</p>
   </div>
 
-  <h3 class="en">Handling questions — the four-step habit</h3>
-  <h3 class="ar">التعامل مع الأسئلة — عادة من أربع خطوات</h3>
+  <h3 class="en">How I handle questions</h3>
+  <h3 class="ar">كيف أتعامل مع الأسئلة</h3>
   <div class="grid g4">
-    <div class="step"><div class="no">Step 01</div><h4 class="en">Pause</h4><h4 class="ar">توقّف</h4>
-      <p class="en">Two seconds. It looks considered, and it stops you answering the question you expected instead of the one you were asked.</p>
-      <p class="ar">ثانيتان. يبدو الأمر متأنيًا، ويمنعك من الإجابة على السؤال الذي توقّعته بدل الذي طُرح.</p></div>
-    <div class="step"><div class="no">Step 02</div><h4 class="en">Restate it</h4><h4 class="ar">أعد الصياغة</h4>
-      <p class="en">"So the question is whether this differs from LoRA." Buys thinking time and confirms you understood.</p>
-      <p class="ar">«إذن السؤال هو هل يختلف هذا عن LoRA.» يمنحك وقتًا للتفكير ويؤكد أنك فهمت.</p></div>
+    <div class="step"><div class="no">Step 01</div><h4 class="en">Pause</h4><h4 class="ar">أتوقّف</h4>
+      <p class="en">Two seconds. It stops me answering the question I expected instead of the one I was asked.</p>
+      <p class="ar">ثانيتان. تمنعانني من الإجابة عن السؤال الذي توقّعتُه بدل الذي طُرح.</p></div>
+    <div class="step"><div class="no">Step 02</div><h4 class="en">Restate it</h4><h4 class="ar">أُعيد الصياغة</h4>
+      <p class="en">"So the question is whether this differs from LoRA." It buys thinking time and confirms I understood.</p>
+      <p class="ar">«إذن السؤال هو هل يختلف هذا عن LoRA.» يمنحني وقتًا للتفكير ويؤكد أنني فهمت.</p></div>
     <div class="step"><div class="no">Step 03</div><h4 class="en">One sentence</h4><h4 class="ar">جملة واحدة</h4>
-      <p class="en">Then stop. The short answer usually satisfies. If not they ask again — and now you know what they actually wanted.</p>
-      <p class="ar">ثم توقّف. الجواب القصير يكفي عادةً. وإن لم يكفِ سألوا مجددًا — وحينها تعرف ما أرادوه فعلًا.</p></div>
-    <div class="step"><div class="no">Step 04</div><h4 class="en">Point to evidence</h4><h4 class="ar">أشِر إلى الدليل</h4>
-      <p class="en">"That is measured — it is in the preliminary experiments." Show where it lives.</p>
-      <p class="ar">«هذا مقيس — وهو في التجارب الأولية.» بيِّن أين يوجد.</p></div>
+      <p class="en">Then I stop. The short answer usually satisfies. If not, they ask again — and then I know what they actually wanted.</p>
+      <p class="ar">ثم أتوقّف. الجواب القصير يكفي عادةً. وإن لم يكفِ سألوا مجددًا — وحينها أعرف ما أرادوه فعلًا.</p></div>
+    <div class="step"><div class="no">Step 04</div><h4 class="en">Point to evidence</h4><h4 class="ar">أشير إلى الدليل</h4>
+      <p class="en">"That is measured — it is in the preliminary experiments." I show where it lives.</p>
+      <p class="ar">«هذا مقيس — وهو في التجارب الأولية.» وأُبيّن أين يوجد.</p></div>
   </div>
 
   <div class="say">
-    <span class="who en">When you genuinely do not know</span>
-    <span class="who ar">حين لا تعرف الجواب فعلًا</span>
+    <span class="who en">When I genuinely do not know</span>
+    <span class="who ar">حين لا أعرف الجواب فعلًا</span>
     <span class="q en">“I have not measured that yet. I would find out by … and it would change the design in this way if the answer came out differently.”</span>
     <span class="q ar">«لم أقِس ذلك بعد. سأكتشفه عن طريق… وسيغيّر التصميم بهذه الطريقة إن جاء الجواب مختلفًا.»</span>
   </div>
-  <p class="en">This will happen, and it is survivable. <b>What is not survivable is inventing an answer.</b></p>
-  <p class="ar">سيحدث هذا، ويمكن تجاوزه. <b>أما ما لا يمكن تجاوزه فهو اختلاق إجابة.</b></p>
+  <p class="en">This will happen, and that is fine. <b>What I never do is invent an answer.</b></p>
+  <p class="ar">سيحدث هذا، ولا بأس. <b>أما ما لا أفعله أبدًا فهو اختلاق إجابة.</b></p>
 
   <div class="note key">
-    <h4 class="en">The two questions you are most likely to get</h4>
-    <h4 class="ar">السؤالان الأرجح أن يُطرحا عليك</h4>
-    <p class="en"><b>"How is this different from existing convolutional PEFT work?"</b> → You are not proposing a general method, so you are not competing with them. Every design decision comes from a measured property of this model. <i>(Section 08.)</i></p>
-    <p class="ar"><b>«بمَ يختلف هذا عن أعمال PEFT الالتفافية الموجودة؟»</b> ← أنت لا تقترح طريقة عامة، فلستَ منافسًا لها. وكل قرار تصميمي نابع من خاصية مقيسة في هذا النموذج. <i>(القسم 08.)</i></p>
-    <p class="en"><b>"What have you actually done?"</b> → You measured the model before designing for it, and the measurement changed the design. Then give the three experiments and their numbers. <i>(Section 10.)</i></p>
-    <p class="ar"><b>«ماذا أنجزتَ فعلًا؟»</b> ← قِستَ النموذج قبل أن تُصمّم له، والقياس غيّر التصميم. ثم اذكر التجارب الثلاث وأرقامها. <i>(القسم 10.)</i></p>
+    <h4 class="en">The two questions I am most likely to get</h4>
+    <h4 class="ar">السؤالان الأرجح أن يُطرحا عليّ</h4>
+    <p class="en"><b>"How is this different from existing convolutional PEFT work?"</b> → I am not proposing a general method, so I am not competing with them. Every design decision comes from a measured property of this model. <i>(Section 08.)</i></p>
+    <p class="ar"><b>«بمَ يختلف هذا عن أعمال PEFT الالتفافية الموجودة؟»</b> ← أنا لا أقترح طريقة عامة، فلستُ منافسًا لها. وكل قرار تصميمي نابع من خاصية مقيسة في هذا النموذج. <i>(القسم 08.)</i></p>
+    <p class="en"><b>"What have you actually done?"</b> → I measured the model before designing for it, and the measurement changed the design. Then I give the three experiments and their numbers. <i>(Section 10.)</i></p>
+    <p class="ar"><b>«ماذا أنجزتَ فعلًا؟»</b> ← قِستُ النموذج قبل أن أُصمّم له، والقياس غيّر التصميم. ثم أذكر التجارب الثلاث وأرقامها. <i>(القسم 10.)</i></p>
   </div>
 </section>
 
 <!-- ========================== 14 ========================== -->
 <section id="s14" class="rv">
   <div class="eyebrow"><b>14</b> <span class="en">The defence</span><span class="ar">المناقشة</span></div>
-  <h2 class="en">The script — what to say</h2>
-  <h2 class="ar">النص — ما ينبغي أن تقوله</h2>
-  <p class="lead en">This is exactly what is in the speaker notes of the deck, so you can learn it here and read it there. Numbers are written the way they should be said out loud.</p>
-  <p class="lead ar">هذا هو نصّ ملاحظات المتحدّث في العرض حرفيًا، فيمكنك حفظه هنا وقراءته هناك. والأرقام مكتوبة بالطريقة التي يجب أن تُنطق بها.</p>
-  <p class="en">Read the whole thing aloud twice. The second time, look up at the end of every paragraph.</p>
-  <p class="ar">اقرأ النص كاملًا بصوت مسموع مرتين. وفي المرة الثانية، ارفع بصرك في نهاية كل فقرة.</p>
+  <h2 class="en">My talk, slide by slide</h2>
+  <h2 class="ar">عرضي، شريحة بشريحة</h2>
+  <p class="lead en">This is what I say over each slide of my defence. Numbers are written the way I say them out loud.</p>
+  <p class="lead ar">هذا ما أقوله عند كل شريحة في عرض المناقشة. والأرقام مكتوبة بالطريقة التي أنطقها بها.</p>
   <div class="note">
     <h4><span class="mono" style="color:var(--mark)">SLIDE 01</span>&nbsp;&nbsp;Title</h4>
     <p class="en" style="font-size:15.5px">Good morning. My name is Yassine Achouak. My proposal is on cross-dataset generalization for precipitation nowcasting, using parameter-efficient fine-tuning. My supervisor is Professor Zhang Baoquan. Thank you for your time today.</p>
@@ -1262,7 +1260,7 @@ document.documentElement.className = "js";
     <p class="ar" style="font-size:15.5px">هذه هي المشكلة التقنية الجوهرية، ولذلك أودّ أن أتناولها ببطء.<br><br>الطريقة التي أُوسّعها تعمل بإعادة الترتيب. وإعادة الترتيب مشروعة فقط على محور لا يحمل ترتيبُه أي معنى.<br><br>نواة الالتفاف لها أربعة محاور. الأولان مؤشّرا قنوات. والقناة رقم سبعة لا تحمل معنى خاصًا؛ إنها تسمية، كاسم على خزانة. فإن أعدتُ ترقيمها جميعًا باتساق لا ينكسر شيء. إذن هذان المحوران يجوز إعادة ترتيبهما.<br><br>والمحوران الأخيران موضعان داخل النافذة. فالموضع صفر-صفر يجاور فعلًا الموضع صفر-واحد، وهما ينظران إلى بكسلات متجاورة. فإن خلطتُهما توقّف المُرشِّح عن كشف ما كان يكشفه. إذن هذان لا يجوز إعادة ترتيبهما.<br><br>وهناك سبب ثانٍ للعمل على القنوات. فداخل النواة، تفوق مُدخلات القنوات المُدخلات المكانية بنحو تسعة وأربعين ألفًا وتسعمئة إلى واحد. لذا فحصر التكييف في محاور القنوات ليس تفضيلًا، بل حساب. فليس في تسعة أرقام ما يُضغط.<br><br>ولهذا لا يمكن ببساطة إعادة تشكيل الطريقة على الالتفاف، ولهذا يجب اشتقاق التوسعة لا نقلها.</p>
   </div>
   <div class="note">
-    <h4><span class="mono" style="color:var(--mark)">NEW SLIDE</span>&nbsp;&nbsp;The method in equations</h4>
+    <h4><span class="mono" style="color:var(--mark)">SLIDE 08B</span>&nbsp;&nbsp;The method in equations</h4>
     <p class="en" style="font-size:15.5px">Here's the method written as maths. These are the four equations that matter, with the same numbers as in the proposal.<br><br>The top two are research content one. Equation 3-1 says the change at each position of the kernel is two small matrices multiplied together, B times A. Equation 3-2 is what that costs: the number of positions, times the rank, times the output channels plus the input channels.<br><br>The bottom two are research content two. Equation 3-6 is my extension. I keep a few coefficients in a spectrum, transform back, and undo the channel reordering with P out and P in. Look at P out and P in. They don't have i and j on them. That's the shared ordering from the last slide, written down.<br><br>Equation 3-7 is the cost, and this is the point I want you to see. It's the number of positions times k. There are no channel counts in it. So LoRA gets more expensive as the layer gets wider, and in this model layers go up to twelve hundred and eighty channels. My method costs the same at any width.<br><br>The metrics, CSI and HSS, are equations 3-8 and 3-9 in the proposal.</p>
     <p class="ar" style="font-size:15.5px">هذه هي الطريقة مكتوبةً رياضيًا. هذه المعادلات الأربع المهمة، بالأرقام نفسها التي في المقترح.<br><br>المعادلتان في الأعلى للمحتوى البحثي الأول. المعادلة 3-1 تقول إن التغيير عند كل موضع في النواة هو مصفوفتان صغيرتان مضروبتان معًا، B في A. والمعادلة 3-2 هي الكلفة: عدد المواضع، في الرتبة، في مجموع قنوات الخرج وقنوات الدخل.<br><br>والمعادلتان في الأسفل للمحتوى البحثي الثاني. المعادلة 3-6 هي توسعتي. أحتفظ بعدد قليل من المعاملات في طيف، ثم أعكس التحويل، وأُلغي إعادة ترتيب القنوات بـ P out وP in. انظروا إلى P out وP in: لا تحملان i وj. هذا هو الترتيب المشترك من الشريحة السابقة، مكتوبًا.<br><br>والمعادلة 3-7 هي الكلفة، وهذه هي النقطة التي أريدكم أن تروها. إنها عدد المواضع في k، ولا يوجد فيها أي عدد قنوات. فـ LoRA تصبح أغلى كلما اتسعت الطبقة، وفي هذا النموذج تصل الطبقات إلى ألف ومئتين وثمانين قناة. أما طريقتي فكلفتها واحدة مهما كان العرض.<br><br>والمقياسان CSI وHSS هما المعادلتان 3-8 و3-9 في المقترح.</p>
   </div>
@@ -1306,10 +1304,10 @@ document.documentElement.className = "js";
 <!-- ========================== 15 ========================== -->
 <section id="s15" class="rv">
   <div class="eyebrow"><b>15</b> <span class="en">The defence</span><span class="ar">المناقشة</span></div>
-  <h2 class="en">Questions they will ask</h2>
-  <h2 class="ar">الأسئلة التي سيطرحونها</h2>
-  <p class="lead en">Grouped by what the question is really testing. Read the answer, then say it in your own words — a memorised answer sounds memorised.</p>
-  <p class="lead ar">مُجمَّعة حسب ما يختبره السؤال فعلًا. اقرأ الجواب ثم قله بكلماتك — فالجواب المحفوظ يبدو محفوظًا.</p>
+  <h2 class="en">Questions I expect, and my answers</h2>
+  <h2 class="ar">الأسئلة التي أتوقعها، وأجوبتي</h2>
+  <p class="lead en">Grouped by what each question is really testing, with the answer I give.</p>
+  <p class="lead ar">مُجمَّعة حسب ما يختبره كل سؤال فعلًا، مع الجواب الذي أقدّمه.</p>
   <h3 class="en">Novelty and prior work</h3>
   <h3 class="ar">الابتكار والأعمال السابقة</h3>
   <div class="note">
@@ -1336,8 +1334,8 @@ document.documentElement.className = "js";
     <p class="en">The model and the spectral method both come from this laboratory, and I say that openly. What is mine is the extension of that method to convolutional kernels, the decision of which axes may be permuted and why, the controlled comparison between the two representations, and the measurements that drove those decisions.</p>
     <p class="ar">النموذج والطريقة الطيفية كلاهما من هذا المختبر، وأقول ذلك صراحةً. أما ما هو لي فهو توسعة تلك الطريقة إلى نوى الالتفاف، وقرار أي المحاور يجوز إعادة ترتيبها ولماذا، والمقارنة المضبوطة بين التمثيلين، والقياسات التي قادت تلك القرارات.</p>
   </div>
-  <h3 class="en">Your evidence</h3>
-  <h3 class="ar">دليلك</h3>
+  <h3 class="en">My evidence</h3>
+  <h3 class="ar">دليلي</h3>
   <div class="note">
     <h4 class="en">“Have you actually run any experiments, or is this all planned?”</h4>
     <h4 class="ar">«هل أجريتَ تجارب فعلية أم أن هذا كله مخطَّط؟»</h4>
@@ -1459,48 +1457,48 @@ document.documentElement.className = "js";
     <p class="ar">يمكن لهيئة أرصاد في دولة قليلة بيانات الرادار المؤرشفة أن تأخذ نموذجًا دُرِّب في مكان آخر وتُكيّفه بملف صغير بدل إعادة تدريب كاملة. كما يُبيّن التحليل الطبقي أي أجزاء هذا النموذج تحتاج التكييف فعلًا، وهي معرفة قابلة لإعادة الاستخدام خارج هاتين الطريقتين.</p>
   </div>
   <div class="say">
-    <span class="who en">If you genuinely do not know</span>
-    <span class="who ar">إذا كنت لا تعرف فعلًا</span>
+    <span class="who en">If I genuinely do not know</span>
+    <span class="who ar">إذا كنتُ لا أعرف فعلًا</span>
     <span class="q en">“I have not measured that yet. I would find out by … and it would change the design in this way if the answer came out differently.”</span>
     <span class="q ar">«لم أقِس ذلك بعد. سأكتشفه عن طريق… وسيغيّر التصميم بهذه الطريقة إن جاء الجواب مختلفًا.»</span>
   </div>
-  <p class="en">This will happen at least once, and it is survivable. <b>Inventing an answer is not.</b></p>
+  <p class="en">This will happen at least once, and that is fine. <b>Inventing an answer is not.</b></p>
   <p class="ar">سيحدث هذا مرة على الأقل، ويمكن تجاوزه. <b>أما اختلاق إجابة فلا.</b></p>
 </section>
 
 <!-- ========================== 16 ========================== -->
 <section id="s16" class="rv">
   <div class="eyebrow"><b>16</b> <span class="en">Reference</span><span class="ar">مرجع</span></div>
-  <h2 class="en">The papers you are standing on</h2>
-  <h2 class="ar">الأوراق البحثية التي تقف عليها</h2>
-  <p class="en">Three came out of your own laboratory, and your supervisor is an author on two. Worth knowing if someone asks why this project sits here.</p>
-  <p class="ar">ثلاث منها خرجت من مختبرك، ومشرفك مؤلف في اثنتين. من المفيد معرفة ذلك إن سُئلت لماذا يقع هذا المشروع هنا.</p>
+  <h2 class="en">The papers I am building on</h2>
+  <h2 class="ar">الأوراق البحثية التي أبني عليها</h2>
+  <p class="en">Three came out of my own laboratory, and my supervisor is an author on two, which is why this project sits where it does.</p>
+  <p class="ar">ثلاث منها خرجت من مختبري، ومشرفي مؤلف في اثنتين، ولهذا يقع هذا المشروع حيث يقع.</p>
 
   <div class="grid g2">
     <div class="note key"><h4>AlphaPre</h4>
-      <p class="src">LIN KENGHONG, ZHANG BAOQUAN ET AL · CVPR 2025 · YOUR LAB</p>
-      <p class="en">Predicts rain by splitting each frame into <b>amplitude</b> (intensity) and <b>phase</b> (motion) and handling them separately. <b>This is the model you adapt</b> — its released weights are your starting point.</p>
-      <p class="ar">يتنبأ بالمطر عبر تقسيم كل لقطة إلى <b>سعة</b> (شدة) و<b>طور</b> (حركة) ومعالجتهما منفصلين. <b>هذا هو النموذج الذي تُكيّفه</b> — وأوزانه المنشورة هي نقطة انطلاقك.</p></div>
+      <p class="src">LIN KENGHONG, ZHANG BAOQUAN ET AL · CVPR 2025 · MY LAB</p>
+      <p class="en">Predicts rain by splitting each frame into <b>amplitude</b> (intensity) and <b>phase</b> (motion) and handling them separately. <b>This is the model I adapt</b> — its released weights are my starting point.</p>
+      <p class="ar">يتنبأ بالمطر عبر تقسيم كل لقطة إلى <b>سعة</b> (شدة) و<b>طور</b> (حركة) ومعالجتهما منفصلين. <b>هذا هو النموذج الذي أُكيّفه</b> — وأوزانه المنشورة هي نقطة انطلاقي.</p></div>
 
     <div class="note key"><h4>S²FT — sparse spectrum</h4>
-      <p class="src">ZHANG BAOQUAN, YU ZHEHAO ET AL · CVPR 2026 · YOUR LAB</p>
-      <p class="en">Fixes an earlier wrong assumption by <b>shuffling rows and columns until the grid is smooth</b>, so it can be described by few spectral coefficients. <b>This is the method you extend.</b> Your supervisor is first author. <b>No public code</b> — you write it from the paper.</p>
-      <p class="ar">تصحّح افتراضًا سابقًا خاطئًا عبر <b>إعادة ترتيب الصفوف والأعمدة حتى تصبح الشبكة ناعمة</b>، فيمكن وصفها بمعاملات طيفية قليلة. <b>هذه هي الطريقة التي تُوسّعها.</b> ومشرفك مؤلفها الأول. <b>ولا يوجد كود عام</b> — أنت تكتبه من الورقة.</p></div>
+      <p class="src">ZHANG BAOQUAN, YU ZHEHAO ET AL · CVPR 2026 · MY LAB</p>
+      <p class="en">Fixes an earlier wrong assumption by <b>shuffling rows and columns until the grid is smooth</b>, so it can be described by few spectral coefficients. <b>This is the method I extend.</b> My supervisor is first author. <b>No public code</b> — I write it from the paper.</p>
+      <p class="ar">تصحّح افتراضًا سابقًا خاطئًا عبر <b>إعادة ترتيب الصفوف والأعمدة حتى تصبح الشبكة ناعمة</b>، فيمكن وصفها بمعاملات طيفية قليلة. <b>هذه هي الطريقة التي أُوسّعها.</b> ومشرفي مؤلفها الأول. <b>ولا يوجد كود عام</b> — أنا أكتبه من الورقة.</p></div>
 
     <div class="note"><h4>FourierFT</h4>
       <p class="src">GAO ZIQI ET AL · ICML 2024</p>
-      <p class="en">The earlier method S²FT improves on. It <b>is</b> open source, so your implementation starts here and adds the shuffling.</p>
-      <p class="ar">الطريقة الأقدم التي حسّنتها S²FT. وهي <b>مفتوحة المصدر</b>، لذا يبدأ تنفيذك منها ثم يضيف إعادة الترتيب.</p></div>
+      <p class="en">The earlier method S²FT improves on. It <b>is</b> open source, so my implementation starts here and adds the shuffling.</p>
+      <p class="ar">الطريقة الأقدم التي حسّنتها S²FT. وهي <b>مفتوحة المصدر</b>، لذا يبدأ تنفيذي منها ثم يضيف إعادة الترتيب.</p></div>
 
     <div class="note"><h4>LoRA</h4>
       <p class="src">HU EDWARD ET AL, MICROSOFT · ICLR 2022</p>
-      <p class="en">The standard efficient fine-tuning method. Ancestor of your Research Content One, and one of your comparison arms — <b>already implemented and measured</b>.</p>
-      <p class="ar">الطريقة القياسية للضبط الدقيق الكفء. سلف محتوى بحثك الأول، وإحدى أذرع المقارنة — <b>وقد نُفِّذت وقِيست بالفعل</b>.</p></div>
+      <p class="en">The standard efficient fine-tuning method. Ancestor of my Research Content One, and one of my comparison arms — <b>already implemented and measured</b>.</p>
+      <p class="ar">الطريقة القياسية للضبط الدقيق الكفء. سلف محتوى بحثي الأول، وإحدى أذرع المقارنة — <b>وقد نُفِّذت وقِيست بالفعل</b>.</p></div>
 
     <div class="note"><h4>DiffCast</h4>
       <p class="src">YU ET AL · CVPR 2024</p>
-      <p class="en">Establishes the task, the four datasets, and the 5→20 at 128×128 protocol you adopt. Also publishes preprocessed files for three of the four datasets.</p>
-      <p class="ar">ترسي المهمة، والمجموعات الأربع، وبروتوكول 5→20 بدقة 128×128 الذي تتبنّاه. وتنشر ملفات مُعالَجة مسبقًا لثلاث من الأربع.</p></div>
+      <p class="en">Establishes the task, the four datasets, and the 5→20 at 128×128 protocol I adopt. Also publishes preprocessed files for three of the four datasets.</p>
+      <p class="ar">ترسي المهمة، والمجموعات الأربع، وبروتوكول 5→20 بدقة 128×128 الذي أتبنّاه. وتنشر ملفات مُعالَجة مسبقًا لثلاث من الأربع.</p></div>
   </div>
 </section>
 
@@ -1509,15 +1507,15 @@ document.documentElement.className = "js";
   <div class="eyebrow"><b>17</b> <span class="en">Reference</span><span class="ar">مصطلحات</span></div>
   <h2 class="en">The words, briefly</h2>
   <h2 class="ar">المصطلحات باختصار</h2>
-  <p class="en">Only the ones you will actually hear on the day.</p>
-  <p class="ar">فقط الكلمات التي ستسمعها فعلًا يوم المناقشة.</p>
+  <p class="en">Only the terms that actually come up in my defence.</p>
+  <p class="ar">فقط المصطلحات التي ترد فعلًا في مناقشتي.</p>
 
   <dl class="gloss en">
     <dt>Nowcasting</dt><dd>predicting rain one to two hours ahead</dd>
     <dt>Frame</dt><dd>one radar picture; 5 or 6 minutes apart</dd>
     <dt>5 → 20</dt><dd>the task: five frames in, twenty out</dd>
-    <dt>Parameter</dt><dd>one of the numbers inside the model. Yours has 89 million</dd>
-    <dt>Frozen</dt><dd>a number you have decided not to change</dd>
+    <dt>Parameter</dt><dd>one of the numbers inside the model. Mine has 89 million</dd>
+    <dt>Frozen</dt><dd>a number that is kept fixed during training</dd>
     <dt>Fine-tuning</dt><dd>adjusting a trained model to do a related job</dd>
     <dt>PEFT</dt><dd>doing that by changing only a tiny fraction of the numbers</dd>
     <dt>Convolution</dt><dd>a small sliding window that detects local patterns</dd>
@@ -1526,11 +1524,11 @@ document.documentElement.className = "js";
     <dt>Low-rank</dt><dd>writing a big grid as two thin grids multiplied together</dd>
     <dt>Rank</dt><dd>how thin those grids are. The dial in method one</dd>
     <dt>Spectrum</dt><dd>a description of something as a sum of waves</dd>
-    <dt>Sparse</dt><dd>almost all the numbers are zero, so you store only a few</dd>
+    <dt>Sparse</dt><dd>almost all the numbers are zero, so only a few are stored</dd>
     <dt>Permutation</dt><dd>a reordering. Shuffling</dd>
     <dt>Domain shift</dt><dd>the difference between two data sources that breaks a model</dd>
     <dt>Zero-shot</dt><dd>using the model on new data with no adaptation at all</dd>
-    <dt>Baseline</dt><dd>an alternative you compare against, to prove yours is worth it</dd>
+    <dt>Baseline</dt><dd>an alternative I compare against, to show mine is worth it</dd>
     <dt>Ablation</dt><dd>removing one part on purpose to see how much it mattered</dd>
     <dt>Overfitting</dt><dd>learning the training examples instead of the pattern</dd>
     <dt>CSI / HSS</dt><dd>the two accuracy scores. HSS corrects for lucky guesses</dd>
@@ -1541,8 +1539,8 @@ document.documentElement.className = "js";
     <dt>Nowcasting</dt><dd>التنبؤ الآني — توقّع المطر قبل ساعة إلى ساعتين</dd>
     <dt>Frame</dt><dd>لقطة — صورة رادار واحدة، بفاصل 5 أو 6 دقائق</dd>
     <dt>5 → 20</dt><dd>المهمة: خمس لقطات دخلًا، عشرون خرجًا</dd>
-    <dt>Parameter</dt><dd>معامل — أحد الأرقام داخل النموذج. نموذجك يحوي 89 مليونًا</dd>
-    <dt>Frozen</dt><dd>مُجمَّد — رقم قرّرتَ ألّا تغيّره</dd>
+    <dt>Parameter</dt><dd>معامل — أحد الأرقام داخل النموذج. نموذجي يحوي 89 مليونًا</dd>
+    <dt>Frozen</dt><dd>مُجمَّد — رقم يبقى ثابتًا أثناء التدريب</dd>
     <dt>Fine-tuning</dt><dd>الضبط الدقيق — تعديل نموذج مدرَّب لمهمة قريبة</dd>
     <dt>PEFT</dt><dd>فعل ذلك بتغيير جزء ضئيل جدًا من الأرقام فقط</dd>
     <dt>Convolution</dt><dd>الالتفاف — نافذة صغيرة منزلقة تكشف الأنماط المحلية</dd>
@@ -1551,11 +1549,11 @@ document.documentElement.className = "js";
     <dt>Low-rank</dt><dd>منخفض الرتبة — كتابة شبكة كبيرة كحاصل ضرب شبكتين نحيفتين</dd>
     <dt>Rank</dt><dd>الرتبة — مدى نحافة تلك الشبكتين. مقبض التحكم في الطريقة الأولى</dd>
     <dt>Spectrum</dt><dd>الطيف — وصف الشيء كمجموع موجات</dd>
-    <dt>Sparse</dt><dd>متناثر — معظم الأرقام أصفار، فتخزّن القليل فقط</dd>
+    <dt>Sparse</dt><dd>متناثر — معظم الأرقام أصفار، فيُخزَّن القليل فقط</dd>
     <dt>Permutation</dt><dd>إعادة ترتيب — خلط الترتيب</dd>
     <dt>Domain shift</dt><dd>انزياح المجال — الفرق بين مصدري بيانات يُعطّل النموذج</dd>
     <dt>Zero-shot</dt><dd>الاستخدام الصفري — تشغيل النموذج على بيانات جديدة بلا تكييف</dd>
-    <dt>Baseline</dt><dd>خط الأساس — بديل تقارن به لتثبت أن طريقتك تستحق</dd>
+    <dt>Baseline</dt><dd>خط الأساس — بديل أقارن به لأُثبت أن طريقتي تستحق</dd>
     <dt>Ablation</dt><dd>دراسة الحذف — إزالة جزء عمدًا لمعرفة أهميته</dd>
     <dt>Overfitting</dt><dd>الإفراط في التخصيص — حفظ أمثلة التدريب بدل تعلّم النمط</dd>
     <dt>CSI / HSS</dt><dd>مقياسا الدقة. وHSS يصحّح أثر التخمين الموفّق</dd>
@@ -1590,7 +1588,7 @@ document.documentElement.className = "js";
     <div class="note warn">
       <h4 class="en">Next</h4><h4 class="ar">التالي</h4>
       <ul class="en">
-        <li><b>Download Shanghai Radar and CIKM</b> (supervisor's instruction)</li>
+        <li><b>Download Shanghai Radar and CIKM</b> (my supervisor's request)</li>
         <li>Secure the compute container — 32 GB RAM, 400 GB data disk</li>
         <li><b>Implement Research Content Two</b> — the sparse spectrum method</li>
         <li>Add the adapter, from-scratch and AdaBN arms</li>
@@ -1598,7 +1596,7 @@ document.documentElement.className = "js";
         <li>Add the HSS metric — not implemented in any available framework</li>
       </ul>
       <ul class="ar">
-        <li><b>تنزيل بيانات رادار شنغهاي وCIKM</b> (تعليمات المشرف)</li>
+        <li><b>تنزيل بيانات رادار شنغهاي وCIKM</b> (بطلب من مشرفي)</li>
         <li>تأمين حاوية الحوسبة — 32 غيغابايت ذاكرة، و400 غيغابايت قرص بيانات</li>
         <li><b>تنفيذ محتوى البحث الثاني</b> — طريقة الطيف المتناثر</li>
         <li>إضافة أذرع المحوِّل، والتدريب من الصفر، وAdaBN</li>
@@ -1609,39 +1607,39 @@ document.documentElement.className = "js";
   </div>
 
   <div class="say">
-    <span class="who en">The last thing to remember</span>
-    <span class="who ar">آخر ما ينبغي تذكّره</span>
-    <span class="q en">You are defending a <b>plan</b>, not a finished thesis. Nobody expects a complete result at this stage — and you arrive with <b>three real experiments</b>, which is more than most people bring. If you can draw the kernel and say why two axes may be shuffled and two may not, the technical core of your defence is safe.</span>
-    <span class="q ar">أنت تدافع عن <b>خطة</b>، لا عن أطروحة مكتملة. لا أحد يتوقع نتيجة نهائية في هذه المرحلة — وأنت تحضر بـ<b>ثلاث تجارب حقيقية</b>، وهذا أكثر مما يحضره معظم الناس. وإن استطعت رسم النواة وشرح لماذا يجوز إعادة ترتيب محورين ولا يجوز للآخرين، فإن الجوهر التقني لدفاعك في أمان.</span>
+    <span class="who en">Where that leaves me</span>
+    <span class="who ar">أين يضعني هذا</span>
+    <span class="q en">I am defending a <b>plan</b>, not a finished thesis. Nobody expects a complete result at this stage — and I arrive with <b>three real experiments</b> behind it. The technical core, why two axes of a kernel may be shuffled and two may not, is already worked out and backed by measurement.</span>
+    <span class="q ar">أنا أدافع عن <b>خطة</b>، لا عن أطروحة مكتملة. لا أحد يتوقع نتيجة نهائية في هذه المرحلة — وأنا أحضر ومعي <b>ثلاث تجارب حقيقية</b>. أما الجوهر التقني، أي لماذا يجوز إعادة ترتيب محورين من محاور النواة ولا يجوز للآخرين، فهو محسوم ومدعوم بالقياس.</span>
   </div>
 </section>
 
 </main>
 
 <footer>
-  <div class="en">PRIVATE STUDY BRIEF · EVERY FIGURE AND NUMBER DERIVED FROM MEASURED RESULTS IN <code>prelim/experiments_summary.md</code> · NOTHING HERE IS QUOTED FROM A PAPER OR ESTIMATED</div>
-  <div class="ar">ملخّص دراسي خاص · كل شكل ورقم مُستخرج من نتائج مقيسة في <code>prelim/experiments_summary.md</code> · لا شيء هنا منقول من بحث أو مُقدَّر تخمينًا</div>
+  <div class="en">PROJECT BRIEF · YASSINE ACHOUAK · HITSZ · EVERY FIGURE AND NUMBER DERIVED FROM MEASURED RESULTS IN <code>prelim/experiments_summary.md</code> · NOTHING HERE IS QUOTED FROM A PAPER OR ESTIMATED</div>
+  <div class="ar">ملخّص المشروع · ياسين أشواك · HITSZ · كل شكل ورقم مُستخرج من نتائج مقيسة في <code>prelim/experiments_summary.md</code> · لا شيء هنا منقول من بحث أو مُقدَّر تخمينًا</div>
 </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 var SECTIONS = [
   ["hero","Start","البداية"],
-  ["s1","01 · The five sentences","01 · الجمل الخمس"],
+  ["s1","01 · In five sentences","01 · في خمس جمل"],
   ["s2","02 · The problem","02 · المشكلة"],
   ["s3","03 · The four datasets","03 · المجموعات الأربع"],
   ["s4","04 · The base model","04 · النموذج الأساس"],
   ["s5","05 · What PEFT means","05 · معنى PEFT"],
   ["s6","06 · The kernel","06 · النواة"],
-  ["s7","07 · Your two methods","07 · طريقتاك"],
+  ["s7","07 · My two methods","07 · طريقتاي"],
   ["s8","08 · Where the innovation is","08 · أين الابتكار"],
   ["s9","09 · What is new, exactly","09 · ما الجديد بالضبط"],
-  ["s10","10 · What you measured","10 · ما قِستَه"],
+  ["s10","10 · What I measured","10 · ما قِستُه"],
   ["s11","11 · What it does not prove","11 · ما لا تُثبته"],
   ["s12","12 · What is still to run","12 · ما تبقّى"],
-  ["s13","13 · How to present","13 · كيف تعرض"],
-  ["s14","14 · The script","14 · النص"],
-  ["s15","15 · Questions they will ask","15 · الأسئلة المتوقعة"],
+  ["s13","13 · How I present","13 · كيف أعرض"],
+  ["s14","14 · My talk","14 · عرضي"],
+  ["s15","15 · Questions I expect","15 · الأسئلة المتوقعة"],
   ["s16","16 · The papers","16 · الأوراق البحثية"],
   ["s17","17 · Glossary","17 · المصطلحات"],
   ["s18","18 · Status and next","18 · الحالة والتالي"]
@@ -1981,10 +1979,10 @@ window.addEventListener("scroll", function(){
   var MSG = {
     idle: ["Both shuffles are one click away. Try the green one, then the red one, and watch what happens to the pattern inside each tile.",
            "كلا الخلطين على بُعد نقرة. جرّب الأخضر ثم الأحمر، وراقب ما يحدث للنمط داخل كل بلاطة."],
-    chan: ["<b>Valid.</b> The tiles moved, but the pattern inside each one is untouched — every filter still works. Channel numbers are only labels, so reordering them changes nothing that matters. <b>This is the shuffle your method is allowed to make.</b>",
-           "<b>مسموح.</b> تحرّكت البلاطات، لكن النمط داخل كل واحدة لم يُمَس — وكل مُرشِّح ما زال يعمل. أرقام القنوات مجرد تسميات، فإعادة ترتيبها لا تغيّر شيئًا مهمًا. <b>هذا هو الخلط المسموح لطريقتك.</b>"],
-    spat: ["<b>Broken.</b> The tiles stayed where they were, but the pattern inside each one is now noise. Those nine cells are real positions in space — (0,0) genuinely sits next to (0,1) — so reordering them destroys what the filter detects. <b>This is the shuffle your method must never make.</b>",
-           "<b>مُعطَّل.</b> بقيت البلاطات مكانها، لكن النمط داخل كل واحدة صار ضجيجًا. تلك الخلايا التسع مواضع حقيقية في الفضاء — فالموضع (0,0) مجاور فعلًا لـ(0,1) — وإعادة ترتيبها تُتلف ما يكشفه المُرشِّح. <b>هذا هو الخلط الممنوع على طريقتك.</b>"],
+    chan: ["<b>Valid.</b> The tiles moved, but the pattern inside each one is untouched — every filter still works. Channel numbers are only labels, so reordering them changes nothing that matters. <b>This is the shuffle my method is allowed to make.</b>",
+           "<b>مسموح.</b> تحرّكت البلاطات، لكن النمط داخل كل واحدة لم يُمَس — وكل مُرشِّح ما زال يعمل. أرقام القنوات مجرد تسميات، فإعادة ترتيبها لا تغيّر شيئًا مهمًا. <b>هذا هو الخلط المسموح لطريقتي.</b>"],
+    spat: ["<b>Broken.</b> The tiles stayed where they were, but the pattern inside each one is now noise. Those nine cells are real positions in space — (0,0) genuinely sits next to (0,1) — so reordering them destroys what the filter detects. <b>This is the shuffle my method must never make.</b>",
+           "<b>مُعطَّل.</b> بقيت البلاطات مكانها، لكن النمط داخل كل واحدة صار ضجيجًا. تلك الخلايا التسع مواضع حقيقية في الفضاء — فالموضع (0,0) مجاور فعلًا لـ(0,1) — وإعادة ترتيبها تُتلف ما يكشفه المُرشِّح. <b>هذا هو الخلط الممنوع على طريقتي.</b>"],
     reset:["Back to the original kernel.", "عودة إلى النواة الأصلية."]
   };
   function say(key, tone){
