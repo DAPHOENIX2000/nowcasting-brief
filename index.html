@@ -239,6 +239,26 @@ html[dir=rtl] .note h4{font-family:"Tajawal",sans-serif; font-weight:800; letter
 .note.key{background:var(--sun-soft); border-color:var(--sun-deep)}
 .note.key h4{color:var(--mark)}
 .note.flat{background:transparent; border-style:dashed}
+
+/* equations (MathML, no library): always left-to-right, even on the Arabic page */
+math{direction:ltr; color:var(--ink)}
+.eqs{display:grid; gap:12px; margin:22px 0}
+.eqgrp{font-family:"IBM Plex Mono",monospace; font-size:11.5px; font-weight:600; letter-spacing:1.4px;
+  color:var(--mark); text-transform:uppercase; margin:10px 0 0}
+.eqrow{display:grid; grid-template-columns:1fr auto; align-items:center; gap:4px 14px;
+  background:var(--card); border:1px solid var(--rule); border-radius:16px; padding:14px 20px}
+.eqm{overflow-x:auto; overflow-y:hidden; padding:6px 0; min-width:0; text-align:center; font-size:1.3em; direction:ltr}
+.eqn{font-family:"IBM Plex Mono",monospace; font-size:13px; color:var(--muted)}
+.eqrow p{grid-column:1/-1; margin:6px 0 0; font-size:15px; color:var(--body)}
+p math, li math{font-size:1.05em}
+.eqm::-webkit-scrollbar{height:4px}
+.eqm::-webkit-scrollbar-thumb{background:var(--rule2); border-radius:4px}
+@media (max-width:600px){
+  .eqrow{grid-template-columns:1fr; padding:12px 14px}
+  .eqn{order:-1; justify-self:end; font-size:12px}
+  .eqm{font-size:1.02em}
+}
+@media (max-width:420px){ .eqm{font-size:.88em} }
 .note.warn{border-color:var(--mark); background:var(--card)}
 
 .grid{display:grid; gap:18px; margin:22px 0}
@@ -777,6 +797,45 @@ document.documentElement.className = "js";
     <p class="en">For this problem, is it better to describe the change <b>directly</b>, or <b>in a transformed space</b>? And — the interesting part — <b>does the answer flip when target data become scarce?</b></p>
     <p class="ar">بالنسبة لهذه المسألة، هل الأفضل وصف التغيير <b>مباشرةً</b>، أم <b>في فضاء محوَّل</b>؟ والأهم — <b>هل ينقلب الجواب عندما تصبح بيانات الهدف شحيحة؟</b></p>
   </div>
+
+  <h3 class="en">The same two methods, written as maths</h3>
+  <h3 class="ar">الطريقتان نفسهما، مكتوبتين رياضيًا</h3>
+  <p class="en">These are equations (3-1), (3-2), (3-6) and (3-7) of the proposal, and they are on the “Method in Equations” slide. You don't need to derive them. You need to say in one sentence what each one means.</p>
+  <p class="ar">هذه هي المعادلات (3-1) و(3-2) و(3-6) و(3-7) في المقترح، وهي نفسها في شريحة «الطريقة بالمعادلات». لا تحتاج إلى اشتقاقها، بل إلى أن تقول في جملة واحدة ماذا تعني كل واحدة منها.</p>
+  <div class="eqs">
+    <div class="eqgrp"><span class="en">Research content one · original parameter space</span><span class="ar">المحتوى البحثي الأول · فضاء المعاملات الأصلي</span></div>
+    <div class="eqrow">
+      <div class="eqm"><math display="block"><mi mathvariant="normal">Δ</mi><msup><mi>K</mi><mrow><mo stretchy="false">(</mo><mi>i</mi><mo>,</mo><mi>j</mi><mo stretchy="false">)</mo></mrow></msup><mo>=</mo><msup><mi>B</mi><mrow><mo stretchy="false">(</mo><mi>i</mi><mo>,</mo><mi>j</mi><mo stretchy="false">)</mo></mrow></msup><msup><mi>A</mi><mrow><mo stretchy="false">(</mo><mi>i</mi><mo>,</mo><mi>j</mi><mo stretchy="false">)</mo></mrow></msup></math></div>
+      <span class="eqn">(3-1)</span>
+      <p class="en">At each of the nine positions (i, j) of a 3 × 3 kernel, the change is a tall matrix <i>B</i> times a wide matrix <i>A</i>. Only <i>B</i> and <i>A</i> are trained. Their shared inner size <i>r</i> is the rank.</p>
+      <p class="ar">عند كل موضع من المواضع التسعة (i, j) في نواة ٣ × ٣، يكون التغيير مصفوفة طويلة <i>B</i> مضروبة في مصفوفة عريضة <i>A</i>. ولا يُدرَّب إلا <i>B</i> و<i>A</i>. وبُعدهما الداخلي المشترك <i>r</i> هو الرتبة.</p>
+    </div>
+    <div class="eqrow">
+      <div class="eqm"><math display="block"><msub><mi>N</mi><mtext>LoRA</mtext></msub><mo>=</mo><msub><mi>k</mi><mi mathvariant="normal">h</mi></msub><msub><mi>k</mi><mi mathvariant="normal">w</mi></msub><mo>·</mo><mi>r</mi><mo stretchy="false">(</mo><msub><mi>C</mi><mtext>out</mtext></msub><mo>+</mo><msub><mi>C</mi><mtext>in</mtext></msub><mo stretchy="false">)</mo></math></div>
+      <span class="eqn">(3-2)</span>
+      <p class="en">The cost of one kernel: positions × rank × (output channels + input channels). It <b>grows with the width of the layer</b>.</p>
+      <p class="ar">كلفة النواة الواحدة: عدد المواضع × الرتبة × (قنوات الخرج + قنوات الدخل). وهي <b>تكبر مع عرض الطبقة</b>.</p>
+    </div>
+    <div class="eqgrp"><span class="en">Research content two · sparse spectrum domain</span><span class="ar">المحتوى البحثي الثاني · مجال الطيف المتناثر</span></div>
+    <div class="eqrow">
+      <div class="eqm"><math display="block"><mi mathvariant="normal">Δ</mi><msup><mi>K</mi><mrow><mo stretchy="false">(</mo><mi>i</mi><mo>,</mo><mi>j</mi><mo stretchy="false">)</mo></mrow></msup><mo>=</mo><msubsup><mi>P</mi><mtext>out</mtext><mi mathvariant="normal">T</mi></msubsup><mi>Re</mi><mo>[</mo><msup><mi>ℱ</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>(</mo><msub><mi>S</mi><msup><mi>E</mi><mrow><mo stretchy="false">(</mo><mi>i</mi><mo>,</mo><mi>j</mi><mo stretchy="false">)</mo></mrow></msup></msub><mo>(</mo><msup><mi>c</mi><mrow><mo stretchy="false">(</mo><mi>i</mi><mo>,</mo><mi>j</mi><mo stretchy="false">)</mo></mrow></msup><mo>)</mo><mo>)</mo><mo>]</mo><msub><mi>P</mi><mtext>in</mtext></msub></math></div>
+      <span class="eqn">(3-6)</span>
+      <p class="en"><b>Your extension.</b> Keep a few coefficients <i>c</i>, place them in a spectrum (<i>S</i>), transform back (ℱ<sup>−1</sup>), keep the real part, then undo the channel reordering with <i>P</i><sub>out</sub> and <i>P</i><sub>in</sub>. Notice that <i>P</i><sub>out</sub> and <i>P</i><sub>in</sub> have no (i, j): one channel order is shared by all nine positions.</p>
+      <p class="ar"><b>توسعتك.</b> تحتفظ بعدد قليل من المعاملات <i>c</i>، وتضعها في طيف (<i>S</i>)، ثم تعكس التحويل (ℱ<sup>−1</sup>)، وتأخذ الجزء الحقيقي، ثم تُلغي إعادة ترتيب القنوات بـ <i>P</i><sub>out</sub> و<i>P</i><sub>in</sub>. لاحظ أن <i>P</i><sub>out</sub> و<i>P</i><sub>in</sub> لا تحملان (i, j): ترتيب واحد للقنوات مشترك بين المواضع التسعة كلها.</p>
+    </div>
+    <div class="eqrow">
+      <div class="eqm"><math display="block"><msub><mi>N</mi><mtext>S²FT</mtext></msub><mo>=</mo><msub><mi>k</mi><mi mathvariant="normal">h</mi></msub><msub><mi>k</mi><mi mathvariant="normal">w</mi></msub><mo>·</mo><mi>k</mi></math></div>
+      <span class="eqn">(3-7)</span>
+      <p class="en">The cost of one kernel: positions × <i>k</i>. <b>No channel count appears at all</b>, so it is the same for a layer with 64 channels or 1,280.</p>
+      <p class="ar">كلفة النواة الواحدة: عدد المواضع × <i>k</i>. <b>لا يظهر فيها عدد القنوات إطلاقًا</b>، فهي نفسها لطبقة من ٦٤ قناة أو من ١٬٢٨٠ قناة.</p>
+    </div>
+  </div>
+  <div class="note key">
+    <h4 class="en">The one sentence to remember</h4>
+    <h4 class="ar">الجملة الواحدة التي تحفظها</h4>
+    <p class="en">Compare (3-2) with (3-7). LoRA's cost has <i>C</i><sub>out</sub> + <i>C</i><sub>in</sub> in it and grows with the layer. Yours is 9<i>k</i> for every 3 × 3 kernel, whatever its width.</p>
+    <p class="ar">قارن (3-2) بـ (3-7). كلفة LoRA فيها <i>C</i><sub>out</sub> + <i>C</i><sub>in</sub> فتكبر مع الطبقة. أما كلفتك فهي 9<i>k</i> لكل نواة ٣ × ٣، مهما كان عرضها.</p>
+  </div>
 </section>
 
 <svg class="thread rv" viewBox="0 0 1000 54" preserveAspectRatio="none" aria-hidden="true"><path d="M824 0 C824 26 794 36 700 42 C598 48 530 35 518 14"/></svg>
@@ -1203,6 +1262,11 @@ document.documentElement.className = "js";
     <p class="ar" style="font-size:15.5px">هذه هي المشكلة التقنية الجوهرية، ولذلك أودّ أن أتناولها ببطء.<br><br>الطريقة التي أُوسّعها تعمل بإعادة الترتيب. وإعادة الترتيب مشروعة فقط على محور لا يحمل ترتيبُه أي معنى.<br><br>نواة الالتفاف لها أربعة محاور. الأولان مؤشّرا قنوات. والقناة رقم سبعة لا تحمل معنى خاصًا؛ إنها تسمية، كاسم على خزانة. فإن أعدتُ ترقيمها جميعًا باتساق لا ينكسر شيء. إذن هذان المحوران يجوز إعادة ترتيبهما.<br><br>والمحوران الأخيران موضعان داخل النافذة. فالموضع صفر-صفر يجاور فعلًا الموضع صفر-واحد، وهما ينظران إلى بكسلات متجاورة. فإن خلطتُهما توقّف المُرشِّح عن كشف ما كان يكشفه. إذن هذان لا يجوز إعادة ترتيبهما.<br><br>وهناك سبب ثانٍ للعمل على القنوات. فداخل النواة، تفوق مُدخلات القنوات المُدخلات المكانية بنحو تسعة وأربعين ألفًا وتسعمئة إلى واحد. لذا فحصر التكييف في محاور القنوات ليس تفضيلًا، بل حساب. فليس في تسعة أرقام ما يُضغط.<br><br>ولهذا لا يمكن ببساطة إعادة تشكيل الطريقة على الالتفاف، ولهذا يجب اشتقاق التوسعة لا نقلها.</p>
   </div>
   <div class="note">
+    <h4><span class="mono" style="color:var(--mark)">NEW SLIDE</span>&nbsp;&nbsp;The method in equations</h4>
+    <p class="en" style="font-size:15.5px">Here's the method written as maths. These are the four equations that matter, with the same numbers as in the proposal.<br><br>The top two are research content one. Equation 3-1 says the change at each position of the kernel is two small matrices multiplied together, B times A. Equation 3-2 is what that costs: the number of positions, times the rank, times the output channels plus the input channels.<br><br>The bottom two are research content two. Equation 3-6 is my extension. I keep a few coefficients in a spectrum, transform back, and undo the channel reordering with P out and P in. Look at P out and P in. They don't have i and j on them. That's the shared ordering from the last slide, written down.<br><br>Equation 3-7 is the cost, and this is the point I want you to see. It's the number of positions times k. There are no channel counts in it. So LoRA gets more expensive as the layer gets wider, and in this model layers go up to twelve hundred and eighty channels. My method costs the same at any width.<br><br>The metrics, CSI and HSS, are equations 3-8 and 3-9 in the proposal.</p>
+    <p class="ar" style="font-size:15.5px">هذه هي الطريقة مكتوبةً رياضيًا. هذه المعادلات الأربع المهمة، بالأرقام نفسها التي في المقترح.<br><br>المعادلتان في الأعلى للمحتوى البحثي الأول. المعادلة 3-1 تقول إن التغيير عند كل موضع في النواة هو مصفوفتان صغيرتان مضروبتان معًا، B في A. والمعادلة 3-2 هي الكلفة: عدد المواضع، في الرتبة، في مجموع قنوات الخرج وقنوات الدخل.<br><br>والمعادلتان في الأسفل للمحتوى البحثي الثاني. المعادلة 3-6 هي توسعتي. أحتفظ بعدد قليل من المعاملات في طيف، ثم أعكس التحويل، وأُلغي إعادة ترتيب القنوات بـ P out وP in. انظروا إلى P out وP in: لا تحملان i وj. هذا هو الترتيب المشترك من الشريحة السابقة، مكتوبًا.<br><br>والمعادلة 3-7 هي الكلفة، وهذه هي النقطة التي أريدكم أن تروها. إنها عدد المواضع في k، ولا يوجد فيها أي عدد قنوات. فـ LoRA تصبح أغلى كلما اتسعت الطبقة، وفي هذا النموذج تصل الطبقات إلى ألف ومئتين وثمانين قناة. أما طريقتي فكلفتها واحدة مهما كان العرض.<br><br>والمقياسان CSI وHSS هما المعادلتان 3-8 و3-9 في المقترح.</p>
+  </div>
+  <div class="note">
     <h4><span class="mono" style="color:var(--mark)">SLIDE 09</span>&nbsp;&nbsp;Innovation</h4>
     <p class="en" style="font-size:15.5px">I make three claims, and I want to be equally clear about what I am not claiming.<br><br>The first claim is about the problem itself. The four archives are used as four separate benchmarks. No study trains on one national radar network and adapts to another under a restricted budget. That question is open.<br><br>The second is the technical contribution. A kernel has two permutable axes and two that are not, so the method is not transferable by reshaping. There is no public implementation of it in any form, and an author of the paper has confirmed that it has never been attempted on convolutions. I derive it from the publication.<br><br>The third is the form of the comparison. Both methods share the frozen model, the restriction to the channel axes, the merge at inference, and the parameter budget. Only the representation differs, so the comparison isolates the representation.<br><br>Now, what I am not claiming. I am not claiming parameter-efficient fine-tuning itself, and I am not claiming low-rank adaptation of convolutions, because several such methods already exist. The amplitude and phase decomposition is AlphaPre's, not mine. What is mine is using it to decide where the budget should go. And the datasets, the protocol and the source checkpoint are all inherited.<br><br>I am not proposing a general-purpose method. Every design decision I make comes from a property of this model that I measured.</p>
     <p class="ar" style="font-size:15.5px">أقدّم ثلاثة ادّعاءات، وأودّ أن أكون واضحًا بالقدر نفسه بشأن ما لا أدّعيه.<br><br>الادّعاء الأول عن المشكلة نفسها. فالمجموعات الأربع تُستخدم كأربع مرجعيات منفصلة. ولا توجد دراسة تدرّب على شبكة رادار وطنية وتتكيّف مع أخرى في ظل ميزانية محدودة. وهذا السؤال مفتوح.<br><br>والثاني هو الإسهام التقني. فللنواة محوران يجوز إعادة ترتيبهما ومحوران لا يجوز، لذا فالطريقة غير قابلة للنقل بإعادة التشكيل. ولا يوجد لها أي تنفيذ عام بأي صورة، وقد أكّد أحد مؤلفي الورقة أنها لم تُجرَّب قط على الالتفافات. وأنا أشتقّها من المنشور.<br><br>والثالث هو شكل المقارنة. فكلتا الطريقتين تشتركان في النموذج المُجمَّد، والحصر في محاور القنوات، والدمج عند الاستدلال، وميزانية المعاملات. والتمثيل وحده هو ما يختلف، فتعزل المقارنةُ التمثيلَ.<br><br>أما ما لا أدّعيه: لا أدّعي الضبط الدقيق كفء المعاملات نفسه، ولا أدّعي التكييف منخفض الرتبة للالتفافات، لأن عدة طرق كهذه موجودة بالفعل. وتفكيك السعة والطور من AlphaPre لا مني؛ وما هو لي هو استخدامه لتحديد أين تذهب الميزانية. والمجموعات والبروتوكول ونقطة التفتيش المصدر، كلها موروثة.<br><br>أنا لا أقترح طريقة عامة الغرض. وكل قرار تصميمي أتخذه نابع من خاصية في هذا النموذج قِستُها بنفسي.</p>
@@ -1337,6 +1401,18 @@ document.documentElement.className = "js";
     <h4 class="ar">«لماذا تُجمّد النموذج بدل ضبطه بالطريقة المعتادة؟»</h4>
     <p class="en">Three reasons. Storage: one frozen model plus a small file per country instead of a whole model per country. Compute: far less memory and time. And most interestingly, regularisation — with very little target data, eighty-nine million free parameters overfit, and a much smaller set cannot as easily. My results already point at that.</p>
     <p class="ar">ثلاثة أسباب. التخزين: نموذج مُجمَّد واحد مع ملف صغير لكل دولة بدل نموذج كامل لكل دولة. والحوسبة: ذاكرة ووقت أقل بكثير. والأهم، التنظيم — فمع بيانات هدف قليلة جدًا يُفرِط تسعة وثمانون مليون معامل حر في التخصيص، بينما لا تستطيع مجموعة أصغر بكثير ذلك بسهولة. ونتائجي تشير إلى ذلك بالفعل.</p>
+  </div>
+  <div class="note">
+    <h4 class="en">“Can you write your method down as an equation?”</h4>
+    <h4 class="ar">«هل يمكنك كتابة طريقتك على شكل معادلة؟»</h4>
+    <p class="en">Yes, it's Equation (3-6): <math><mi mathvariant="normal">Δ</mi><msup><mi>K</mi><mrow><mo stretchy="false">(</mo><mi>i</mi><mo>,</mo><mi>j</mi><mo stretchy="false">)</mo></mrow></msup><mo>=</mo><msubsup><mi>P</mi><mtext>out</mtext><mi mathvariant="normal">T</mi></msubsup><mi>Re</mi><mo>[</mo><msup><mi>ℱ</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>(</mo><mi>S</mi><mo stretchy="false">(</mo><mi>c</mi><mo stretchy="false">)</mo><mo>)</mo><mo>]</mo><msub><mi>P</mi><mtext>in</mtext></msub></math>. I only train the coefficients <i>c</i>. The permutations <i>P</i><sub>out</sub> and <i>P</i><sub>in</sub> come from the short pre-estimate, and they're the same at every position, which is why they have no (i, j). If I gave each position its own order, a channel would mean different things in different places and the kernel would break.</p>
+    <p class="ar">نعم، إنها المعادلة (3-6): <math><mi mathvariant="normal">Δ</mi><msup><mi>K</mi><mrow><mo stretchy="false">(</mo><mi>i</mi><mo>,</mo><mi>j</mi><mo stretchy="false">)</mo></mrow></msup><mo>=</mo><msubsup><mi>P</mi><mtext>out</mtext><mi mathvariant="normal">T</mi></msubsup><mi>Re</mi><mo>[</mo><msup><mi>ℱ</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>(</mo><mi>S</mi><mo stretchy="false">(</mo><mi>c</mi><mo stretchy="false">)</mo><mo>)</mo><mo>]</mo><msub><mi>P</mi><mtext>in</mtext></msub></math>. لا أُدرّب إلا المعاملات <i>c</i>. أما إعادتا الترتيب <i>P</i><sub>out</sub> و<i>P</i><sub>in</sub> فتأتيان من التقدير الأولي القصير، وهما نفسهما عند كل موضع، ولهذا لا تحملان (i, j). فلو أعطيتُ كل موضع ترتيبه الخاص، لدلّت القناة على أشياء مختلفة في أماكن مختلفة ولانكسرت النواة.</p>
+  </div>
+  <div class="note">
+    <h4 class="en">“How much does your method cost compared with LoRA?”</h4>
+    <h4 class="ar">«كم تكلّف طريقتك مقارنةً بـ LoRA؟»</h4>
+    <p class="en">Per kernel, LoRA costs <i>k</i><sub>h</sub><i>k</i><sub>w</sub> · <i>r</i>(<i>C</i><sub>out</sub> + <i>C</i><sub>in</sub>), Equation (3-2), so it grows with the width of the layer. Mine costs <i>k</i><sub>h</sub><i>k</i><sub>w</sub> · <i>k</i>, Equation (3-7), with no channel count in it. Layers in this model reach 1,280 channels, so the difference is biggest exactly where the model is biggest. Over the whole model, from my parameter census: rank-4 LoRA is about 0.71% of the parameters, and 200 coefficients per position is about 0.011%.</p>
+    <p class="ar">لكل نواة، تكلّف LoRA <i>k</i><sub>h</sub><i>k</i><sub>w</sub> · <i>r</i>(<i>C</i><sub>out</sub> + <i>C</i><sub>in</sub>)، وهي المعادلة (3-2)، فتكبر مع عرض الطبقة. أما طريقتي فتكلّف <i>k</i><sub>h</sub><i>k</i><sub>w</sub> · <i>k</i>، وهي المعادلة (3-7)، بلا أي عدد قنوات. وطبقات هذا النموذج تصل إلى ١٬٢٨٠ قناة، فيكون الفرق أكبر ما يكون حيث يكون النموذج أكبر. وعلى النموذج كله، بحسب إحصاء المعاملات الذي أجريتُه: LoRA برتبة ٤ تعادل نحو 0.71% من المعاملات، و٢٠٠ معامل لكل موضع تعادل نحو 0.011%.</p>
   </div>
   <div class="note">
     <h4 class="en">“Why only the channel axes? Why not adapt the spatial ones too?”</h4>
