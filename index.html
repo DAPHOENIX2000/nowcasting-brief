@@ -1450,6 +1450,85 @@ document.documentElement.className = "js";
     <p class="en">Mean squared error rewards blurry forecasts, because averaging away the uncertainty minimises it. CSI thresholds the prediction and the truth at a rainfall intensity and asks whether rain was predicted where and when it actually fell, which is what a warning depends on. I also report HSS, which corrects for lucky guesses.</p>
     <p class="ar">متوسط مربع الخطأ يكافئ التنبؤات الضبابية، لأن تمييع عدم اليقين بالمتوسط يُقلّله. أما CSI فيضع عتبة على التنبؤ والحقيقة عند شدة مطر معيّنة، ويسأل هل تُوقّع المطر حيث ومتى هطل فعلًا، وهذا ما يعتمد عليه التحذير. وأُبلّغ أيضًا بـ HSS الذي يصحّح أثر التخمين الموفَّق.</p>
   </div>
+  <h3 class="en">AlphaPre and DiffCast in detail</h3>
+  <h3 class="ar">AlphaPre وDiffCast بالتفصيل</h3>
+  <p class="en">A member of my committee co-wrote both papers, so I expect questions that test whether I understand them exactly.</p>
+  <p class="ar">أحد أعضاء لجنتي شارك في تأليف البحثين، لذا أتوقع أسئلة تختبر هل أفهمهما بدقة.</p>
+  <div class="note">
+    <h4 class="en">“Why AlphaPre as the base model, and not DiffCast or Earthformer?”</h4>
+    <h4 class="ar">«لماذا اخترتَ AlphaPre نموذجًا أساسًا، لا DiffCast أو Earthformer؟»</h4>
+    <p class="en">Three reasons. It is deterministic: one forward pass, so training and testing are cheap, and small differences between methods are not lost in sampling noise. There is a released checkpoint trained on SEVIR. And it is almost entirely convolutional, 99.93%, which is exactly the case my extension is built for. DiffCast uses diffusion, which needs many sampling steps and gives a different output on every run, so a small-budget comparison would be much noisier.</p>
+    <p class="ar">لثلاثة أسباب. فهو حتمي: تمريرة أمامية واحدة، فيكون التدريب والاختبار رخيصين، ولا تضيع الفوارق الصغيرة بين الطرق في ضجيج أخذ العينات. وتوجد له نقطة تفتيش منشورة مدرَّبة على SEVIR. وهو التفافي بالكامل تقريبًا، بنسبة 99.93%، وهذه بالضبط الحالة التي بُنيت توسعتي من أجلها. أما DiffCast فيستخدم الانتشار، الذي يحتاج خطوات أخذ عينات كثيرة ويعطي خرجًا مختلفًا في كل تشغيل، فتصبح المقارنة بميزانية صغيرة أكثر ضجيجًا بكثير.</p>
+  </div>
+  <div class="note">
+    <h4 class="en">“Which parts of AlphaPre do you freeze, and where do the adapters go?”</h4>
+    <h4 class="ar">«أي أجزاء AlphaPre تُجمّد، وأين تضع المُكيِّفات؟»</h4>
+    <p class="en">All original weights stay frozen. The trainable updates go on the convolution kernels, along the channel axes only, in both the amplitude and the phase branches. The amplitude branch has about 534 times the parameters of the phase branch, so when I compare the two branches I give each the same budget. Otherwise I would only be measuring size.</p>
+    <p class="ar">تبقى كل الأوزان الأصلية مُجمَّدة. وتوضع التحديثات القابلة للتدريب على نوى الالتفاف، على محاور القنوات فقط، في فرعي السعة والطور كليهما. ولفرع السعة نحو 534 ضعف معاملات فرع الطور، لذا حين أقارن الفرعين أعطي كلًّا منهما الميزانية نفسها، وإلا لكنتُ أقيس الحجم فقط.</p>
+  </div>
+  <div class="note">
+    <h4 class="en">“Does domain shift live in amplitude or in phase?”</h4>
+    <h4 class="ar">«هل يكمن انزياح المجال في السعة أم في الطور؟»</h4>
+    <p class="en">My hypothesis is mostly amplitude: the archives differ in how intensity is measured and calibrated, and even in the stored quantity, VIL against dBZ, while motion patterns should transfer better. But I have not measured it yet. It is a planned ablation: adapt amplitude only, then phase only, under the same budget.</p>
+    <p class="ar">فرضيتي أنه في السعة غالبًا: فالأرشيفان يختلفان في طريقة قياس الشدة ومعايرتها، بل وفي الكمية المخزَّنة نفسها، VIL مقابل dBZ، بينما يُفترض أن تنتقل أنماط الحركة بشكل أفضل. لكني لم أقِس ذلك بعد. وهي دراسة حذف مخطَّطة: تكييف السعة وحدها، ثم الطور وحده، بالميزانية نفسها.</p>
+  </div>
+  <div class="note">
+    <h4 class="en">“AlphaPre works in the frequency domain. SEVIR covers 384 km and MeteoNet 550 km, both resized to 128 × 128. Doesn't that change the frequency content?”</h4>
+    <h4 class="ar">«يعمل AlphaPre في المجال الترددي. وتغطي SEVIR مسافة 384 كم وMeteoNet مسافة 550 كم، وكلتاهما تُصغَّر إلى 128 × 128. ألا يغيّر ذلك المحتوى الترددي؟»</h4>
+    <p class="en">Yes. One pixel covers a different real distance in each dataset, so the same storm appears at different frequencies. That is part of the domain shift rather than something separate. I follow DiffCast's preprocessing so my numbers stay comparable with the literature, and it is one more reason adaptation is needed at all.</p>
+    <p class="ar">نعم. فالبكسل الواحد يغطي مسافة حقيقية مختلفة في كل مجموعة، فتظهر العاصفة نفسها عند ترددات مختلفة. وهذا جزء من انزياح المجال لا شيء منفصل عنه. وأتبع المعالجة المسبقة لـ DiffCast حتى تبقى أرقامي قابلة للمقارنة مع الأدبيات، وهو سبب إضافي لضرورة التكييف أصلًا.</p>
+  </div>
+  <div class="note">
+    <h4 class="en">“How do you know you are using the checkpoint correctly?”</h4>
+    <h4 class="ar">«كيف تعرف أنك تستخدم نقطة التفتيش بشكل صحيح؟»</h4>
+    <p class="en">I ran a control on SEVIR itself, which scores 0.3508 CSI. That rules out a broken data loader, so the low score on MeteoNet is genuine transfer loss rather than a pipeline error.</p>
+    <p class="ar">أجريتُ ضابطًا على SEVIR نفسها، سجّل 0.3508 من CSI. وهذا يستبعد خللًا في محمّل البيانات، فيكون ضعف النتيجة على MeteoNet خسارة نقل حقيقية لا خطأ في المسار البرمجي.</p>
+  </div>
+  <div class="note">
+    <h4 class="en">“Why not simply train AlphaPre on MeteoNet from scratch?”</h4>
+    <h4 class="ar">«لماذا لا تدرّب AlphaPre على MeteoNet من الصفر ببساطة؟»</h4>
+    <p class="en">That is one of my seven arms: training from scratch on the same small target subset. It is the only arm that shows whether pretraining on SEVIR helps at all. Training on the full MeteoNet archive would be the upper limit, but the whole point is that a new country does not have that much data.</p>
+    <p class="ar">هذه إحدى أذرعي السبع: التدريب من الصفر على عيّنة الهدف الصغيرة نفسها. وهي الذراع الوحيدة التي تُظهر هل يفيد التدريب المسبق على SEVIR أصلًا. أما التدريب على أرشيف MeteoNet كاملًا فهو الحد الأعلى، لكن جوهر المشكلة أن الدولة الجديدة لا تملك هذا القدر من البيانات.</p>
+  </div>
+  <div class="note">
+    <h4 class="en">“You say you use DiffCast's protocol. Exactly which parts?”</h4>
+    <h4 class="ar">«تقول إنك تستخدم بروتوكول DiffCast. أي أجزائه تحديدًا؟»</h4>
+    <p class="en">The four datasets, the 5 → 20 task at 128 × 128, and the same preprocessing and normalisation to 0–1. CIKM is 5 → 10 because its sequences are shorter, and I report it separately. HSS is not implemented yet; it is on the list for this term.</p>
+    <p class="ar">المجموعات الأربع، ومهمة 5 → 20 بدقة 128 × 128، والمعالجة المسبقة نفسها والتطبيع إلى 0–1. أما CIKM فهي 5 → 10 لأن تسلسلاتها أقصر، وأُبلّغ عنها منفصلة. ومقياس HSS لم يُنفَّذ بعد، وهو ضمن قائمة هذا الفصل.</p>
+  </div>
+  <div class="note">
+    <h4 class="en">“SEVIR uses VIL and MeteoNet uses dBZ, with 5- and 6-minute steps. How do you compare across datasets?”</h4>
+    <h4 class="ar">«SEVIR تستخدم VIL وMeteoNet تستخدم dBZ، بخطوات 5 و6 دقائق. كيف تقارن بين المجموعات؟»</h4>
+    <p class="en">I never compare raw CSI across datasets. 0.3508 on SEVIR and 0.3178 on MeteoNet are averages over different physical quantities at different thresholds. I compare how fast skill decays relative to each curve's own first frame, matched in minutes: 61.8% of skill kept against 33.8%. Lead time is always reported in minutes, never frames.</p>
+    <p class="ar">لا أقارن قيم CSI الخام بين المجموعات أبدًا. فـ 0.3508 على SEVIR و0.3178 على MeteoNet متوسطان على كميتين فيزيائيتين مختلفتين عند عتبات مختلفة. بل أقارن سرعة تدهور المهارة بالنسبة إلى اللقطة الأولى لكل منحنى، مطابَقة بالدقائق: 61.8% من المهارة محفوظة مقابل 33.8%. ويُذكر الزمن دائمًا بالدقائق لا باللقطات.</p>
+  </div>
+  <div class="note">
+    <h4 class="en">“Deterministic models go blurry at long lead times, which was DiffCast's whole motivation. Does adaptation make that better or worse?”</h4>
+    <h4 class="ar">«النماذج الحتمية تصبح ضبابية عند الآجال الطويلة، وهذا كان دافع DiffCast كله. هل يحسّن التكييف ذلك أم يسوّئه؟»</h4>
+    <p class="en">I measure CSI at several thresholds, and at the heaviest one, 32 dBZ, adaptation improves CSI by about 37% relative to zero-shot, so it is not simply smoothing everything. But I have not measured blur directly. Adding perceptual metrics like those DiffCast reports is a reasonable extension.</p>
+    <p class="ar">أقيس CSI عند عدة عتبات، وعند أعلاها، 32 dBZ، يحسّن التكييف CSI بنحو 37% نسبيًا مقارنة بالاستخدام الصفري، فهو لا يكتفي بتنعيم كل شيء. لكني لم أقِس الضبابية مباشرة. وإضافة مقاييس إدراكية كتلك التي يُبلّغ عنها DiffCast امتداد معقول.</p>
+  </div>
+  <div class="note">
+    <h4 class="en">“Could your method be applied to DiffCast?”</h4>
+    <h4 class="ar">«هل يمكن تطبيق طريقتك على DiffCast؟»</h4>
+    <p class="en">In principle, yes. DiffCast's deterministic backbone and its diffusion network are both built from convolution kernels, so the channel-axis extension applies to them too. I keep it out of scope so the comparison stays clean, but it is a natural next step.</p>
+    <p class="ar">نظريًا نعم. فالعمود الفقري الحتمي لـ DiffCast وشبكة الانتشار فيه مبنيّان من نوى التفاف، فتنطبق التوسعة على محاور القنوات عليهما أيضًا. وأُبقيه خارج النطاق حتى تبقى المقارنة نظيفة، لكنه خطوة تالية طبيعية.</p>
+  </div>
+  <div class="note warn">
+    <h4 class="en">Two things I confirm before answering</h4>
+    <h4 class="ar">أمران أتحقّق منهما قبل الإجابة</h4>
+    <ul class="en">
+      <li>The SEVIR CSI that AlphaPre reports in its paper, and whether my 0.3508 control is on the same basis: the same thresholds and the same averaging.</li>
+      <li>Exactly how my pipeline normalises MeteoNet before it goes into a model trained on SEVIR.</li>
+    </ul>
+    <ul class="ar">
+      <li>قيمة CSI على SEVIR التي يذكرها بحث AlphaPre، وهل ضابطي 0.3508 محسوب على الأساس نفسه: العتبات نفسها وطريقة المتوسط نفسها.</li>
+      <li>كيف يُطبِّع مساري البرمجي بيانات MeteoNet تحديدًا قبل إدخالها في نموذج مدرَّب على SEVIR.</li>
+    </ul>
+    <p class="en">And I describe both papers the way their authors would: AlphaPre separates intensity (amplitude) from motion (phase) with the Fourier transform, and DiffCast adds a diffusion model on top of a deterministic backbone to model the leftover random variation. Cross-dataset transfer was not their goal, which is not the same as saying they fail at it.</p>
+    <p class="ar">وأصف البحثين كما يصفهما مؤلفوهما: يفصل AlphaPre الشدة (السعة) عن الحركة (الطور) بتحويل فورييه، ويضيف DiffCast نموذج انتشار فوق عمود فقري حتمي لنمذجة التباين العشوائي المتبقي. ولم يكن النقل بين المجموعات هدفهما، وهذا يختلف عن القول إنهما يفشلان فيه.</p>
+  </div>
+
   <h3 class="en">Scope and outcome</h3>
   <h3 class="ar">النطاق والنتيجة</h3>
   <div class="note">
